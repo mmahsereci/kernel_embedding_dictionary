@@ -2,16 +2,18 @@
 # SPDX-License-Identifier: MIT
 
 
-class KernelEmbedding:
+from ..kernels import Kernel
+from ..measures import Measure
 
-    # TODO: add types
-    def __init__(self, kernel, measure):
+
+class KernelEmbedding:
+    def __init__(self, kernel: Kernel, measure: Measure):
         self._kernel = kernel
         self._measure = measure
 
-    # TODO: description including kernel and measure params
     def __str__(self) -> str:
-        return ""
+
+        return f"Kernel embedding for\n\n{self._kernel.__str__()}\n\nand\n\n{self._measure.__str__()}"
 
     def __repr__(self) -> str:
-        return f"{self._kernel.__repr__}_{self._measure.__repr__}"
+        return f"Kernel embedding for {self._kernel.__repr__()} and {self._measure.__repr__()}."

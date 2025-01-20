@@ -3,4 +3,4 @@
 
 
 from .lebesgue_measure import LebesgueMeasure
-
+from .measure import Measure

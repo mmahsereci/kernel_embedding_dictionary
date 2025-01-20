@@ -3,3 +3,4 @@
 
 
 from .expquad_kernel import ExpQuadKernel
+from .kernel import Kernel
