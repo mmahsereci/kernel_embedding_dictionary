@@ -15,12 +15,11 @@ class LebesgueMeasure(Measure):
 
         :param config: needs to contain bounds, (optionalL: ndim), normalized
         """
-
         # this will yield the standard Lebesgue measure in 1D
         if config is None:
             config = {}
 
-        # bounds and dimensionality
+        # dimensionality and bounds
         bounds = config.get("bounds", [(0, 1)])
         ndim = config.get("ndim", None)
 
