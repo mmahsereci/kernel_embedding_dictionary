@@ -3,21 +3,19 @@
 
 
 import abc
+
 import numpy as np
 
 
-class Measure(abc.ABC):
-
+class Kernel(abc.ABC):
     @abc.abstractmethod
-    def pdf(self, x: np.ndarray) -> np.ndarray:
+    def k(self, x1: np.ndarray, x2: np.ndarray) -> np.ndarray:
         pass
 
-    # TODO: is it good to handle these as abstract methods?
     @abc.abstractmethod
     def __str__(self) -> str:
         pass
 
-    # TODO: is it good to handle these as abstract methods?
     @abc.abstractmethod
     def __repr__(self) -> str:
-        raise NotImplementedError
+        pass

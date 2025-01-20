@@ -56,7 +56,6 @@ class LebesgueMeasure(Measure):
             f"normalized: {self.normalize}\n"
             f"density: {self._density}\n"
             f"bounds: {self.bounds}"
-            f""
         )
 
     def __repr__(self) -> str:
