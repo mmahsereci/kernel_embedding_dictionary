@@ -35,17 +35,6 @@ class ExpQuadKernel(Kernel):
         self.ndim = ndim
         self.ell = np.array(ell)
 
-    def k(self, x1: np.ndarray, x2: np.ndarray) -> np.ndarray:
-        # TODO: implement this efficiently
-        n1 = x1.shape[0]
-        n2 = x2.shape[0]
-        K = np.zeros([n1, n2])
-        for i in range(n1):
-            for j in range(n2):
-                diff = (x1[i, :] - x2[j, :]) / self.ell
-                K[i, j] = np.exp(np.sum(-0.5 * diff**2))
-        return K
-
     def __str__(self) -> str:
         return f"Exponentiated quadratic kernel \n" f"dimensionality: {self.ndim} \n" f"lengthscales: {list(self.ell)}"
 
