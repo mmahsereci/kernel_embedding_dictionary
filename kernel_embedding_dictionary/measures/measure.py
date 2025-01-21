@@ -7,17 +7,14 @@ import numpy as np
 
 
 class Measure(abc.ABC):
-
     @abc.abstractmethod
     def pdf(self, x: np.ndarray) -> np.ndarray:
         pass
 
-    # TODO: is it good to handle these as abstract methods?
     @abc.abstractmethod
     def __str__(self) -> str:
         pass
 
-    # TODO: is it good to handle these as abstract methods?
     @abc.abstractmethod
     def __repr__(self) -> str:
         raise NotImplementedError

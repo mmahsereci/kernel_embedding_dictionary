@@ -2,5 +2,4 @@
 # SPDX-License-Identifier: MIT
 
 from . import embeddings
-
-from ._helper_functions import get_embedding
+from ._get_embedding import get_embedding

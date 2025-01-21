@@ -11,13 +11,24 @@ from ..measures import Measure
 
 
 class KernelEmbedding:
-    def __init__(self, kernel: Kernel, measure: Measure, eval_func: Callable):
+    def __init__(self, kernel: Kernel, measure: Measure, mean_func: Callable):
+        if kernel.ndim != measure.ndim:
+            raise ValueError(f"kernel ({kernel.ndim}) and measure ({measure.ndim}) need to have same dimensionality.")
+
         self._kernel = kernel
         self._measure = measure
-        self._evaluate = eval_func
+        self._mean_func = mean_func
 
-    def evaluate(self, x: np.ndarray) -> np.ndarray:
-        return self._evaluate(x, self._kernel, self._measure)
+        self.ndim = kernel.ndim
+
+    def mean(self, x: np.ndarray) -> np.ndarray:
+
+        if (self.ndim != x.shape[1]) or (len(x.shape) != 2):
+            raise ValueError(
+                f"x has wrong shape {x.shape}. Perhaps the dimensionality does not match the kernel embedding."
+            )
+
+        return self._mean_func(x, self._kernel, self._measure)
 
     def __str__(self) -> str:
 

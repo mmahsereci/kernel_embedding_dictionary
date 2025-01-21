@@ -47,9 +47,7 @@ class ExpQuadKernel(Kernel):
         return K
 
     def __str__(self) -> str:
-        return f"Exponentiated quadratic kernel \n" \
-               f"dimensionality: {self.ndim} \n" \
-               f"lengthscales: {list(self.ell)}"
+        return f"Exponentiated quadratic kernel \n" f"dimensionality: {self.ndim} \n" f"lengthscales: {list(self.ell)}"
 
     def __repr__(self) -> str:
         return "exponentiated quadratic kernel"
