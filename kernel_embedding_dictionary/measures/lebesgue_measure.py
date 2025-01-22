@@ -38,26 +38,19 @@ class LebesgueMeasure(Measure):
 
         # normalization and density
         normalize = config.get("normalize", False)
-        density = 1.0
-        if normalize:
-            density = 1.0 / np.prod(self.ub - self.lb)
         self.normalize = normalize
-        self.density = density
+
+        self.name = "lebesgue"
 
     @property
     def bounds(self):
         return [(lb, ub) for lb, ub in zip(self.lb, self.ub)]
-
-    def pdf(self, x: np.ndarray) -> np.ndarray:
-        # TODO: does not account for x that may lie outside of the bounds (in which case the pdf should be zero)
-        return np.full(x.shape[0], self.density)
 
     def __str__(self) -> str:
         return (
             f"Lebesgue measure \n"
             f"dimensionality: {self.ndim} \n"
             f"normalized: {self.normalize}\n"
-            f"density: {self.density}\n"
             f"bounds: {self.bounds}"
         )
 

@@ -34,9 +34,10 @@ class ExpQuadKernel(Kernel):
 
         self.ndim = ndim
         self.ell = np.array(ell)
+        self.name = "expquad"
 
     def __str__(self) -> str:
-        return f"Exponentiated quadratic kernel \n" f"dimensionality: {self.ndim} \n" f"lengthscales: {list(self.ell)}"
+        return f"exponentiated quadratic kernel \n" f"dimensionality: {self.ndim} \n" f"lengthscales: {list(self.ell)}"
 
     def __repr__(self) -> str:
         return "exponentiated quadratic kernel"

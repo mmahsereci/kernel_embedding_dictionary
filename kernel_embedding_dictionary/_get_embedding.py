@@ -5,7 +5,6 @@
 from typing import Optional
 
 from .embeddings import KernelEmbedding
-from .embeddings.mean_funcs import expquad_lebesgue_mean
 from .kernels import ExpQuadKernel
 from .measures import LebesgueMeasure
 
@@ -26,4 +25,4 @@ def get_embedding(
     # TODO get kernel and measure instance and create kernelembedding instance
     if kernel_name == "expquad":
         if measure_name == "lebesgue":
-            return KernelEmbedding(ExpQuadKernel(kernel_config), LebesgueMeasure(measure_config), expquad_lebesgue_mean)
+            return KernelEmbedding(ExpQuadKernel(kernel_config), LebesgueMeasure(measure_config))

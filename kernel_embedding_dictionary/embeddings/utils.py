@@ -4,6 +4,10 @@
 
 import numpy as np
 
+from typing import Union
 
-def scaled_vector_diff(x1: np.ndarray, x2: np.ndarray, scales: np.ndarray) -> np.ndarray:
-    return (x1 - x2) / (scales * np.sqrt(2))
+
+def scaled_vector_diff(
+    x1: Union[np.ndarray, float], x2: Union[np.ndarray, float], scale: float
+) -> Union[np.ndarray, float]:
+    return (x1 - x2) / (scale * np.sqrt(2))

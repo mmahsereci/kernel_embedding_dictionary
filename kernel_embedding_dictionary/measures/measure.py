@@ -7,9 +7,6 @@ import numpy as np
 
 
 class Measure(abc.ABC):
-    @abc.abstractmethod
-    def pdf(self, x: np.ndarray) -> np.ndarray:
-        pass
 
     @abc.abstractmethod
     def __str__(self) -> str:
@@ -17,4 +14,4 @@ class Measure(abc.ABC):
 
     @abc.abstractmethod
     def __repr__(self) -> str:
-        raise NotImplementedError
+        pass
