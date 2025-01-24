@@ -5,7 +5,7 @@
 import numpy as np
 from scipy.special import erf
 
-from .utils import scaled_vector_diff
+from kernel_embedding_dictionary.utils import scaled_vector_diff
 
 
 def expquad_lebesgue_mean_func_1d(x: np.ndarray, ell: float, lb: float, ub: float) -> np.ndarray:

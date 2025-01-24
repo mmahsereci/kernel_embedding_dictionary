@@ -3,4 +3,4 @@
 
 
 from .expquad_kernel import ExpQuadKernel
-from .kernel import Kernel
+from .kernel import ProductKernel, UnivariateKernel

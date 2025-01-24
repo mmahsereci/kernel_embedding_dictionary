@@ -6,14 +6,14 @@ from typing import Callable
 
 import numpy as np
 
-from ..kernels import Kernel, ExpQuadKernel
-from ..measures import Measure, LebesgueMeasure
+from ..kernels import ProductKernel, ExpQuadKernel
+from ..measures import ProductMeasure, LebesgueMeasure
 
 from .mean_funcs import expquad_lebesgue_mean_func_1d
 
 
 class KernelEmbedding:
-    def __init__(self, kernel: Kernel, measure: Measure):
+    def __init__(self, kernel: ProductKernel, measure: ProductKernel):
         if kernel.ndim != measure.ndim:
             raise ValueError(f"kernel ({kernel.ndim}) and measure ({measure.ndim}) need to have same dimensionality.")
 
@@ -39,29 +39,14 @@ class KernelEmbedding:
 
         kernel_mean = np.ones(x.shape[0])
         for dim in range(x.shape[1]):
-            params_dim = self._get_params_1d(dim)
+            params_dim = {**self._kernel.get_param_dict_from_dim(dim), **self._measure.get_param_dict_from_dim(dim)}
             kernel_mean *= self._mean_func_1d(x[:, dim], **params_dim)
         return kernel_mean
-
-    def _get_params_1d(self, dim: int):
-        return {**self._get_params_kernel_1d(dim), **self._get_params_measure_1d(dim)}
 
     def _set_embedding_specific_1d_funcs(self):
 
         if self._kernel.name == "expquad":
             if self._measure.name == "lebesgue":
                 mean_func_1d = expquad_lebesgue_mean_func_1d
-                get_params_kernel_1d = lambda dim: _get_params_1d_expquad(dim, self._kernel)
-                get_params_measure_1d = lambda dim: _get_params_1d_expquad(dim, self._kernel)
 
         self._mean_func_1d = mean_func_1d
-        self._get_params_kernel_1d = get_params_kernel_1d
-        self._get_params_measure_1d = get_params_measure_1d
-
-
-def _get_params_1d_expquad(dim, k: ExpQuadKernel) -> dict:
-    return {"ell": k.ell[dim]}
-
-
-def _get_params_1d_lebesgue(dim, m: LebesgueMeasure) -> dict:
-    return {"lb": m.lb[dim], "ub": m.ub[dim]}
