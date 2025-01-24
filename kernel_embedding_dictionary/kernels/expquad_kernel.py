@@ -10,7 +10,7 @@ from ..utils import scaled_vector_diff
 from .kernel import ProductKernel, UnivariateKernel
 
 
-class ExpQuadUniKernel(UnivariateKernel):
+class ExpQuadKernelUni(UnivariateKernel):
     def __init__(self, ell: float):
 
         if ell <= 0:
@@ -55,7 +55,7 @@ class ExpQuadKernel(ProductKernel):
                 if ndim != len(ell):
                     raise ValueError(f"ndim ({ndim}) and dimensionality of lengthscales ({len(ell)}) does not match.")
 
-        kernels = [ExpQuadUniKernel(ell=elli) for elli in ell]
+        kernels = [ExpQuadKernelUni(ell=elli) for elli in ell]
         super().__init__(name="expquad", kernel_list=kernels)  # sets name, ndim and kernel list
 
     @property
