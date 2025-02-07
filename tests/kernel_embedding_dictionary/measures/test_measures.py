@@ -6,6 +6,7 @@ import pytest
 
 from kernel_embedding_dictionary.measures import LebesgueMeasure
 
+
 @pytest.fixture()
 def lebesgue():
     c = {"ndim": 2}

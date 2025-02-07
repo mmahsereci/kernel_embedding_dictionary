@@ -45,13 +45,19 @@ class ProductKernel(abc.ABC):
         return self._kernels[dim].get_param_dict()
 
     def evaluate(self, x1: np.ndarray, x2: np.ndarray) -> np.ndarray:
+        if (len(x1.shape) != 2) or (len(x2.shape) != 2):
+            raise ValueError(f"x1 or x2 have wrong shape.")
+
         n1, d1 = x1.shape
         n2, d2 = x2.shape
 
         if d1 != d2:
             raise ValueError(f"x1 ({d1}) and x2 ({d2}) must have matching dimensionality.")
 
+        if d1 != self.ndim:
+            raise ValueError(f"x1 and x2 have wrong dimensionality ({d1}).")
+
         K = np.ones([n1, n2])
-        for k in self._kernels:
-            K *= k.evaluate(x1, x2)
+        for dim, k in enumerate(self._kernels):
+            K *= k.evaluate(x1[:, dim], x2[:, dim])
         return K

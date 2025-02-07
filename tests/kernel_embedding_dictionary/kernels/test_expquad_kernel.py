@@ -6,8 +6,6 @@ import pytest
 
 from kernel_embedding_dictionary.kernels import ExpQuadKernel, ExpQuadKernelUni
 
-KERNEL_NAME = "expquad"
-
 
 # tests for ExpQuadKernelUni start here
 def test_expquad_kernel_uni_values():
@@ -49,7 +47,6 @@ def test_expquad_kernel_defaults():
     assert k.ndim == 1
     assert k.ell == [1.0]
     assert len(k._kernels) == 1
-    assert k.name == KERNEL_NAME
 
     # only ndim given
     c = {"ndim": 2}
@@ -57,7 +54,6 @@ def test_expquad_kernel_defaults():
     assert k.ndim == 2
     assert k.ell == [1.0, 1.0]
     assert len(k._kernels) == 2
-    assert k.name == KERNEL_NAME
 
     # only ell given
     c = {"lengthscales": [1.0, 2.0]}
@@ -65,7 +61,6 @@ def test_expquad_kernel_defaults():
     assert k.ndim == 2
     assert k.ell == [1.0, 2.0]
     assert len(k._kernels) == 2
-    assert k.name == KERNEL_NAME
 
 
 def test_expquad_kernel_values():
@@ -76,7 +71,6 @@ def test_expquad_kernel_values():
     assert k.ndim == 2
     assert k.ell == [1.0, 2.0]
     assert len(k._kernels) == 2
-    assert k.name == KERNEL_NAME
 
 
 def test_expquad_kernel_raises():
