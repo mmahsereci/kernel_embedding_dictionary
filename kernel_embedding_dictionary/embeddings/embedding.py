@@ -2,13 +2,10 @@
 # SPDX-License-Identifier: MIT
 
 
-from typing import Callable
-
 import numpy as np
 
-from ..kernels import ProductKernel, ExpQuadKernel
-from ..measures import ProductMeasure, LebesgueMeasure
-
+from ..kernels import ProductKernel
+from ..measures import ProductMeasure
 from .mean_funcs import expquad_lebesgue_mean_func_1d
 
 
@@ -40,7 +37,8 @@ class KernelEmbedding:
         kernel_mean = np.ones(x.shape[0])
         for dim in range(x.shape[1]):
             params_dim = {**self._kernel.get_param_dict_from_dim(dim), **self._measure.get_param_dict_from_dim(dim)}
-            print(params_dim)  # TODO: remove after debugging
+            # TODO: remove after debugging
+            print(params_dim)
             kernel_mean *= self._mean_func_1d(x[:, dim], **params_dim)
         return kernel_mean
 
