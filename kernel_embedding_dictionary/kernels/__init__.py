@@ -2,5 +2,5 @@
 # SPDX-License-Identifier: MIT
 
 
-from .expquad_kernel import ExpQuadKernel
+from .expquad_kernel import ExpQuadKernel, ExpQuadKernelUni
 from .kernel import ProductKernel, UnivariateKernel

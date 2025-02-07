@@ -17,7 +17,6 @@ class ExpQuadKernelUni(UnivariateKernel):
             raise ValueError(f"ell ({ell}) must be positive")
 
         self.ell = ell
-        self.name = "expquad"
 
     def get_param_dict(self) -> dict:
         return {"ell": self.ell}
