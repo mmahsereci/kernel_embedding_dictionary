@@ -2,5 +2,5 @@
 # SPDX-License-Identifier: MIT
 
 
-from .lebesgue_measure import LebesgueMeasure
+from .lebesgue_measure import LebesgueMeasure, LebesgueMeasureUni
 from .measure import ProductMeasure, UnivariateMeasure
