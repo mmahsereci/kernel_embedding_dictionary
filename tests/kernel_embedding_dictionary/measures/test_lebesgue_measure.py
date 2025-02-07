@@ -2,22 +2,11 @@
 # SPDX-License-Identifier: MIT
 
 
-import numpy as np
 import pytest
-
-
-REL_TOL = 1e-5
-ABS_TOL = 1e-4
 
 from kernel_embedding_dictionary.measures import LebesgueMeasure, LebesgueMeasureUni
 
-
-@pytest.fixture
-def lebesgue_measure_uni():
-    lb = 0.0
-    ub = 1.0
-    normalize = False
-    return LebesgueMeasureUni(lb, ub, normalize)
+MEASURE_NAME = "lebesgue"
 
 
 # tests for LebesgueMeasureUni start here
@@ -69,19 +58,68 @@ def test_lebesgue_measure_uni_raises():
 
 # tests for LebesgueMeasure start here
 def test_lebesgue_measure_defaults():
-    pass
 
-#    # noting given
-#    m = LebesgueMeasure()
-#    assert m.
-#
+    # nothing given
+    m = LebesgueMeasure()
+    assert m.ndim == 1
+    assert m.lb == [0.0]
+    assert m.ub == [1.0]
+    assert m.bounds == [(0.0, 1.0)]
+    assert not m.normalize
+    assert len(m._measures) == 1
+    assert m.name == MEASURE_NAME
 
-#    config = {
-#        "ndim": 2,
-#        "bounds": [(0, 1)],
-#        "normalize": True
-#    }
+    # only ndim given
+    c = {"ndim": 2}
+    m = LebesgueMeasure(c)
+    assert m.ndim == 2
+    assert m.lb == [0.0, 0.0]
+    assert m.ub == [1.0, 1.0]
+    assert m.bounds == [(0.0, 1.0), (0.0, 1.0)]
+    assert not m.normalize
+    assert len(m._measures) == 2
+    assert m.name == MEASURE_NAME
+
+    # only bounds given
+    c = {"bounds": [(0.0, 1.5), (1.0, 2.0)]}
+    m = LebesgueMeasure(c)
+    assert m.ndim == 2
+    assert m.lb == [0.0, 1.0]
+    assert m.ub == [1.5, 2.0]
+    assert m.bounds == [(0.0, 1.5), (1.0, 2.0)]
+    assert not m.normalize
+    assert len(m._measures) == 2
+    assert m.name == MEASURE_NAME
+
+    # ndim and 1D bounds given
+    c = {"ndim": 2, "bounds": [(1.0, 2.5)]}
+    m = LebesgueMeasure(c)
+    assert m.ndim == 2
+    assert m.lb == [1.0, 1.0]
+    assert m.ub == [2.5, 2.5]
+    assert m.bounds == [(1.0, 2.5), (1.0, 2.5)]
+    assert not m.normalize
+    assert len(m._measures) == 2
+    assert m.name == MEASURE_NAME
+
 
 def test_lebesgue_measure_values():
-    pass
 
+    # all values given, no defaults
+    c = {"ndim": 2, "bounds": [(1.0, 2.5), (0.0, 1.0)], "normalize": True}
+    m = LebesgueMeasure(c)
+    assert m.ndim == 2
+    assert m.lb == [1.0, 0.0]
+    assert m.ub == [2.5, 1.0]
+    assert m.bounds == [(1.0, 2.5), (0.0, 1.0)]
+    assert m.normalize
+    assert len(m._measures) == 2
+    assert m.name == MEASURE_NAME
+
+
+def test_lebesgue_measure_raises():
+
+    # ndim and bounds do not match
+    wrong_c = {"ndim": 1, "bounds": [(0.0, 1.0), (0.0, 1.0)]}
+    with pytest.raises(ValueError):
+        LebesgueMeasure(wrong_c)
