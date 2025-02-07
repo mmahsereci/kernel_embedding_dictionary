@@ -13,7 +13,7 @@ class UnivariateMeasure(abc.ABC):
 
 
 class ProductMeasure(abc.ABC):
-    def __init__(self, name: str, measure_list: List[UnivariateMeasure, ...]):
+    def __init__(self, name: str, measure_list: List[UnivariateMeasure]):
         self.name = name
         self._measures = measure_list
 

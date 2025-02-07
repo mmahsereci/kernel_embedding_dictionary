@@ -22,7 +22,7 @@ def get_embedding(
     :return:
     """
 
-    # TODO get kernel and measure instance and create kernelembedding instance
+    # TODO get kernel and measure instance and create KernelEmbedding instance
     if kernel_name == "expquad":
         if measure_name == "lebesgue":
             return KernelEmbedding(ExpQuadKernel(kernel_config), LebesgueMeasure(measure_config))

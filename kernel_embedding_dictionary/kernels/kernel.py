@@ -25,7 +25,7 @@ class UnivariateKernel(abc.ABC):
 
 
 class ProductKernel(abc.ABC):
-    def __init__(self, name: str, kernel_list: List[UnivariateKernel, ...]):
+    def __init__(self, name: str, kernel_list: List[UnivariateKernel]):
         self.name = name
         self._kernels = kernel_list
 

@@ -6,7 +6,7 @@ from typing import Optional
 
 import numpy as np
 
-from ..utils import scaled_vector_diff
+from ..utils import scaled_diff
 from .kernel import ProductKernel, UnivariateKernel
 
 
@@ -23,13 +23,12 @@ class ExpQuadKernelUni(UnivariateKernel):
         return {"ell": self.ell}
 
     def _evaluate(self, x1: np.ndarray, x2: np.ndarray) -> np.ndarray:
-        # TODO: implement this efficiently
         n1 = x1.shape[0]
         n2 = x2.shape[0]
         K = np.zeros([n1, n2])
         for i in range(n1):
             for j in range(n2):
-                diff = scaled_vector_diff(x1[i], x2[j], self.ell)
+                diff = scaled_diff(x1[i], x2[j], self.ell)
                 K[i, j] = np.exp(np.sum(-(diff**2)))
         return K
 
