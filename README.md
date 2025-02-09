@@ -56,7 +56,7 @@ Inspect the embedding with the print command
 print(ke)
 ```
 
-If you like you get your hands on some raw kernel embedding code for you own project, please feel
+If you like you get your hands on some raw kernel embedding code for your own project, please feel
 free to inspect e.g. 
 [this](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/kernel_embedding_dictionary/embeddings/mean_funcs.py) 
 module where all univariate mean embeddings are listed. 
@@ -66,13 +66,13 @@ to cite our paper and to add the appropriate license.
 
 ## Available Kernel embeddings
 
-All multi-dimension embeddings are based on product kernels and product measures.
+All multidimensional embeddings are based on product kernels and product measures.
 
-| Kernel / Emdedding | `lebesgue` | `gaussian` |
-|-------------------|:---------:|:---------:|
-| `expquad`           |     x     |           |
-| `matern12`          |           |           |
-| `matern13`          |           |           |
+| kernel / emdedding | `lebesgue` | `gaussian` |
+|--------------------|:---------:|:---------:|
+| `expquad`          |     x     |           |
+| `matern12`         |           |           |
+| `matern13`         |           |           |
 
 ## Kernel configs
 
