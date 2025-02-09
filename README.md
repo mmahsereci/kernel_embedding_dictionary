@@ -36,7 +36,7 @@ from kernel_embedding_dictionary import get_embedding
 
 config_measure = {
     "ndim": 2,
-    "bounds": [(0, 1)],
+    "bounds": [(0, 1), (0.5, 2.5)],
     "normalize": True
 }
 

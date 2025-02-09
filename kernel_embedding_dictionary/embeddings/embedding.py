@@ -19,7 +19,7 @@ class KernelEmbedding:
         self._measure = measure
 
         # kernel and measure must be set first
-        self._set_embedding_specific_1d_funcs()
+        self._mean_func_1d = self._get_1d_funcs()
 
     def __str__(self) -> str:
         return f"Kernel embedding for\n\n{self._kernel.__str__()}\n\nand\n\n{self._measure.__str__()}"
@@ -42,10 +42,12 @@ class KernelEmbedding:
             kernel_mean *= self._mean_func_1d(x[:, dim], **params_dim)
         return kernel_mean
 
-    def _set_embedding_specific_1d_funcs(self):
+    def _get_1d_funcs(self):
 
-        if self._kernel.name == "expquad":
-            if self._measure.name == "lebesgue":
-                mean_func_1d = expquad_lebesgue_mean_func_1d
+        mean_func_1d_dict = {"expquad-lebesgue": expquad_lebesgue_mean_func_1d}
 
-        self._mean_func_1d = mean_func_1d
+        mean_func_1d = mean_func_1d_dict.get(self._kernel.name + "-" + self._measure.name, None)
+        if not mean_func_1d_dict:
+            raise ValueError(f"kernel embedding unknown.")
+
+        return mean_func_1d

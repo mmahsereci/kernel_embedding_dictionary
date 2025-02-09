@@ -23,6 +23,11 @@ def get_embedding(
     """
 
     # TODO get kernel and measure instance and create KernelEmbedding instance
-    if kernel_name == "expquad":
-        if measure_name == "lebesgue":
-            return KernelEmbedding(ExpQuadKernel(kernel_config), LebesgueMeasure(measure_config))
+    available_embeddings_dict = {"expquad-lebesgue": [ExpQuadKernel, LebesgueMeasure]}
+
+    km = available_embeddings_dict.get(kernel_name + "-" + measure_name, None)
+
+    if not km:
+        raise ValueError(f"kernel embedding unknown.")
+
+    return KernelEmbedding(km[0](kernel_config), km[1](measure_config))
