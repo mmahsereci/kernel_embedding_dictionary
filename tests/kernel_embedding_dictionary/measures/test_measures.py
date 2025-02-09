@@ -6,10 +6,21 @@ import pytest
 
 from kernel_embedding_dictionary.measures import LebesgueMeasure
 
+# common tests for all measures go into this file. Add a fixture to add a measre to the tests
+# - measure name
+# - sample shapes
+#
+# test that are measure specific go to the specific test file
+# - default param values
+# - param values
+# - raises
+
+NDIM = 2
+
 
 @pytest.fixture()
 def lebesgue():
-    c = {"ndim": 2}
+    c = {"ndim": NDIM, "bounds": [(1.0, 2.5), (0.0, 1.0)], "normalize": True}
     return LebesgueMeasure(c)
 
 
@@ -26,5 +37,13 @@ def test_measure_names(measure_name, request):
 @pytest.mark.parametrize("measure_name", measure_list)
 def test_measure_param_dict_from_dim(measure_name, request):
     m = request.getfixturevalue(measure_name)
-    assert isinstance(m.get_param_dict_from_dim(0), dict)
-    assert isinstance(m.get_param_dict_from_dim(1), dict)
+    for i in range(NDIM):
+        assert isinstance(m.get_param_dict_from_dim(i), dict)
+
+
+@pytest.mark.parametrize("measure_name", measure_list)
+def test_measure_sample_shapes(measure_name, request):
+    m = request.getfixturevalue(measure_name)
+    num_points = 5
+    res = m.sample(num_points)
+    assert res.shape == (num_points, NDIM)

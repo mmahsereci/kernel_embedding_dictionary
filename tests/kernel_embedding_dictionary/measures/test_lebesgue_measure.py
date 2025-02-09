@@ -6,6 +6,15 @@ import pytest
 
 from kernel_embedding_dictionary.measures import LebesgueMeasure, LebesgueMeasureUni
 
+# test that are measure specific go into this files
+# - default param values
+# - param values
+# - raises
+#
+# common tests for all measures go into the common test file.
+# - measure name
+# - sample shapes
+
 MEASURE_NAME = "lebesgue"
 
 
@@ -125,15 +134,6 @@ def test_lebesgue_measure_values():
     assert m.normalize
     assert len(m._measures) == 2
     assert m.name == MEASURE_NAME
-
-
-def test_lebesgue_measure_sample_shapes():
-
-    c = {"ndim": 2, "bounds": [(1.0, 2.5), (0.0, 1.0)], "normalize": True}
-    m = LebesgueMeasure(c)
-    num_points = 5
-    res = m.sample(num_points)
-    assert res.shape == (num_points, 2)
 
 
 def test_lebesgue_measure_raises():
