@@ -4,6 +4,8 @@
 
 from typing import Optional
 
+import numpy as np
+
 from .measure import ProductMeasure, UnivariateMeasure
 
 
@@ -24,6 +26,9 @@ class LebesgueMeasureUni(UnivariateMeasure):
 
     def get_param_dict(self) -> dict:
         return {"lb": self.lb, "ub": self.ub, "density": self.density}
+
+    def sample(self, num_points: int) -> np.ndarray:
+        return np.random.rand(num_points) * (self.ub - self.lb) + self.lb
 
 
 class LebesgueMeasure(ProductMeasure):

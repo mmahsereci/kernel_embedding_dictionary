@@ -47,6 +47,16 @@ def test_lebesgue_measure_uni_param_dict():
     assert p["density"] == density
 
 
+def test_lebesgue_measure_uni_sample_shapes():
+
+    lb = 2.0
+    ub = 4.5
+    m = LebesgueMeasureUni(lb, ub, normalize=True)
+    num_points = 5
+    res = m.sample(num_points)
+    assert res.shape == (num_points,)
+
+
 def test_lebesgue_measure_uni_raises():
 
     # upper bound smaller than lower bound
@@ -115,6 +125,15 @@ def test_lebesgue_measure_values():
     assert m.normalize
     assert len(m._measures) == 2
     assert m.name == MEASURE_NAME
+
+
+def test_lebesgue_measure_sample_shapes():
+
+    c = {"ndim": 2, "bounds": [(1.0, 2.5), (0.0, 1.0)], "normalize": True}
+    m = LebesgueMeasure(c)
+    num_points = 5
+    res = m.sample(num_points)
+    assert res.shape == (num_points, 2)
 
 
 def test_lebesgue_measure_raises():
