@@ -23,7 +23,7 @@ jobs:
           pip install .[dev]
       - name: Run code coverage
         run: |
-          python -m pytest --verbose --cov emukit --cov-report term-missing tests
+          python -m pytest --verbose --cov kernel_embedding_dictionary --cov-report term-missing tests
       - name: Run codecov
         if: success()
         run: |
