@@ -1,23 +1,38 @@
 # Copyright 2025 The KED Authors. All Rights Reserved.
 # SPDX-License-Identifier: MIT
+
+
 import numpy as np
 import pytest
 
-from kernel_embedding_dictionary.embeddings import KernelEmbedding
 from kernel_embedding_dictionary._get_embedding import get_embedding
 
 
 def get_config_expquad_lebesgue_1d_1():
-    ck = {"ndim": 1, "lengthscale": [1.0]}
-    cm = {"ndim": 1, "bounds": [(0.0, 1.0)]}
+    ck = {"ndim": 1}
+    cm = {"ndim": 1}
     x = np.array([[0.1], [0.5], [0.9]])  # 3x1 must lie in domain
     return "expquad", "lebesgue", ck, cm, x
 
 
 def get_config_expquad_lebesgue_1d_2():
-    ck = {"ndim": 1, "lengthscale": [0.03]}
-    cm = {"ndim": 1, "lengthscale": [(-0.5, 2.5)]}
-    x = np.array([[-0.3], [0.0], [1.5]])  # 3x1 must lie in domain
+    ck = {"ndim": 1, "lengthscales": [0.3]}
+    cm = {"ndim": 1, "bounds": [(-0.5, 2.5)], "normalize": True}  # test only works for normalized measures
+    x = np.array([[0.1], [0.5], [0.85]])  # 3x1 must lie in domain
+    return "expquad", "lebesgue", ck, cm, x
+
+
+def get_config_expquad_lebesgue_2d_1():
+    ck = {"ndim": 2}
+    cm = {"ndim": 2}
+    x = np.array([[0.1, 0.2], [0.5, 0.5], [0.9, 0.2]])  # 3x2 must lie in domain
+    return "expquad", "lebesgue", ck, cm, x
+
+
+def get_config_expquad_lebesgue_2d_2():
+    ck = {"ndim": 2, "lengthscales": [0.03, 1.6]}
+    cm = {"ndim": 2, "bounds": [(-0.5, 2.5), (-1.5, 0.1)], "normalize": True}  # test only works for normalized measures
+    x = np.array([[-0.3, -1], [0.0, -0.2], [1.5, 0.0]])  # 3x2 must lie in domain
     return "expquad", "lebesgue", ck, cm, x
 
 
@@ -36,9 +51,31 @@ def config_expquad_lebesgue_1d_1():
 def config_expquad_lebesgue_1d_2():
     kn, mn, ck, cm, x = get_config_expquad_lebesgue_1d_2()
     mean_intervals = [
-        [0.7123375363149562, 0.7153457299975337],
-        [0.8535104942181617, 0.8558150970311784],
-        [0.60567942156233, 0.6088408610742959]
+        [0.24216467221751733, 0.2486510713545889],
+        [0.24630363249007906, 0.2527071991123484],
+        [0.24701635519133064, 0.2534341832086769],
+    ]
+    return kn, mn, ck, cm, x, mean_intervals
+
+
+@pytest.fixture()
+def config_expquad_lebesgue_2d_1():
+    kn, mn, ck, cm, x = get_config_expquad_lebesgue_2d_1()
+    mean_intervals = [
+        [0.8196870021193354, 0.8219827266254676],
+        [0.9207579814859344, 0.9216710074102283],
+        [0.8193363233387485, 0.8216278133280472],
+    ]
+    return kn, mn, ck, cm, x, mean_intervals
+
+
+@pytest.fixture()
+def config_expquad_lebesgue_2d_2():
+    kn, mn, ck, cm, x = get_config_expquad_lebesgue_2d_2()
+    mean_intervals = [
+        [0.022810691847351294, 0.025168802301165173],
+        [0.021634162578259314, 0.02390160606875473],
+        [0.020470357518382998, 0.022648072052878],
     ]
     return kn, mn, ck, cm, x, mean_intervals
 
@@ -46,6 +83,8 @@ def config_expquad_lebesgue_1d_2():
 fixture_list = [
     "config_expquad_lebesgue_1d_1",
     "config_expquad_lebesgue_1d_2",
+    "config_expquad_lebesgue_2d_1",
+    "config_expquad_lebesgue_2d_2",
 ]
 
 
@@ -57,4 +96,6 @@ def test_embedding_uni_mean(fixture_name, request):
 
     res = ke.mean(x_eval)
     for i in range(x_eval.shape[0]):
+        print(i)
+        print(res)
         assert mean_intervals[i][0] < res[i] < mean_intervals[i][1]

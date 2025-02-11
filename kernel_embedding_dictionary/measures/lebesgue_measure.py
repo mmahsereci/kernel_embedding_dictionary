@@ -71,11 +71,16 @@ class LebesgueMeasure(ProductMeasure):
     def bounds(self):
         return [(lb, ub) for lb, ub in zip(self.lb, self.ub)]
 
+    @property
+    def density(self):
+        return np.array([m.density for m in self._measures]).prod()
+
     def __str__(self) -> str:
         return (
             f"Lebesgue measure \n"
             f"dimensionality: {self.ndim} \n"
             f"normalized: {self.normalize}\n"
+            f"density: {self.density}\n"
             f"bounds: {self.bounds}"
         )
 
