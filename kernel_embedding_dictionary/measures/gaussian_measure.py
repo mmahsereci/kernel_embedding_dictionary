@@ -55,16 +55,13 @@ class GaussianMeasure(ProductMeasure):
             variances = ndim * [1.0]
         # only means given
         elif means and not (ndim or variances):
-            ndim = len(means)
-            variances = ndim * [1.0]
+            variances = len(means) * [1.0]
         # only variances given
         elif variances and not (ndim or means):
-            ndim = len(variances)
-            means = ndim * [0.0]
+            means = len(variances) * [0.0]
         # only variances given
         elif variances and not (ndim or means):
-            ndim = len(variances)
-            means = ndim * [0.0]
+            means = len(variances) * [0.0]
         # ndim and variances given
         elif (variances and ndim) and not means:
             if len(variances) != ndim:
