@@ -15,8 +15,6 @@ from kernel_embedding_dictionary.measures import LebesgueMeasure, LebesgueMeasur
 # - measure name
 # - sample shapes
 
-MEASURE_NAME = "lebesgue"
-
 
 # tests for LebesgueMeasureUni start here
 def test_lebesgue_measure_uni_values():
@@ -86,7 +84,6 @@ def test_lebesgue_measure_defaults():
     assert m.bounds == [(0.0, 1.0)]
     assert not m.normalize
     assert len(m._measures) == 1
-    assert m.name == MEASURE_NAME
 
     # only ndim given
     c = {"ndim": 2}
@@ -97,7 +94,6 @@ def test_lebesgue_measure_defaults():
     assert m.bounds == [(0.0, 1.0), (0.0, 1.0)]
     assert not m.normalize
     assert len(m._measures) == 2
-    assert m.name == MEASURE_NAME
 
     # only bounds given
     c = {"bounds": [(0.0, 1.5), (1.0, 2.0)]}
@@ -108,7 +104,6 @@ def test_lebesgue_measure_defaults():
     assert m.bounds == [(0.0, 1.5), (1.0, 2.0)]
     assert not m.normalize
     assert len(m._measures) == 2
-    assert m.name == MEASURE_NAME
 
     # ndim and 1D bounds given
     c = {"ndim": 2, "bounds": [(1.0, 2.5)]}
@@ -119,7 +114,6 @@ def test_lebesgue_measure_defaults():
     assert m.bounds == [(1.0, 2.5), (1.0, 2.5)]
     assert not m.normalize
     assert len(m._measures) == 2
-    assert m.name == MEASURE_NAME
 
 
 def test_lebesgue_measure_values():
@@ -133,7 +127,6 @@ def test_lebesgue_measure_values():
     assert m.bounds == [(1.0, 2.5), (0.0, 1.0)]
     assert m.normalize
     assert len(m._measures) == 2
-    assert m.name == MEASURE_NAME
 
 
 def test_lebesgue_measure_raises():

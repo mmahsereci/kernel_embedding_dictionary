@@ -4,7 +4,7 @@
 
 import pytest
 
-from kernel_embedding_dictionary.measures import LebesgueMeasure
+from kernel_embedding_dictionary.measures import GaussianMeasure, LebesgueMeasure
 
 # common tests for all measures go into this file. Add a fixture to add a measre to the tests
 # - measure name
@@ -24,8 +24,14 @@ def lebesgue():
     return LebesgueMeasure(c)
 
 
+@pytest.fixture()
+def gaussian():
+    c = {"ndim": NDIM, "means": [-0.5, 0.3], "variances": [0.2, 1.4]}
+    return GaussianMeasure(c)
+
+
 # for a new kernel: add a fixture and its name to the list
-measure_list = ["lebesgue"]
+measure_list = ["lebesgue", "gaussian"]
 
 
 @pytest.mark.parametrize("measure_name", measure_list)
