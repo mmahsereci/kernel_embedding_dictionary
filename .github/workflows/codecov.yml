@@ -30,8 +30,7 @@ jobs:
       - name: Run tests
         run: python -m pytest --verbose --cov kernel_embedding_dictionary --cov-report term-missing tests
 
-      - name: Upload results to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          slug: mmahsereci/kernel_embedding_dictionary
+      - name: Run codecov
+        if: success()
+        run: |
+          codecov
