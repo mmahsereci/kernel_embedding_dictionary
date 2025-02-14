@@ -28,7 +28,7 @@ jobs:
           pip install pytest pytest-cov
 
       - name: Run tests
-        run: python -m pytest --verbose --cov kernel_embedding_dictionary --cov-report=xml term-missing tests
+        run: python -m pytest --verbose --cov kernel_embedding_dictionary --cov-report term-missing tests
 
       - name: Upload results to Codecov
         uses: codecov/codecov-action@v5
