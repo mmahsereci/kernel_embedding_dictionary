@@ -79,11 +79,9 @@ All multidimensional embeddings are based on product kernels and product measure
 
 If an argument is not given, a default is used or inferred.
 
-### expquad
-
-TODO: add formula
 
 ```python
+# expquad
 config_kernel = {
     "ndim": 2,
     "lengthscales": [1.0, 2.0],
@@ -94,9 +92,6 @@ config_kernel = {
 
 If an argument is not given, a default is used or inferred.
 
-### lebesgue
-
-TODO: add formula
 
 ```python
 
@@ -109,6 +104,17 @@ config_measure = {
 
 ```
 
+
+```python
+
+# gaussian
+config_measure = {
+    "ndim": 2,
+    "means": [-0.5, 2.8],
+    "variances": [0.3, 1.2]
+}
+
+```
 ## Contributing
 
 If you would like to contribute an additional kernel embedding or other enhancements, 
