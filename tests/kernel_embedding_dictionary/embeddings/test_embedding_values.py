@@ -165,7 +165,7 @@ fixture_list = [
 
 
 @pytest.mark.parametrize("fixture_name", fixture_list)
-def test_embedding_uni_mean(fixture_name, request):
+def test_embedding_mean_values(fixture_name, request):
     kn, mn, ck, cm, x_eval, mean_intervals = request.getfixturevalue(fixture_name)
 
     ke = get_embedding(kernel_name=kn, measure_name=mn, kernel_config=ck, measure_config=cm)

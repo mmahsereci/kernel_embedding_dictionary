@@ -3,7 +3,7 @@
 
 
 import numpy as np
-from test_embeddings import (
+from test_embedding_values import (
     get_config_expquad_gaussian_1d_standard,
     get_config_expquad_gaussian_1d_values,
     get_config_expquad_gaussian_2d_standard,
