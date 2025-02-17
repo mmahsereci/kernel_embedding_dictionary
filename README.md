@@ -103,7 +103,7 @@ config_measure = {
 }
 
 ```
-`gaussian` with density $p(x_i) = e^{\frac{(x_i - \mu_i)^2}{2\sigma_i^2}}$.
+`gaussian` with density $p(x_i) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x_i - \mu_i)^2}{2\sigma_i^2}}$.
 
 ```python
 
