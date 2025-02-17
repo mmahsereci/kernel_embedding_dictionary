@@ -2,6 +2,8 @@
 # SPDX-License-Identifier: MIT
 
 
+from typing import Callable
+
 import numpy as np
 
 from ..kernels import ProductKernel
@@ -29,10 +31,11 @@ class KernelEmbedding:
 
     def mean(self, x: np.ndarray) -> np.ndarray:
 
-        if (self.ndim != x.shape[1]) or (len(x.shape) != 2):
-            raise ValueError(
-                f"x has wrong shape {x.shape}. Perhaps the dimensionality does not match the kernel embedding."
-            )
+        e_msg = f"x has wrong shape {x.shape}. Perhaps the dimensionality does not match the kernel embedding."
+        if len(x.shape) != 2:
+            raise ValueError(e_msg)
+        if self.ndim != x.shape[1]:
+            raise ValueError(e_msg)
 
         kernel_mean = np.ones(x.shape[0])
         for dim in range(x.shape[1]):
@@ -42,7 +45,7 @@ class KernelEmbedding:
             kernel_mean *= self._mean_func_1d(x[:, dim], **params_dim)
         return kernel_mean
 
-    def _get_1d_funcs(self):
+    def _get_1d_funcs(self) -> Callable:
 
         mean_func_1d_dict = {
             "expquad-lebesgue": expquad_lebesgue_mean_func_1d,

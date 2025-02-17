@@ -34,7 +34,7 @@ class ProductMeasure(abc.ABC):
         return x
 
     @property
-    def ndim(self):
+    def ndim(self) -> int:
         return len(self._measures)
 
     @abc.abstractmethod

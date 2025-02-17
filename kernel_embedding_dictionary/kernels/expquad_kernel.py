@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 
 
-from typing import Optional
+from typing import List, Optional
 
 import numpy as np
 
@@ -57,7 +57,7 @@ class ExpQuadKernel(ProductKernel):
         super().__init__(name="expquad", kernel_list=kernels)  # sets name, ndim and kernel list
 
     @property
-    def ell(self):
+    def ell(self) -> List[float]:
         return [k.ell for k in self._kernels]
 
     def __str__(self) -> str:

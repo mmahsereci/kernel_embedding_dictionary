@@ -9,20 +9,10 @@ from .kernels import ExpQuadKernel
 from .measures import GaussianMeasure, LebesgueMeasure
 
 
-# TODO: add return type
 def get_embedding(
     kernel_name: str, measure_name: str, kernel_config: Optional[dict] = None, measure_config: Optional[dict] = None
-):
-    """Constructs the kernel embedding from the given configurations.
+) -> KernelEmbedding:
 
-    :param kernel_name:
-    :param measure_name:
-    :param kernel_config:
-    :param measure_config:
-    :return:
-    """
-
-    # TODO get kernel and measure instance and create KernelEmbedding instance
     available_embeddings_dict = {
         "expquad-lebesgue": [ExpQuadKernel, LebesgueMeasure],
         "expquad-gaussian": [ExpQuadKernel, GaussianMeasure],

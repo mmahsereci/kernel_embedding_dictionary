@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 
 
-from typing import Optional
+from typing import List, Optional, Tuple
 
 import numpy as np
 
@@ -60,19 +60,19 @@ class LebesgueMeasure(ProductMeasure):
         super().__init__(name="lebesgue", measure_list=measures)  # sets name, ndim and measure list
 
     @property
-    def lb(self):
+    def lb(self) -> List[float]:
         return [m.lb for m in self._measures]
 
     @property
-    def ub(self):
+    def ub(self) -> List[float]:
         return [m.ub for m in self._measures]
 
     @property
-    def bounds(self):
+    def bounds(self) -> List[Tuple[float, float]]:
         return [(lb, ub) for lb, ub in zip(self.lb, self.ub)]
 
     @property
-    def density(self):
+    def density(self) -> float:
         return np.array([m.density for m in self._measures]).prod()
 
     def __str__(self) -> str:

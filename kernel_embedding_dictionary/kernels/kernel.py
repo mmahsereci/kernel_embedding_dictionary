@@ -30,7 +30,7 @@ class ProductKernel(abc.ABC):
         self._kernels = kernel_list
 
     @property
-    def ndim(self):
+    def ndim(self) -> int:
         return len(self._kernels)
 
     @abc.abstractmethod

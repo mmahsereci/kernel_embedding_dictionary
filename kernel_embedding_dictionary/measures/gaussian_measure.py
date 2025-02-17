@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 
 
-from typing import Optional
+from typing import List, Optional
 
 import numpy as np
 
@@ -81,11 +81,11 @@ class GaussianMeasure(ProductMeasure):
         super().__init__(name="gaussian", measure_list=measures)  # sets name, ndim and measure list
 
     @property
-    def means(self):
+    def means(self) -> List[float]:
         return [m.mean for m in self._measures]
 
     @property
-    def variances(self):
+    def variances(self) -> List[float]:
         return [m.variance for m in self._measures]
 
     def __str__(self) -> str:
