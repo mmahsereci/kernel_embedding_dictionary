@@ -6,7 +6,7 @@ from typing import Optional
 
 from .embeddings import KernelEmbedding
 from .kernels import ExpQuadKernel
-from .measures import LebesgueMeasure
+from .measures import GaussianMeasure, LebesgueMeasure
 
 
 # TODO: add return type
@@ -23,7 +23,10 @@ def get_embedding(
     """
 
     # TODO get kernel and measure instance and create KernelEmbedding instance
-    available_embeddings_dict = {"expquad-lebesgue": [ExpQuadKernel, LebesgueMeasure]}
+    available_embeddings_dict = {
+        "expquad-lebesgue": [ExpQuadKernel, LebesgueMeasure],
+        "expquad-gaussian": [ExpQuadKernel, GaussianMeasure],
+    }
 
     km = available_embeddings_dict.get(kernel_name + "-" + measure_name, None)
 

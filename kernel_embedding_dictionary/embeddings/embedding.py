@@ -6,7 +6,7 @@ import numpy as np
 
 from ..kernels import ProductKernel
 from ..measures import ProductMeasure
-from .mean_funcs_1d import expquad_lebesgue_mean_func_1d
+from .mean_funcs_1d import expquad_gaussian_mean_func_1d, expquad_lebesgue_mean_func_1d
 
 
 class KernelEmbedding:
@@ -44,7 +44,10 @@ class KernelEmbedding:
 
     def _get_1d_funcs(self):
 
-        mean_func_1d_dict = {"expquad-lebesgue": expquad_lebesgue_mean_func_1d}
+        mean_func_1d_dict = {
+            "expquad-lebesgue": expquad_lebesgue_mean_func_1d,
+            "expquad-gaussian": expquad_gaussian_mean_func_1d,
+        }
 
         mean_func_1d = mean_func_1d_dict.get(self._kernel.name + "-" + self._measure.name, None)
         if not mean_func_1d_dict:

@@ -69,11 +69,11 @@ to cite our paper and to add the appropriate license.
 All multidimensional embeddings are based on product kernels and product measures.
 
 | kernel / emdedding | `lebesgue` | `gaussian` |
-|--------------------|:---------:|:---------:|
-| `expquad`          |     x     |           |
-| `matern12`         |           |           |
-| `matern32`         |           |           |
-| `matern52`         |           |           |
+|--------------------|:---------:|:----------:|
+| `expquad`          |     x     |     x      |
+| `matern12`         |           |            |
+| `matern32`         |           |            |
+| `matern52`         |           |            |
 
 ## Kernel configs
 

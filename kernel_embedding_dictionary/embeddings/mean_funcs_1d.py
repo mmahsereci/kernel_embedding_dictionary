@@ -14,3 +14,10 @@ def expquad_lebesgue_mean_func_1d(x: np.ndarray, ell: float, lb: float, ub: floa
     erf_up = erf(scaled_diff(ub, x, ell))
     kernel_mean = np.sqrt(np.pi / 2.0) * ell * (erf_up - erf_lo)
     return density * kernel_mean.reshape(-1)
+
+
+def expquad_gaussian_mean_func_1d(x: np.ndarray, ell: float, mean: float, variance: float) -> np.ndarray:
+    print(ell, mean, variance)
+    factor = np.sqrt(ell**2 / (ell**2 + variance))
+    scaled_norm_sq = np.power(scaled_diff(x, mean, np.sqrt(ell**2 + variance)), 2)
+    return factor * np.exp(-scaled_norm_sq).reshape(-1)
