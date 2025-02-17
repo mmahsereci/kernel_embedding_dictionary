@@ -56,9 +56,9 @@ Inspect the embedding with the print command
 print(ke)
 ```
 
-If you like you get your hands on some raw kernel embedding code for your own project, please feel
+If you would like to get your hands on some raw kernel embedding code for your own project, please feel
 free to inspect e.g. 
-[this](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/kernel_embedding_dictionary/embeddings/mean_funcs.py) 
+[this](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/kernel_embedding_dictionary/embeddings/mean_funcs_1d.py) 
 module where all univariate mean embeddings are listed. 
 
 If you use our code in your project, please do not forget 
