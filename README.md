@@ -103,7 +103,11 @@ config_measure = {
 }
 
 ```
+`gaussian`
 
+```math
+p(x_i) = e^{\frac{(x_i - \mu_i)^2}{2\sigma_i^2}}
+```
 
 ```python
 
@@ -115,6 +119,9 @@ config_measure = {
 }
 
 ```
+
+where `variances` = $[\sigma_1^2, ...\sigma_d^2]$ and `means` = $[\mu_1, ...\mu_d]$. 
+
 ## Contributing
 
 If you would like to contribute an additional kernel embedding or other enhancements, 
