@@ -77,7 +77,7 @@ All multidimensional embeddings are based on product kernels and product measure
 
 ## Kernel configs
 
-All kernel are product kernels of the form $\Prod_{i=1}^d k(x_i, z_i)$ where $d$ is the 
+All kernel are product kernels of the form $\prod_{i=1}^d k(x_i, z_i)$ where $d$ is the 
 dimensionality and $k$ is a univariate kernel.
 
 If an argument is not given, a default is used or inferred. 
@@ -96,7 +96,7 @@ where `ndim` = $d$ and `lengthscales` = $[\ell_1, ...\ell_d]$.
 
 ## Measure configs
 
-All measures are product measures of the form $\Prod_{i=1}^d p(x_i, z_i)$ where $d$ is the 
+All measures are product measures of the form $\prod_{i=1}^d p(x_i, z_i)$ where $d$ is the 
 dimensionality and $p$ is a univariate density.
 
 If an argument is not given, a default is used or inferred. 
