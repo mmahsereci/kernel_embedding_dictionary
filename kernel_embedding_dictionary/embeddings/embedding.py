@@ -6,7 +6,7 @@ import numpy as np
 
 from ..kernels import ProductKernel
 from ..measures import ProductMeasure
-from .mean_funcs import expquad_lebesgue_mean_func_1d
+from .mean_funcs_1d import expquad_lebesgue_mean_func_1d
 
 
 class KernelEmbedding:
