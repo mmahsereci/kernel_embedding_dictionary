@@ -102,6 +102,10 @@ config_measure = {
     "normalize": True
 }
 ```
+
+where `ndim` = $d$ and `bounds` = $[(lb_1, ub_1), ... (lb_d, ub_d)]$.
+
+
 `gaussian` with density $p(x_i) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x_i - \mu_i)^2}{2\sigma_i^2}}$.
 
 ```python
@@ -112,7 +116,7 @@ config_measure = {
 }
 ```
 
-where ``ndim` = $d$, ``variances` = $[\sigma_1^2, ...\sigma_d^2]$ and `means` = $[\mu_1, ...\mu_d]$. 
+where `ndim` = $d$, `variances` = $[\sigma_1^2, ...\sigma_d^2]$ and `means` = $[\mu_1, ...\mu_d]$. 
 
 ## Contributing
 
