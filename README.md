@@ -77,23 +77,33 @@ All multidimensional embeddings are based on product kernels and product measure
 
 ## Kernel configs
 
-If an argument is not given, a default is used or inferred.
+All kernel are product kernels of the form $\Prod_{i=1}^d k(x_i, z_i)$ where $d$ is the 
+dimensionality and $k$ is a univariate kernel.
 
+If an argument is not given, a default is used or inferred. 
+The available kernels configs are as follows.
+
+`expaquad` with value $k(x_i, z_i') = e^{-\frac{(x_i - z_i)^2}{2\ell_i^2}}$.
 
 ```python
-# expquad
 config_kernel = {
     "ndim": 2,
     "lengthscales": [1.0, 2.0],
 }
 ```
 
+where `ndim` = $d$ and `lengthscales` = $[\ell_1, ...\ell_d]$. 
+
 ## Measure configs
 
-If an argument is not given, a default is used or inferred.
+All measures are product measures of the form $\Prod_{i=1}^d p(x_i, z_i)$ where $d$ is the 
+dimensionality and $p$ is a univariate density.
+
+If an argument is not given, a default is used or inferred. 
+The available measure configs are as follows.
 
 `lebesgue` with density $p(x_i) = (ub_i - lb_i)^{-1}$ (normalized) or 
-$p(x_i) = 1$ (not normalized) when $lb_i\leq x_i\leq ub_i$.
+$p(x_i) = 1$ (not normalized) when $lb_i\leq x_i\leq ub_i$
 
 ```python
 config_measure = {
@@ -103,7 +113,7 @@ config_measure = {
 }
 ```
 
-where `ndim` = $d$ and `bounds` = $[(lb_1, ub_1), ... (lb_d, ub_d)]$.
+where `ndim` = $d$ and `bounds` = $[(lb_1, ub_1), ... (lb_d, ub_d)]$
 
 
 `gaussian` with density $p(x_i) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x_i - \mu_i)^2}{2\sigma_i^2}}$.
