@@ -92,28 +92,24 @@ config_kernel = {
 
 If an argument is not given, a default is used or inferred.
 
+`lebesgue` with density $p(x_i) = (ub_i - lb_i)^{-1}$ (normalized) or 
+$p(x_i) = 1$ (not normalized) when $lb_i\leq x_i\leq ub_i$.
 
 ```python
-
-# lebesgue
 config_measure = {
     "ndim": 2,
     "bounds": [(0, 1), (1, 2)],
     "normalize": True
 }
-
 ```
 `gaussian` with density $p(x_i) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x_i - \mu_i)^2}{2\sigma_i^2}}$.
 
 ```python
-
-# gaussian
 config_measure = {
     "ndim": 2,
     "means": [-0.5, 2.8],
     "variances": [0.3, 1.2]
 }
-
 ```
 
 where ``ndim` = $d$, ``variances` = $[\sigma_1^2, ...\sigma_d^2]$ and `means` = $[\mu_1, ...\mu_d]$. 
