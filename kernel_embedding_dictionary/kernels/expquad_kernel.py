@@ -27,7 +27,7 @@ class ExpQuadKernelUni(UnivariateKernel):
         K = np.zeros([n1, n2])
         for i in range(n1):
             for j in range(n2):
-                diff = scaled_diff(x1[i], x2[j], self.ell)
+                diff = 0.5 * scaled_diff(x1[i], x2[j], self.ell, np.sqrt(2))
                 K[i, j] = np.exp(-(diff**2))
         return K
 

@@ -3,7 +3,7 @@
 
 
 import numpy as np
-from test_embedding_values import (
+from test_mean_values_expquad import (
     get_config_expquad_gaussian_1d_standard,
     get_config_expquad_gaussian_1d_values,
     get_config_expquad_gaussian_2d_standard,
@@ -12,6 +12,12 @@ from test_embedding_values import (
     get_config_expquad_lebesgue_1d_values,
     get_config_expquad_lebesgue_2d_standard,
     get_config_expquad_lebesgue_2d_values,
+)
+from test_mean_values_matern12 import (
+    get_config_matern12_lebesgue_1d_standard,
+    get_config_matern12_lebesgue_1d_values,
+    get_config_matern12_lebesgue_2d_standard,
+    get_config_matern12_lebesgue_2d_values,
 )
 
 from kernel_embedding_dictionary._get_embedding import get_embedding
@@ -24,10 +30,16 @@ embedding_to_config_list_dict = {
         get_config_expquad_lebesgue_2d_values,
     ],
     "expquad-gaussian": [
-        # get_config_expquad_gaussian_1d_standard,
-        # get_config_expquad_gaussian_1d_values,
+        get_config_expquad_gaussian_1d_standard,
+        get_config_expquad_gaussian_1d_values,
         get_config_expquad_gaussian_2d_standard,
         get_config_expquad_gaussian_2d_values,
+    ],
+    "matern12-lebesgue": [
+        get_config_matern12_lebesgue_1d_standard,
+        get_config_matern12_lebesgue_1d_values,
+        get_config_matern12_lebesgue_2d_standard,
+        get_config_matern12_lebesgue_2d_values,
     ],
 }
 
@@ -39,7 +51,8 @@ if __name__ == "__main__":
 
     # Choose embedding
     # embedding_name = "expquad-lebesgue"
-    embedding_name = "expquad-gaussian"
+    # embedding_name = "expquad-gaussian"
+    embedding_name = "matern12-lebesgue"
 
     get_config_func_list = embedding_to_config_list_dict[embedding_name]
 

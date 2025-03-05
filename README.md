@@ -69,11 +69,11 @@ to cite our paper and to add the appropriate license.
 All multidimensional embeddings are based on product kernels and product measures.
 
 | kernel / emdedding | `lebesgue` | `gaussian` |
-|--------------------|:---------:|:----------:|
-| `expquad`          |     x     |     x      |
-| `matern12`         |           |            |
-| `matern32`         |           |            |
-| `matern52`         |           |            |
+|--------------------|:----------:|:----------:|
+| `expquad`          |     x      |     x      |
+| `matern12`         |     x      |            |
+| `matern32`         |            |            |
+| `matern52`         |            |            |
 
 ## Kernel configs
 
@@ -93,6 +93,15 @@ config_kernel = {
 ```
 
 where `ndim` = $d$ and `lengthscales` = $[\ell_1, ...\ell_d]$. 
+
+`matern12` with value $k(x_i, z_i') = e^{-\frac{|x_i - z_i|}{\ell_i}}$.
+
+```python
+config_kernel = {
+    "ndim": 2,
+    "lengthscales": [1.0, 2.0],
+}
+```
 
 ## Measure configs
 

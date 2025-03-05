@@ -28,7 +28,7 @@ class Matern12KernelUni(UnivariateKernel):
         K = np.zeros([n1, n2])
         for i in range(n1):
             for j in range(n2):
-                diff = scaled_diff(x1[i], x2[j], self.ell)
+                diff = scaled_diff(x1[i], x2[j], self.ell, 1)
                 K[i, j] = np.exp(-abs(diff))
         return K
 
