@@ -5,7 +5,7 @@
 import numpy as np
 import pytest
 
-from kernel_embedding_dictionary.kernels import ExpQuadKernelUni
+from kernel_embedding_dictionary.kernels import ExpQuadKernelUni, Matern12KernelUni
 
 
 @pytest.fixture()
@@ -13,8 +13,13 @@ def expquad_uni():
     return ExpQuadKernelUni(ell=1.0)
 
 
+@pytest.fixture()
+def matern12_uni():
+    return Matern12KernelUni(ell=1.0)
+
+
 # for a new univariate kernel: add a fixture and its name to the list
-kernel_uni_list = ["expquad_uni"]
+kernel_uni_list = ["expquad_uni", "matern12_uni"]
 
 
 @pytest.mark.parametrize("kernel_uni_name", kernel_uni_list)

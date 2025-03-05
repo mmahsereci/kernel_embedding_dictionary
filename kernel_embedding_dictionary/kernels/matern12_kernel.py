@@ -10,16 +10,17 @@ from ..utils import scaled_diff
 from .kernel import ProductKernel, UnivariateKernel
 
 
-class ExpQuadKernelUni(UnivariateKernel):
+class Matern12KernelUni(UnivariateKernel):
     def __init__(self, ell: float):
 
         if ell <= 0:
             raise ValueError(f"ell ({ell}) must be positive")
 
         self.ell = ell
+        self.nu = 0.5
 
     def get_param_dict(self) -> dict:
-        return {"ell": self.ell}
+        return {"ell": self.ell, "nu": self.nu}
 
     def _evaluate(self, x1: np.ndarray, x2: np.ndarray) -> np.ndarray:
         n1 = x1.shape[0]
@@ -28,11 +29,11 @@ class ExpQuadKernelUni(UnivariateKernel):
         for i in range(n1):
             for j in range(n2):
                 diff = scaled_diff(x1[i], x2[j], self.ell)
-                K[i, j] = np.exp(-(diff**2))
+                K[i, j] = np.exp(-abs(diff))
         return K
 
 
-class ExpQuadKernel(ProductKernel):
+class Matern12Kernel(ProductKernel):
     def __init__(self, config: Optional[dict] = None):
         """
 
@@ -53,15 +54,19 @@ class ExpQuadKernel(ProductKernel):
                 if ndim != len(ell):
                     raise ValueError(f"ndim ({ndim}) and dimensionality of lengthscales ({len(ell)}) does not match.")
 
-        kernels = [ExpQuadKernelUni(ell=elli) for elli in ell]
-        super().__init__(name="expquad", kernel_list=kernels)  # sets name, ndim and kernel list
+        kernels = [Matern12KernelUni(ell=elli) for elli in ell]
+        super().__init__(name="matern12", kernel_list=kernels)  # sets name, ndim and kernel list
 
     @property
     def ell(self) -> List[float]:
         return [k.ell for k in self._kernels]
 
+    @property
+    def nu(self) -> float:
+        return 0.5
+
     def __str__(self) -> str:
-        return f"exponentiated quadratic kernel \n" f"dimensionality: {self.ndim} \n" f"lengthscales: {list(self.ell)}"
+        return f"Matern1/2 kernel \n" f"dimensionality: {self.ndim} \n" f"lengthscales: {list(self.ell)}"
 
     def __repr__(self) -> str:
-        return "exponentiated quadratic kernel"
+        return "Matern1/2 kernel"

@@ -5,7 +5,7 @@
 import numpy as np
 import pytest
 
-from kernel_embedding_dictionary.kernels import ExpQuadKernel
+from kernel_embedding_dictionary.kernels import ExpQuadKernel, Matern12Kernel
 
 
 @pytest.fixture()
@@ -14,13 +14,20 @@ def expquad():
     return ExpQuadKernel(c)
 
 
+@pytest.fixture()
+def matern12():
+    c = {"ndim": 2}
+    return Matern12Kernel(c)
+
+
 # for a new kernel: add a fixture and its name to the list
-kernel_list = ["expquad"]
+kernel_list = ["expquad", "matern12"]
 
 
 @pytest.mark.parametrize("kernel_name", kernel_list)
 def test_kernel_names(kernel_name, request):
     k = request.getfixturevalue(kernel_name)
+    print(k)
     assert k.name == kernel_name
 
 
