@@ -8,7 +8,12 @@ import numpy as np
 
 from ..kernels import ProductKernel
 from ..measures import ProductMeasure
-from .mean_funcs_1d import expquad_gaussian_mean_func_1d, expquad_lebesgue_mean_func_1d, matern12_lebesgue_mean_func_1d
+from .mean_funcs_1d import (
+    expquad_gaussian_mean_func_1d,
+    expquad_lebesgue_mean_func_1d,
+    matern12_lebesgue_mean_func_1d,
+    matern32_lebesgue_mean_func_1d,
+)
 
 
 class KernelEmbedding:
@@ -51,6 +56,7 @@ class KernelEmbedding:
             "expquad-lebesgue": expquad_lebesgue_mean_func_1d,
             "expquad-gaussian": expquad_gaussian_mean_func_1d,
             "matern12-lebesgue": matern12_lebesgue_mean_func_1d,
+            "matern32-lebesgue": matern32_lebesgue_mean_func_1d,
         }
 
         mean_func_1d = mean_func_1d_dict.get(self._kernel.name + "-" + self._measure.name, None)

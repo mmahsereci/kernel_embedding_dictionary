@@ -5,7 +5,7 @@
 import pytest
 
 from kernel_embedding_dictionary._get_embedding import get_embedding
-from kernel_embedding_dictionary.kernels import ExpQuadKernel
+from kernel_embedding_dictionary.kernels import ExpQuadKernel, Matern12Kernel, Matern32Kernel
 from kernel_embedding_dictionary.measures import GaussianMeasure, LebesgueMeasure
 
 # add new combination to list to include it in tests
@@ -16,6 +16,8 @@ from kernel_embedding_dictionary.measures import GaussianMeasure, LebesgueMeasur
     [
         ("expquad", ExpQuadKernel, "lebesgue", LebesgueMeasure),
         ("expquad", ExpQuadKernel, "gaussian", GaussianMeasure),
+        ("matern12", Matern12Kernel, "lebesgue", LebesgueMeasure),
+        ("matern32", Matern32Kernel, "lebesgue", LebesgueMeasure),
     ],
 )
 def test_get_embedding_returns_correct_types(embedding):

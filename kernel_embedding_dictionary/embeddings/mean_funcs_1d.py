@@ -24,8 +24,18 @@ def expquad_gaussian_mean_func_1d(x: np.ndarray, ell: float, mean: float, varian
 def matern12_lebesgue_mean_func_1d(
     x: np.ndarray, ell: float, nu: float, lb: float, ub: float, density: float
 ) -> np.ndarray:
-    print(ell, lb, ub, density)
     exp_lb_x = np.exp(scaled_diff(lb, x, ell, 1))
     exp_x_ub = np.exp(scaled_diff(x, ub, ell, 1))
     kernel_mean = ell * (2.0 - exp_lb_x - exp_x_ub)
+    return density * kernel_mean.reshape(-1)
+
+
+def matern32_lebesgue_mean_func_1d(
+    x: np.ndarray, ell: float, nu: float, lb: float, ub: float, density: float
+) -> np.ndarray:
+    diff_x_ub = np.sqrt(3) * scaled_diff(x, ub, ell, 1)
+    diff_lb_x = np.sqrt(3) * scaled_diff(lb, x, ell, 1)
+    exp_term_1 = np.exp(diff_x_ub) * (ub + 2.0 * ell / np.sqrt(3) - x)
+    exp_term_2 = np.exp(diff_lb_x) * (x + 2.0 * ell / np.sqrt(3) - lb)
+    kernel_mean = 4.0 * ell / np.sqrt(3) - exp_term_1 - exp_term_2
     return density * kernel_mean.reshape(-1)

@@ -5,7 +5,7 @@
 from typing import Optional
 
 from .embeddings import KernelEmbedding
-from .kernels import ExpQuadKernel, Matern12Kernel
+from .kernels import ExpQuadKernel, Matern12Kernel, Matern32Kernel
 from .measures import GaussianMeasure, LebesgueMeasure
 
 
@@ -17,6 +17,7 @@ def get_embedding(
         "expquad-lebesgue": [ExpQuadKernel, LebesgueMeasure],
         "expquad-gaussian": [ExpQuadKernel, GaussianMeasure],
         "matern12-lebesgue": [Matern12Kernel, LebesgueMeasure],
+        "matern32-lebesgue": [Matern32Kernel, LebesgueMeasure],
     }
 
     km = available_embeddings_dict.get(kernel_name + "-" + measure_name, None)
