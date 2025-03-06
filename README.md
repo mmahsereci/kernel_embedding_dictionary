@@ -94,7 +94,16 @@ config_kernel = {
 
 where `ndim` = $d$ and `lengthscales` = $[\ell_1, ...\ell_d]$. 
 
-`matern12` with value $k(x_i, z_i') = e^{-\frac{|x_i - z_i|}{\ell_i}}$.
+`matern12` with value $k(x_i, z_i') = e^{-r_i}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$.
+
+```python
+config_kernel = {
+    "ndim": 2,
+    "lengthscales": [1.0, 2.0],
+}
+```
+
+`matern32` with value $k(x_i, z_i') = (1 + \sqrt{3} r_i)e^{-\sqrt{3} r_i}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$
 
 ```python
 config_kernel = {
