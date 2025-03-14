@@ -55,7 +55,7 @@ class Matern52Kernel(ProductKernel):
                     raise ValueError(f"ndim ({ndim}) and dimensionality of lengthscales ({len(ell)}) does not match.")
 
         kernels = [Matern52KernelUni(ell=elli) for elli in ell]
-        super().__init__(name="matern32", kernel_list=kernels)  # sets name, ndim and kernel list
+        super().__init__(name="matern52", kernel_list=kernels)  # sets name, ndim and kernel list
 
     @property
     def ell(self) -> List[float]:
@@ -63,7 +63,7 @@ class Matern52Kernel(ProductKernel):
 
     @property
     def nu(self) -> float:
-        return 1.5
+        return 2.5
 
     def __str__(self) -> str:
         return f"Matern5/2 kernel \n" f"dimensionality: {self.ndim} \n" f"lengthscales: {list(self.ell)}"
