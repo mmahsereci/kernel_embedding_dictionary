@@ -41,7 +41,7 @@ def test_matern12_kernel_uni_raises():
         Matern12KernelUni(wrong_ell)
 
 
-# tests for ExpQuadKernel start here
+# tests for Matern12Kernel start here
 def test_matern12_kernel_defaults():
 
     # nothing given
