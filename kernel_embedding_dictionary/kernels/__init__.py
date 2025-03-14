@@ -13,7 +13,9 @@ __all__ = [
     "ExpQuadKernel",
     "Matern12Kernel",
     "Matern32Kernel",
+    "Matern52Kernel",
     "ExpQuadKernelUni",
     "Matern12KernelUni",
     "Matern32KernelUni",
+    "Matern52KernelUni",
 ]
