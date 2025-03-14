@@ -17,7 +17,7 @@ class Matern52KernelUni(UnivariateKernel):
             raise ValueError(f"ell ({ell}) must be positive")
 
         self.ell = ell
-        self.nu = 1.5
+        self.nu = 2.5
 
     def get_param_dict(self) -> dict:
         return {"ell": self.ell, "nu": self.nu}
