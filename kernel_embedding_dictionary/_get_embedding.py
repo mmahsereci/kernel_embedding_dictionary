@@ -18,6 +18,7 @@ def get_embedding(
         "expquad-gaussian": [ExpQuadKernel, GaussianMeasure],
         "matern12-lebesgue": [Matern12Kernel, LebesgueMeasure],
         "matern32-lebesgue": [Matern32Kernel, LebesgueMeasure],
+        "matern52-lebesgue": [Matern52Kernel, LebesgueMeasure],
     }
 
     km = available_embeddings_dict.get(kernel_name + "-" + measure_name, None)
