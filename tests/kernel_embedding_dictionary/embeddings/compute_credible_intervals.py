@@ -26,6 +26,13 @@ from test_mean_values_matern32 import (
     get_config_matern32_lebesgue_2d_values,
 )
 
+from test_mean_values_matern52 import (
+    get_config_matern52_lebesgue_1d_standard,
+    get_config_matern52_lebesgue_1d_values,
+    get_config_matern52_lebesgue_2d_standard,
+    get_config_matern52_lebesgue_2d_values,
+)
+
 from kernel_embedding_dictionary._get_embedding import get_embedding
 
 embedding_to_config_list_dict = {
@@ -53,6 +60,12 @@ embedding_to_config_list_dict = {
         get_config_matern32_lebesgue_2d_standard,
         get_config_matern32_lebesgue_2d_values,
     ],
+    "matern52-lebesgue": [
+        get_config_matern52_lebesgue_1d_standard,
+        get_config_matern52_lebesgue_1d_values,
+        get_config_matern52_lebesgue_2d_standard,
+        get_config_matern52_lebesgue_2d_values,
+    ],
 }
 
 if __name__ == "__main__":
@@ -65,7 +78,8 @@ if __name__ == "__main__":
     # embedding_name = "expquad-lebesgue"
     # embedding_name = "expquad-gaussian"
     # embedding_name = "matern12-lebesgue"
-    embedding_name = "matern32-lebesgue"
+    # embedding_name = "matern32-lebesgue"
+    embedding_name = "matern52-lebesgue"
 
     get_config_func_list = embedding_to_config_list_dict[embedding_name]
 
