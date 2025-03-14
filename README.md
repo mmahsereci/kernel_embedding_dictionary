@@ -73,7 +73,7 @@ All multidimensional embeddings are based on product kernels and product measure
 | `expquad`          |     x      |     x      |
 | `matern12`         |     x      |            |
 | `matern32`         |     x      |            |
-| `matern52`         |            |            |
+| `matern52`         |     x      |            |
 
 ## Kernel configs
 
