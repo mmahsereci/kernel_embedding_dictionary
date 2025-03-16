@@ -46,6 +46,10 @@ from test_mean_values_wendland0 import (
     get_config_wendland0_lebesgue_1d_values_case4,
     get_config_wendland0_lebesgue_2d_standard,
     get_config_wendland0_lebesgue_2d_values,
+    get_config_wendland0_gaussian_1d_standard,
+    get_config_wendland0_gaussian_1d_values,
+    get_config_wendland0_gaussian_2d_standard,
+    get_config_wendland0_gaussian_2d_values,
 )
 
 from kernel_embedding_dictionary._get_embedding import get_embedding
@@ -93,6 +97,10 @@ embedding_to_config_list_dict = {
         get_config_wendland0_lebesgue_1d_values_case4,
         get_config_wendland0_lebesgue_2d_standard,
         get_config_wendland0_lebesgue_2d_values,
+        get_config_wendland0_gaussian_1d_standard,
+        get_config_wendland0_gaussian_1d_values,
+        get_config_wendland0_gaussian_2d_standard,
+        get_config_wendland0_gaussian_2d_values,
     ],
 }
 

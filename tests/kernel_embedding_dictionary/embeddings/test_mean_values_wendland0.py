@@ -44,6 +44,40 @@ def get_config_wendland0_lebesgue_2d_values():
     x = np.array([[-0.3, -1], [0.0, -0.2], [1.5, 0.0]])  # 3x2 must lie in domain
     return "wendland0", "lebesgue", ck, cm, x
 
+def get_config_wendland0_gaussian_1d_standard():
+    ck = {"ndim": 1}
+    cm = {"ndim": 1}
+    x = np.array([[-0.1], [0.5], [0.9]])  # 3x1 must lie in domain
+    return "wendland0", "gaussian", ck, cm, x
+
+
+def get_config_wendland0_gaussian_1d_values():
+    ck = {"ndim": 1, "lengthscales": [0.3]}
+    cm = {"ndim": 1, "means": [0.0], "variances": [1.7]}
+    x = np.array([[-0.1], [0.5], [1.8]])  # 3x1 must lie in domain
+    return "wendland0", "gaussian", ck, cm, x
+
+
+def get_config_wendland0_gaussian_1d_non_zero_mean_values():
+    ck = {"ndim": 1, "lengthscales": [0.3]}
+    cm = {"ndim": 1, "means": [0.5], "variances": [1.7]}
+    x = np.array([[-0.1], [0.5], [1.8]])  # 3x1 must lie in domain
+    return "wendland0", "gaussian", ck, cm, x
+
+
+def get_config_wendland0_gaussian_2d_standard():
+    ck = {"ndim": 2}
+    cm = {"ndim": 2}
+    x = np.array([[-0.1, 0.2], [0.5, 0.0], [0.9, 3.4]])  # 3x1 must lie in domain
+    return "wendland0", "gaussian", ck, cm, x
+
+
+def get_config_wendland0_gaussian_2d_values():
+    ck = {"ndim": 2, "lengthscales": [0.3, 2.5]}
+    cm = {"ndim": 2, "means": [0.0, 0.0], "variances": [1.7, 0.4]}
+    x = np.array([[-0.1, 0.2], [0.5, 0.0], [0.9, 3.4]])  # 3x1 must lie in domain
+    return "wendland0", "gaussian", ck, cm, x
+
 
 @pytest.fixture()
 def config_wendland0_lebesgue_1d_standard():
@@ -98,12 +132,60 @@ def config_wendland0_lebesgue_2d_values():
     return kn, mn, ck, cm, x, mean_intervals
 
 
+@pytest.fixture()
+def config_wendland0_gaussian_1d_standard():
+    kn, mn, ck, cm, x = get_config_wendland0_gaussian_1d_standard()
+    mean_intervals = [
+        [0.364076904917011, 0.37057302342176984],
+        [0.32999013949842987, 0.33648368540327595],
+        [0.25948222921309627, 0.26570959614888057],
+    ]
+    return kn, mn, ck, cm, x, mean_intervals
+
+
+@pytest.fixture()
+def config_wendland0_gaussian_1d_values():
+    kn, mn, ck, cm, x = get_config_wendland0_gaussian_1d_values()
+    mean_intervals = [
+        [0.08877430837032896, 0.09311611680644455],
+        [0.08389713857769604, 0.0881535630583076],
+        [0.03466435433160734, 0.03752774936720384],
+    ]
+    return kn, mn, ck, cm, x, mean_intervals
+
+
+@pytest.fixture()
+def config_wendland0_gaussian_2d_standard():
+    kn, mn, ck, cm, x = get_config_wendland0_gaussian_2d_standard()
+    mean_intervals = [
+        [0.13027047170793685, 0.13429803606094606],
+        [0.11988858934822494, 0.12379426502963284],
+        [0.00050360469939905, 0.0007823685535048706],
+    ]
+    return kn, mn, ck, cm, x, mean_intervals
+
+
+@pytest.fixture()
+def config_wendland0_gaussian_2d_values():
+    kn, mn, ck, cm, x = get_config_wendland0_gaussian_2d_values()
+    mean_intervals = [
+        [0.06977894538796134, 0.07328018552496801],
+        [0.06603235598510478, 0.06946551916369643],
+        [0.0005390654902389064, 0.0007164047856198059],
+    ]
+    return kn, mn, ck, cm, x, mean_intervals
+
+
 fixture_list = [
     "config_wendland0_lebesgue_1d_standard",
     "config_wendland0_lebesgue_1d_values",
     "config_wendland0_lebesgue_1d_values_case4",
     "config_wendland0_lebesgue_2d_standard",
     "config_wendland0_lebesgue_2d_values",
+    "config_wendland0_gaussian_1d_standard",
+    "config_wendland0_gaussian_1d_values",
+    "config_wendland0_gaussian_2d_standard",
+    "config_wendland0_gaussian_2d_values",
 ]
 
 
@@ -117,3 +199,13 @@ def test_embedding_mean_values(fixture_name, request):
     print(res)
     for i in range(x_eval.shape[0]):
         assert mean_intervals[i][0] < res[i] < mean_intervals[i][1]
+
+
+def test_get_embedding_raises():
+    """Test that get_embedding raises ValueError for non-zero mean in Gaussian measure."""
+    kn, mn, ck, cm, x = get_config_wendland0_gaussian_1d_non_zero_mean_values()
+
+    ke = get_embedding(kernel_name=kn, measure_name=mn, kernel_config=ck, measure_config=cm)
+
+    with pytest.raises(ValueError):    
+        res = ke.mean(x)

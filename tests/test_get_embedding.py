@@ -21,6 +21,7 @@ from kernel_embedding_dictionary.measures import GaussianMeasure, LebesgueMeasur
         ("matern52", Matern52Kernel, "lebesgue", LebesgueMeasure),
         ("matern72", Matern72Kernel, "lebesgue", LebesgueMeasure),
         ("wendland0", Wendland0Kernel, "lebesgue", LebesgueMeasure),
+        ("wendland0", Wendland0Kernel, "gaussian", GaussianMeasure),
     ],
 )
 def test_get_embedding_returns_correct_types(embedding):

@@ -21,6 +21,7 @@ def get_embedding(
         "matern52-lebesgue": [Matern52Kernel, LebesgueMeasure],
         "matern72-lebesgue": [Matern72Kernel, LebesgueMeasure],
         "wendland0-lebesgue": [Wendland0Kernel, LebesgueMeasure],
+        "wendland0-gaussian": [Wendland0Kernel, GaussianMeasure],
     }
 
     km = available_embeddings_dict.get(kernel_name + "-" + measure_name, None)
