@@ -108,3 +108,51 @@ def wendland0_gaussian_mean_func_1d(
     kernel_mean = (erf_terms + gauss_terms) / (2 * ell)
 
     return kernel_mean.reshape(-1)
+
+
+def wendland2_gaussian_mean_func_1d(
+    x: np.ndarray, ell: float, order: int, mean: float, variance: float) -> np.ndarray:
+
+    if mean != 0.0:
+        raise ValueError("Only mean=0 is supported.")
+    
+    s = np.sqrt(2 * variance)
+
+    def phi(x):
+        """Unnormalized Gaussian."""
+        return np.exp(-x**2 / s**2)
+    
+    def Phi(x):
+        """ Scaled error function."""
+        return erf(x / s)
+    
+    def dot_product(a, b):
+        """Dot product of two lists."""
+        return sum([a_i * b_i for a_i, b_i in zip(a, b)])
+    
+    # Exponential function terms
+    term_1 = (phi(x + ell) + phi(x - ell)) * (ell**3 - ell * (7 * variance + 5 * x**2))
+    term_2 = (phi(x + ell) - phi(x - ell))  * (ell**2 * x + 3 * x * (5 * variance + x**2))
+    term_3 = phi(x) * 16 * ell * (2 * variance + x**2)
+
+    exp_term = (term_1 - term_2 + term_3) * s / np.sqrt(np.pi)
+
+    # Coefficients and terms for the error function
+    erf_prefac_terms = [ell**4, 
+                        6 * ell**2 * (x**2 + variance),
+                        8 * ell * (3 * variance * x + x**3),
+                        3 * (3 * variance**2 + 6 * variance * x**2 + x**4),
+                        ]
+    signs_p = [1, -1, -1, -1]
+    signs_m = [1, -1, 1, -1]
+    
+    erf_term = (dot_product(signs_p, erf_prefac_terms) * Phi(ell + x)
+        + dot_product(signs_m, erf_prefac_terms) * Phi(ell - x)
+        + 16 * ell * x * (3 * variance + x**2) * Phi(x)
+    )
+    
+    kernel_mean = (exp_term + erf_term) / (2 * ell**4)
+
+    kernel_mean == np.zeros_like(x)
+
+    return kernel_mean.reshape(-1)

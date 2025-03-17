@@ -76,7 +76,7 @@ All multidimensional embeddings are based on product kernels and product measure
 | `matern52`         |     x      |            |
 | `matern72`         |     x      |            |
 | `wendland0`        |     x      |     x      |
-| `wendland2`        |            |            |
+| `wendland2`        |            |     x      |
 | `wendland4`        |            |            |
 
 

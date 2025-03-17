@@ -5,7 +5,15 @@
 from typing import Optional
 
 from .embeddings import KernelEmbedding
-from .kernels import ExpQuadKernel, Matern12Kernel, Matern32Kernel, Matern52Kernel, Matern72Kernel, Wendland0Kernel
+from .kernels import (
+    ExpQuadKernel,
+    Matern12Kernel,
+    Matern32Kernel,
+    Matern52Kernel,
+    Matern72Kernel,
+    Wendland0Kernel,
+    Wendland2Kernel,
+)
 from .measures import GaussianMeasure, LebesgueMeasure
 
 
@@ -22,6 +30,7 @@ def get_embedding(
         "matern72-lebesgue": [Matern72Kernel, LebesgueMeasure],
         "wendland0-lebesgue": [Wendland0Kernel, LebesgueMeasure],
         "wendland0-gaussian": [Wendland0Kernel, GaussianMeasure],
+        "wendland2-gaussian": [Wendland2Kernel, GaussianMeasure],
     }
 
     km = available_embeddings_dict.get(kernel_name + "-" + measure_name, None)

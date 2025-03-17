@@ -55,7 +55,7 @@ class Wendland2Kernel(ProductKernel):
                     raise ValueError(f"ndim ({ndim}) and dimensionality of lengthscales ({len(ell)}) does not match.")
 
         kernels = [Wendland2KernelUni(ell=elli) for elli in ell]
-        super().__init__(name="Wendland2", kernel_list=kernels)  # sets name, ndim and kernel list
+        super().__init__(name="wendland2", kernel_list=kernels)  # sets name, ndim and kernel list
 
     @property
     def ell(self) -> List[float]:

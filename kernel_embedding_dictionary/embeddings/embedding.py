@@ -17,6 +17,7 @@ from .mean_funcs_1d import (
     matern72_lebesgue_mean_func_1d,
     wendland0_lebesgue_mean_func_1d,
     wendland0_gaussian_mean_func_1d,
+    wendland2_gaussian_mean_func_1d,
 )
 
 
@@ -65,9 +66,12 @@ class KernelEmbedding:
             "matern72-lebesgue": matern72_lebesgue_mean_func_1d,
             "wendland0-lebesgue": wendland0_lebesgue_mean_func_1d,
             "wendland0-gaussian": wendland0_gaussian_mean_func_1d,
+            "wendland2-gaussian": wendland2_gaussian_mean_func_1d,
         }
 
         mean_func_1d = mean_func_1d_dict.get(self._kernel.name + "-" + self._measure.name, None)
+        print(f"Selected mean function: {self._kernel.name}-{self._measure.name}")
+        print(f"Mean function: {mean_func_1d}")
         if not mean_func_1d:
             raise ValueError(f"kernel embedding unknown.")
 
