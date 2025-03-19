@@ -29,7 +29,7 @@ class Matern52KernelUni(UnivariateKernel):
         for i in range(n1):
             for j in range(n2):
                 abs_diff = np.sqrt(5) * abs(scaled_diff(x1[i], x2[j], self.ell, 1))
-                K[i, j] = (1 + abs_diff + abs_diff**2/3) * np.exp(-abs_diff)
+                K[i, j] = (1 + abs_diff + abs_diff**2 / 3) * np.exp(-abs_diff)
         return K
 
 

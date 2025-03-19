@@ -29,7 +29,7 @@ class Wendland4KernelUni(UnivariateKernel):
         for i in range(n1):
             for j in range(n2):
                 abs_diff = abs(scaled_diff(x1[i], x2[j], self.ell, 1))
-                K[i, j] = max(0, (1 - abs_diff))**5 * (1 + 5 * abs_diff + 8 * abs_diff**2)
+                K[i, j] = max(0, (1 - abs_diff)) ** 5 * (1 + 5 * abs_diff + 8 * abs_diff**2)
         return K
 
 

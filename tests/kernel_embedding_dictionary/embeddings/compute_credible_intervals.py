@@ -25,33 +25,29 @@ from test_mean_values_matern32 import (
     get_config_matern32_lebesgue_2d_standard,
     get_config_matern32_lebesgue_2d_values,
 )
-
 from test_mean_values_matern52 import (
     get_config_matern52_lebesgue_1d_standard,
     get_config_matern52_lebesgue_1d_values,
     get_config_matern52_lebesgue_2d_standard,
     get_config_matern52_lebesgue_2d_values,
 )
-
 from test_mean_values_matern72 import (
     get_config_matern72_lebesgue_1d_standard,
     get_config_matern72_lebesgue_1d_values,
     get_config_matern72_lebesgue_2d_standard,
     get_config_matern72_lebesgue_2d_values,
 )
-
 from test_mean_values_wendland0 import (
+    get_config_wendland0_gaussian_1d_standard,
+    get_config_wendland0_gaussian_1d_values,
+    get_config_wendland0_gaussian_2d_standard,
+    get_config_wendland0_gaussian_2d_values,
     get_config_wendland0_lebesgue_1d_standard,
     get_config_wendland0_lebesgue_1d_values,
     get_config_wendland0_lebesgue_1d_values_case4,
     get_config_wendland0_lebesgue_2d_standard,
     get_config_wendland0_lebesgue_2d_values,
-    get_config_wendland0_gaussian_1d_standard,
-    get_config_wendland0_gaussian_1d_values,
-    get_config_wendland0_gaussian_2d_standard,
-    get_config_wendland0_gaussian_2d_values,
 )
-
 from test_mean_values_wendland2 import (
     get_config_wendland2_gaussian_1d_standard,
     get_config_wendland2_gaussian_1d_values,

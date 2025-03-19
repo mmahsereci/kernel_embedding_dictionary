@@ -113,5 +113,5 @@ def test_get_embedding_raises():
 
     ke = get_embedding(kernel_name=kn, measure_name=mn, kernel_config=ck, measure_config=cm)
 
-    with pytest.raises(ValueError):    
+    with pytest.raises(ValueError):
         res = ke.mean(x)

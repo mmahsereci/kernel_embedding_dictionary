@@ -44,6 +44,7 @@ def get_config_wendland0_lebesgue_2d_values():
     x = np.array([[-0.3, -1], [0.0, -0.2], [1.5, 0.0]])  # 3x2 must lie in domain
     return "wendland0", "lebesgue", ck, cm, x
 
+
 def get_config_wendland0_gaussian_1d_standard():
     ck = {"ndim": 1}
     cm = {"ndim": 1}
@@ -207,5 +208,5 @@ def test_get_embedding_raises():
 
     ke = get_embedding(kernel_name=kn, measure_name=mn, kernel_config=ck, measure_config=cm)
 
-    with pytest.raises(ValueError):    
+    with pytest.raises(ValueError):
         res = ke.mean(x)

@@ -15,8 +15,8 @@ from .mean_funcs_1d import (
     matern32_lebesgue_mean_func_1d,
     matern52_lebesgue_mean_func_1d,
     matern72_lebesgue_mean_func_1d,
-    wendland0_lebesgue_mean_func_1d,
     wendland0_gaussian_mean_func_1d,
+    wendland0_lebesgue_mean_func_1d,
     wendland2_gaussian_mean_func_1d,
 )
 
