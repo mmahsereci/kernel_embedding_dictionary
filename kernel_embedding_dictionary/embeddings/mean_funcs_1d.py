@@ -50,5 +50,5 @@ def matern52_lebesgue_mean_func_1d(
     def exp_term(diff):
         return ell * np.exp(diff) * (8.0 - 5 * diff + diff**2) / (3 * np.sqrt(5))
 
-    kernel_mean =  16.0 * ell / (3 * np.sqrt(5)) - exp_term(diff_x_ub) - exp_term(diff_lb_x)
+    kernel_mean = 16.0 * ell / (3 * np.sqrt(5)) - exp_term(diff_x_ub) - exp_term(diff_lb_x)
     return density * kernel_mean.reshape(-1)
