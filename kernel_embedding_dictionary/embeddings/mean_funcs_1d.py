@@ -47,7 +47,7 @@ def matern52_lebesgue_mean_func_1d(
     diff_x_ub = np.sqrt(5) * scaled_diff(x, ub, ell, 1)
     diff_lb_x = np.sqrt(5) * scaled_diff(lb, x, ell, 1)
 
-    def exp_term(diff):
+    def exp_term(diff: np.ndarray) -> np.ndarray:
         return ell * np.exp(diff) * (8.0 - 5 * diff + diff**2) / (3 * np.sqrt(5))
 
     kernel_mean = 16.0 * ell / (3 * np.sqrt(5)) - exp_term(diff_x_ub) - exp_term(diff_lb_x)
