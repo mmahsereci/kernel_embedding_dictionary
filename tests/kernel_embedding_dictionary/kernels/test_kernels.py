@@ -5,7 +5,13 @@
 import numpy as np
 import pytest
 
-from kernel_embedding_dictionary.kernels import ExpQuadKernel, Matern12Kernel, Matern32Kernel, Matern52Kernel, Matern72Kernel
+from kernel_embedding_dictionary.kernels import (
+    ExpQuadKernel,
+    Matern12Kernel,
+    Matern32Kernel,
+    Matern52Kernel,
+    Matern72Kernel,
+)
 
 
 @pytest.fixture()
