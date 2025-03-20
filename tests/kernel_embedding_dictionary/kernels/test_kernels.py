@@ -11,6 +11,9 @@ from kernel_embedding_dictionary.kernels import (
     Matern32Kernel,
     Matern52Kernel,
     Matern72Kernel,
+    Wendland0Kernel,
+    Wendland2Kernel,
+    Wendland4Kernel,
 )
 
 
@@ -44,8 +47,26 @@ def matern72():
     return Matern72Kernel(c)
 
 
+@pytest.fixture()
+def wendland0():
+    c = {"ndim": 2}
+    return Wendland0Kernel(c)
+
+
+@pytest.fixture()
+def wendland2():
+    c = {"ndim": 2}
+    return Wendland2Kernel(c)
+
+
+@pytest.fixture()
+def wendland4():
+    c = {"ndim": 2}
+    return Wendland4Kernel(c)
+
+
 # for a new kernel: add a fixture and its name to the list
-kernel_list = ["expquad", "matern12", "matern32", "matern52", "matern72"]
+kernel_list = ["expquad", "matern12", "matern32", "matern52", "matern72", "wendland0", "wendland2"]
 
 
 @pytest.mark.parametrize("kernel_name", kernel_list)
