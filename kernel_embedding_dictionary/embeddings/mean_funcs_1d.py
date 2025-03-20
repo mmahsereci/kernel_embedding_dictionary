@@ -51,7 +51,7 @@ def matern52_lebesgue_mean_func_1d(
         return np.exp(diff) * (8.0 - 5.0 * diff + diff**2)
 
     prefactor = ell / (3 * np.sqrt(5))
-    kernel_mean =  prefactor * (16.0 - exp_term(diff_x_ub) - exp_term(diff_lb_x))
+    kernel_mean = prefactor * (16.0 - exp_term(diff_x_ub) - exp_term(diff_lb_x))
     return density * kernel_mean.reshape(-1)
 
 
@@ -96,11 +96,11 @@ def wendland0_gaussian_mean_func_1d(x: np.ndarray, ell: float, order: int, mean:
 
     s = np.sqrt(2 * variance)
 
-    def phi(x):
+    def phi(x: np.ndarray) -> np.ndarray:
         """Unnormalized Gaussian."""
         return np.exp(-(x**2) / s**2)
 
-    def Phi(x):
+    def Phi(x: np.ndarray) -> np.ndarray:
         """Scaled error function."""
         return erf(x / s)
 
@@ -118,15 +118,15 @@ def wendland2_gaussian_mean_func_1d(x: np.ndarray, ell: float, order: int, mean:
 
     s = np.sqrt(2 * variance)
 
-    def phi(x):
+    def phi(x: np.ndarray) -> np.ndarray:
         """Unnormalized Gaussian."""
         return np.exp(-(x**2) / s**2)
 
-    def Phi(x):
+    def Phi(x: np.ndarray) -> np.ndarray:
         """Scaled error function."""
         return erf(x / s)
 
-    def dot_product(a, b):
+    def dot_product(a: list[np.ndarray], b: list[np.ndarray]) -> np.ndarray:
         """Dot product of two lists."""
         return sum([a_i * b_i for a_i, b_i in zip(a, b)])
 
@@ -154,7 +154,4 @@ def wendland2_gaussian_mean_func_1d(x: np.ndarray, ell: float, order: int, mean:
     )
 
     kernel_mean = (exp_term + erf_term) / (2 * ell**4)
-
-    kernel_mean == np.zeros_like(x)
-
     return kernel_mean.reshape(-1)
