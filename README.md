@@ -112,7 +112,7 @@ config_kernel = {
 }
 ```
 
-`matern52` with value $k(x_i, z_i) = (1 + \sqrt{5} r_i +\frac{5}{3} r_1^2)e^{-\sqrt{3} r_i}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$
+`matern52` with value $k(x_i, z_i) = (1 + \sqrt{5} r_i +\frac{5}{3} r_1^2)e^{-\sqrt{5} r_i}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$
 
 ```python
 config_kernel = {
