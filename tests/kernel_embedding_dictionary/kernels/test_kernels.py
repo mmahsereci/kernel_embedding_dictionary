@@ -5,7 +5,13 @@
 import numpy as np
 import pytest
 
-from kernel_embedding_dictionary.kernels import ExpQuadKernel, Matern12Kernel, Matern32Kernel
+from kernel_embedding_dictionary.kernels import (
+    ExpQuadKernel,
+    Matern12Kernel,
+    Matern32Kernel,
+    Matern52Kernel,
+    Matern72Kernel,
+)
 
 
 @pytest.fixture()
@@ -26,8 +32,20 @@ def matern32():
     return Matern32Kernel(c)
 
 
+@pytest.fixture()
+def matern52():
+    c = {"ndim": 2}
+    return Matern52Kernel(c)
+
+
+@pytest.fixture()
+def matern72():
+    c = {"ndim": 2}
+    return Matern72Kernel(c)
+
+
 # for a new kernel: add a fixture and its name to the list
-kernel_list = ["expquad", "matern12", "matern32"]
+kernel_list = ["expquad", "matern12", "matern32", "matern52", "matern72"]
 
 
 @pytest.mark.parametrize("kernel_name", kernel_list)

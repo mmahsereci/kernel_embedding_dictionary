@@ -117,6 +117,24 @@ config_kernel = {
 }
 ```
 
+`matern52` with value $k(x_i, z_i) = (1 + \sqrt{5} r_i +\frac{5}{3} r_1^2)e^{-\sqrt{5} r_i}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$
+
+```python
+config_kernel = {
+    "ndim": 2,
+    "lengthscales": [1.0, 2.0],
+}
+```
+
+`matern72` with value $k(x_i, z_i) = (1 + \sqrt{7} r_i +\frac{14}{5} r_1^2 + \frac{7\sqrt{7}}{15})e^{-\sqrt{7} r_i}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$
+
+```python
+config_kernel = {
+    "ndim": 2,
+    "lengthscales": [1.0, 2.0],
+}
+```
+
 `matern52` with value $k(x_i, z_i) = (1 + \sqrt{5} r_i +\frac{5}{3} r_1^2)e^{-\sqrt{3} r_i}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$
 
 ```python

@@ -47,11 +47,11 @@ def matern52_lebesgue_mean_func_1d(
     diff_x_ub = np.sqrt(5) * scaled_diff(x, ub, ell, 1)
     diff_lb_x = np.sqrt(5) * scaled_diff(lb, x, ell, 1)
 
-    def exp_term(diff):
+    def exp_term(diff: np.ndarray) -> np.ndarray:
         return np.exp(diff) * (8.0 - 5.0 * diff + diff**2)
 
     prefactor = ell / (3 * np.sqrt(5))
-    kernel_mean = prefactor * (16.0 - exp_term(diff_x_ub) - exp_term(diff_lb_x))
+    kernel_mean =  prefactor * (16.0 - exp_term(diff_x_ub) - exp_term(diff_lb_x))
     return density * kernel_mean.reshape(-1)
 
 
@@ -61,7 +61,7 @@ def matern72_lebesgue_mean_func_1d(
     diff_x_ub = np.sqrt(7) * scaled_diff(x, ub, ell, 1)
     diff_lb_x = np.sqrt(7) * scaled_diff(lb, x, ell, 1)
 
-    def exp_term(diff):
+    def exp_term(diff: np.ndarray) -> np.ndarray:
         return np.exp(diff) * (48.0 - 33.0 * diff + 9.0 * diff**2 - diff**3)
 
     prefactor = ell / (15 * np.sqrt(7))
