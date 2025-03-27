@@ -153,7 +153,7 @@ config_kernel = {
 }
 ```
 
-`wendland2` with value $k(x_i, z_i) = (1 - r_i)_{+}^5 (8 r_i^2 + 5r_i + 1)$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$ and $(\cdot)_{+} = \operatorname{max} (0, \cdot)$
+`wendland4` with value $k(x_i, z_i) = (1 - r_i)_{+}^5 (8 r_i^2 + 5r_i + 1)$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$ and $(\cdot)_{+} = \operatorname{max} (0, \cdot)$
 
 ```python
 config_kernel = {
