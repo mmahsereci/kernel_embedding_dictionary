@@ -10,6 +10,7 @@ from kernel_embedding_dictionary.kernels import (
     Matern12KernelUni,
     Matern32KernelUni,
     Matern52KernelUni,
+    Matern72KernelUni,
 )
 
 
@@ -33,8 +34,13 @@ def matern52_uni():
     return Matern52KernelUni(ell=1.0)
 
 
+@pytest.fixture()
+def matern72_uni():
+    return Matern72KernelUni(ell=1.0)
+
+
 # for a new univariate kernel: add a fixture and its name to the list
-kernel_uni_list = ["expquad_uni", "matern12_uni", "matern32_uni", "matern52_uni"]
+kernel_uni_list = ["expquad_uni", "matern12_uni", "matern32_uni", "matern52_uni", "matern72_uni"]
 
 
 @pytest.mark.parametrize("kernel_uni_name", kernel_uni_list)

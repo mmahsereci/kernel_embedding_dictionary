@@ -14,6 +14,7 @@ from .mean_funcs_1d import (
     matern12_lebesgue_mean_func_1d,
     matern32_lebesgue_mean_func_1d,
     matern52_lebesgue_mean_func_1d,
+    matern72_lebesgue_mean_func_1d,
 )
 
 
@@ -59,6 +60,7 @@ class KernelEmbedding:
             "matern12-lebesgue": matern12_lebesgue_mean_func_1d,
             "matern32-lebesgue": matern32_lebesgue_mean_func_1d,
             "matern52-lebesgue": matern52_lebesgue_mean_func_1d,
+            "matern72-lebesgue": matern72_lebesgue_mean_func_1d,
         }
 
         mean_func_1d = mean_func_1d_dict.get(self._kernel.name + "-" + self._measure.name, None)
