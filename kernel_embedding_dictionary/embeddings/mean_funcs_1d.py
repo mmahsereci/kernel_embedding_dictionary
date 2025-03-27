@@ -42,7 +42,7 @@ def matern32_lebesgue_mean_func_1d(
     return density * kernel_mean.reshape(-1)
 
 
-def matern32_gaussian_mean_func_1d(x: np.ndarray, ell: float, mean: float, variance: float) -> np.ndarray:
+def matern32_gaussian_mean_func_1d(x: np.ndarray, ell: float, nu: float, mean: float, variance: float) -> np.ndarray:
 
     mu_1 = mean - np.sqrt(3) * variance / ell
     mu_2 = mean + np.sqrt(3) * variance / ell
