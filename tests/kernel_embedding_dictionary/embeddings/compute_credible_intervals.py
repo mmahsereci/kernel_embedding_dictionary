@@ -14,14 +14,14 @@ from test_mean_values_expquad import (
     get_config_expquad_lebesgue_2d_values,
 )
 from test_mean_values_matern12 import (
-    get_config_matern12_lebesgue_1d_standard,
-    get_config_matern12_lebesgue_1d_values,
-    get_config_matern12_lebesgue_2d_standard,
-    get_config_matern12_lebesgue_2d_values,
     get_config_matern12_gaussian_1d_standard,
     get_config_matern12_gaussian_1d_values,
     get_config_matern12_gaussian_2d_standard,
     get_config_matern12_gaussian_2d_values,
+    get_config_matern12_lebesgue_1d_standard,
+    get_config_matern12_lebesgue_1d_values,
+    get_config_matern12_lebesgue_2d_standard,
+    get_config_matern12_lebesgue_2d_values,
 )
 from test_mean_values_matern32 import (
     get_config_matern32_lebesgue_1d_standard,
