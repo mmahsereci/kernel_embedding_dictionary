@@ -39,3 +39,16 @@ def matern32_lebesgue_mean_func_1d(
     exp_term_2 = np.exp(diff_lb_x) * (x + 2.0 * ell / np.sqrt(3) - lb)
     kernel_mean = 4.0 * ell / np.sqrt(3) - exp_term_1 - exp_term_2
     return density * kernel_mean.reshape(-1)
+
+
+def matern52_lebesgue_mean_func_1d(
+    x: np.ndarray, ell: float, nu: float, lb: float, ub: float, density: float
+) -> np.ndarray:
+    diff_x_ub = np.sqrt(5) * scaled_diff(x, ub, ell, 1)
+    diff_lb_x = np.sqrt(5) * scaled_diff(lb, x, ell, 1)
+
+    def exp_term(diff: np.ndarray) -> np.ndarray:
+        return ell * np.exp(diff) * (8.0 - 5 * diff + diff**2) / (3 * np.sqrt(5))
+
+    kernel_mean = 16.0 * ell / (3 * np.sqrt(5)) - exp_term(diff_x_ub) - exp_term(diff_lb_x)
+    return density * kernel_mean.reshape(-1)

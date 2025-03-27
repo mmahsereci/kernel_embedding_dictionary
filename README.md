@@ -73,7 +73,7 @@ All multidimensional embeddings are based on product kernels and product measure
 | `expquad`          |     x      |     x      |
 | `matern12`         |     x      |            |
 | `matern32`         |     x      |            |
-| `matern52`         |            |            |
+| `matern52`         |     x      |            |
 
 ## Kernel configs
 
@@ -83,7 +83,7 @@ dimensionality and $k$ is a univariate kernel.
 If an argument is not given, a default is used or inferred. 
 The available kernels configs are as follows.
 
-`expaquad` with value $k(x_i, z_i') = e^{-\frac{(x_i - z_i)^2}{2\ell_i^2}}$.
+`expaquad` with value $k(x_i, z_i) = e^{-\frac{(x_i - z_i)^2}{2\ell_i^2}}$.
 
 ```python
 config_kernel = {
@@ -94,7 +94,7 @@ config_kernel = {
 
 where `ndim` = $d$ and `lengthscales` = $[\ell_1, ...\ell_d]$. 
 
-`matern12` with value $k(x_i, z_i') = e^{-r_i}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$.
+`matern12` with value $k(x_i, z_i) = e^{-r_i}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$.
 
 ```python
 config_kernel = {
@@ -103,7 +103,16 @@ config_kernel = {
 }
 ```
 
-`matern32` with value $k(x_i, z_i') = (1 + \sqrt{3} r_i)e^{-\sqrt{3} r_i}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$
+`matern32` with value $k(x_i, z_i) = (1 + \sqrt{3} r_i)e^{-\sqrt{3} r_i}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$
+
+```python
+config_kernel = {
+    "ndim": 2,
+    "lengthscales": [1.0, 2.0],
+}
+```
+
+`matern52` with value $k(x_i, z_i) = (1 + \sqrt{5} r_i +\frac{5}{3} r_i^2)e^{-\sqrt{5} r_i}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$
 
 ```python
 config_kernel = {

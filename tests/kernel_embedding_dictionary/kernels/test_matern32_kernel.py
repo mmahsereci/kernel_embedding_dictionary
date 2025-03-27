@@ -41,7 +41,7 @@ def test_matern32_kernel_uni_raises():
         Matern32KernelUni(wrong_ell)
 
 
-# tests for ExpQuadKernel start here
+# tests for Matern32Kernel start here
 def test_matern32_kernel_defaults():
 
     # nothing given
