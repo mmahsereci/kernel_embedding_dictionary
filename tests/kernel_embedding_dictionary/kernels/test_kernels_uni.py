@@ -40,7 +40,7 @@ def matern72_uni():
 
 
 # for a new univariate kernel: add a fixture and its name to the list
-kernel_uni_list = ["expquad_uni", "matern12_uni", "matern32_uni", "matern52_uni"]
+kernel_uni_list = ["expquad_uni", "matern12_uni", "matern32_uni", "matern52_uni", "matern72_uni"]
 
 
 @pytest.mark.parametrize("kernel_uni_name", kernel_uni_list)
