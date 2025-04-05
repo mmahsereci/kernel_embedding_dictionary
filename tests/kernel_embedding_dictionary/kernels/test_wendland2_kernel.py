@@ -8,7 +8,7 @@ from kernel_embedding_dictionary.kernels import Wendland2Kernel, Wendland2Kernel
 
 
 # tests for Wendland2KernelUni start here
-def test_Wendland2_kernel_uni_values():
+def test_wendland2_kernel_uni_values():
 
     ell = 1.5
     k = Wendland2KernelUni(ell)
@@ -16,7 +16,7 @@ def test_Wendland2_kernel_uni_values():
     assert k.order == 2
 
 
-def test_Wendland2_kernel_uni_param_dict():
+def test_wendland2_kernel_uni_param_dict():
 
     ell = 1.5
     k = Wendland2KernelUni(ell)
@@ -28,7 +28,7 @@ def test_Wendland2_kernel_uni_param_dict():
     assert p["order"] == 2
 
 
-def test_Wendland2_kernel_uni_raises():
+def test_wendland2_kernel_uni_raises():
 
     # negative lengthscale
     wrong_ell = -1.0
@@ -42,7 +42,7 @@ def test_Wendland2_kernel_uni_raises():
 
 
 # tests for Wendland2Kernel start here
-def test_Wendland2_kernel_defaults():
+def test_wendland2_kernel_defaults():
 
     # nothing given
     k = Wendland2Kernel()
@@ -68,7 +68,7 @@ def test_Wendland2_kernel_defaults():
     assert k.order == 2
 
 
-def test_Wendland2_kernel_values():
+def test_wendland2_kernel_values():
 
     # all values given, no defaults
     c = {"ndim": 2, "lengthscales": [1.0, 2.0]}
@@ -79,7 +79,7 @@ def test_Wendland2_kernel_values():
     assert k.order == 2
 
 
-def test_Wendland2_kernel_raises():
+def test_wendland2_kernel_raises():
 
     # ndim and lengthscales do not match
     wrong_c = {"ndim": 1, "lengthscales": [1.0, 1.0]}
