@@ -161,7 +161,7 @@ def wendland2_gaussian_mean_func_1d(x: np.ndarray, ell: float, order: int, mean:
         """Scaled error function."""
         return erf(x / s)
 
-    def dot_product(a: list[np.ndarray], b: list[np.ndarray]) -> np.ndarray:
+    def dot_product(a: list[np.ndarray | float], b: list[np.ndarray | float]) -> np.ndarray:
         """Dot product of two lists."""
         return sum([a_i * b_i for a_i, b_i in zip(a, b)])
 
