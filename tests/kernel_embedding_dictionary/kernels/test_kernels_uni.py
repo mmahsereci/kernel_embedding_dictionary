@@ -13,7 +13,6 @@ from kernel_embedding_dictionary.kernels import (
     Matern72KernelUni,
     Wendland0KernelUni,
     Wendland2KernelUni,
-    Wendland4KernelUni,
 )
 
 
@@ -52,11 +51,6 @@ def wendland2_uni():
     return Wendland2KernelUni(ell=1.0)
 
 
-@pytest.fixture()
-def wendland4_uni():
-    return Wendland4KernelUni(ell=1.0)
-
-
 # for a new univariate kernel: add a fixture and its name to the list
 kernel_uni_list = [
     "expquad_uni",
@@ -66,7 +60,6 @@ kernel_uni_list = [
     "matern72_uni",
     "wendland0_uni",
     "wendland2_uni",
-    "wendland4_uni",
 ]
 
 

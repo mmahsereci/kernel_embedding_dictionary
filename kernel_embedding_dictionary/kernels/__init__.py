@@ -10,7 +10,6 @@ from .matern52_kernel import Matern52Kernel, Matern52KernelUni
 from .matern72_kernel import Matern72Kernel, Matern72KernelUni
 from .wendland0_kernel import Wendland0Kernel, Wendland0KernelUni
 from .wendland2_kernel import Wendland2Kernel, Wendland2KernelUni
-from .wendland4_kernel import Wendland4Kernel, Wendland4KernelUni
 
 __all__ = [
     "ProductKernel",
@@ -22,7 +21,6 @@ __all__ = [
     "Matern72Kernel",
     "Wendland0Kernel",
     "Wendland2Kernel",
-    "Wendland4Kernel",
     "ExpQuadKernelUni",
     "Matern12KernelUni",
     "Matern32KernelUni",
@@ -30,5 +28,4 @@ __all__ = [
     "Matern72KernelUni",
     "Wendland0KernelUni",
     "Wendland2KernelUni",
-    "Wendland4KernelUni",
 ]

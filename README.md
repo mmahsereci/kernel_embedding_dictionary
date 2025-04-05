@@ -77,7 +77,6 @@ All multidimensional embeddings are based on product kernels and product measure
 | `matern72`         |     x      |            |
 | `wendland0`        |     x      |     x      |
 | `wendland2`        |            |     x      |
-| `wendland4`        |            |            |
 
 
 ## Kernel configs
@@ -145,15 +144,6 @@ config_kernel = {
 ```
 
 `wendland2` with value $k(x_i, z_i) = (1 - r_i)_{+}^3 (3r_i + 1)$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$ and $(\cdot)_{+} = \operatorname{max} (0, \cdot)$
-
-```python
-config_kernel = {
-    "ndim": 2,
-    "lengthscales": [1.0, 2.0],
-}
-```
-
-`wendland4` with value $k(x_i, z_i) = (1 - r_i)_{+}^5 (8 r_i^2 + 5r_i + 1)$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$ and $(\cdot)_{+} = \operatorname{max} (0, \cdot)$
 
 ```python
 config_kernel = {

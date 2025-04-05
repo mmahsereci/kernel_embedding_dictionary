@@ -13,7 +13,6 @@ from kernel_embedding_dictionary.kernels import (
     Matern72Kernel,
     Wendland0Kernel,
     Wendland2Kernel,
-    Wendland4Kernel,
 )
 
 
@@ -57,12 +56,6 @@ def wendland0():
 def wendland2():
     c = {"ndim": 2}
     return Wendland2Kernel(c)
-
-
-@pytest.fixture()
-def wendland4():
-    c = {"ndim": 2}
-    return Wendland4Kernel(c)
 
 
 # for a new kernel: add a fixture and its name to the list
