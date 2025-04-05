@@ -74,8 +74,7 @@ class KernelEmbedding:
         }
 
         mean_func_1d = mean_func_1d_dict.get(self._kernel.name + "-" + self._measure.name, None)
-        print(f"Selected mean function: {self._kernel.name}-{self._measure.name}")
-        print(f"Mean function: {mean_func_1d}")
+
         if not mean_func_1d:
             raise ValueError(f"kernel embedding unknown.")
 
