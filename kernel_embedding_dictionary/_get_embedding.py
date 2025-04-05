@@ -17,6 +17,7 @@ def get_embedding(
         "expquad-lebesgue": [ExpQuadKernel, LebesgueMeasure],
         "expquad-gaussian": [ExpQuadKernel, GaussianMeasure],
         "matern12-lebesgue": [Matern12Kernel, LebesgueMeasure],
+        "matern12-gaussian": [Matern12Kernel, GaussianMeasure],
         "matern32-lebesgue": [Matern32Kernel, LebesgueMeasure],
         "matern52-lebesgue": [Matern52Kernel, LebesgueMeasure],
         "matern72-lebesgue": [Matern72Kernel, LebesgueMeasure],

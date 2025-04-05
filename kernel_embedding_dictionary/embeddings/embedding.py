@@ -11,6 +11,7 @@ from ..measures import ProductMeasure
 from .mean_funcs_1d import (
     expquad_gaussian_mean_func_1d,
     expquad_lebesgue_mean_func_1d,
+    matern12_gaussian_mean_func_1d,
     matern12_lebesgue_mean_func_1d,
     matern32_lebesgue_mean_func_1d,
     matern52_lebesgue_mean_func_1d,
@@ -58,6 +59,7 @@ class KernelEmbedding:
             "expquad-lebesgue": expquad_lebesgue_mean_func_1d,
             "expquad-gaussian": expquad_gaussian_mean_func_1d,
             "matern12-lebesgue": matern12_lebesgue_mean_func_1d,
+            "matern12-gaussian": matern12_gaussian_mean_func_1d,
             "matern32-lebesgue": matern32_lebesgue_mean_func_1d,
             "matern52-lebesgue": matern52_lebesgue_mean_func_1d,
             "matern72-lebesgue": matern72_lebesgue_mean_func_1d,
