@@ -31,6 +31,19 @@ def matern12_lebesgue_mean_func_1d(
     return density * kernel_mean.reshape(-1)
 
 
+def matern12_gaussian_mean_func_1d(x: np.ndarray, ell: float, nu: float, mean: float, variance: float) -> np.ndarray:
+
+    arg_var = scaled_diff(x, mean, np.sqrt(variance), 1)
+    arg_ell = scaled_diff(x, mean, ell, 1)
+
+    cdf_term_1 = norm.cdf(-arg_var - np.sqrt(variance) / ell)
+    cdf_term_2 = norm.cdf(arg_var - np.sqrt(variance) / ell)
+
+    exp_term_1 = np.exp(variance / (2 * ell**2) + arg_ell)
+    exp_term_2 = np.exp(variance / (2 * ell**2) - arg_ell)
+    return exp_term_1 * cdf_term_1 + exp_term_2 * cdf_term_2
+
+
 def matern32_lebesgue_mean_func_1d(
     x: np.ndarray, ell: float, nu: float, lb: float, ub: float, density: float
 ) -> np.ndarray:

@@ -71,7 +71,7 @@ All multidimensional embeddings are based on product kernels and product measure
 | kernel / emdedding | `lebesgue` | `gaussian` |
 |--------------------|:----------:|:----------:|
 | `expquad`          |     x      |     x      |
-| `matern12`         |     x      |            |
+| `matern12`         |     x      |     x      |
 | `matern32`         |     x      |     x      |
 | `matern52`         |     x      |            |
 | `matern72`         |     x      |            |
