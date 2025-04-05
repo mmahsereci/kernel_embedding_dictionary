@@ -19,6 +19,7 @@ def get_embedding(
         "matern12-lebesgue": [Matern12Kernel, LebesgueMeasure],
         "matern12-gaussian": [Matern12Kernel, GaussianMeasure],
         "matern32-lebesgue": [Matern32Kernel, LebesgueMeasure],
+        "matern32-gaussian": [Matern32Kernel, GaussianMeasure],
         "matern52-lebesgue": [Matern52Kernel, LebesgueMeasure],
         "matern72-lebesgue": [Matern72Kernel, LebesgueMeasure],
     }

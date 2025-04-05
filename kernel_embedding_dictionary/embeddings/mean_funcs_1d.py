@@ -55,6 +55,27 @@ def matern32_lebesgue_mean_func_1d(
     return density * kernel_mean.reshape(-1)
 
 
+def matern32_gaussian_mean_func_1d(x: np.ndarray, ell: float, nu: float, mean: float, variance: float) -> np.ndarray:
+
+    mu_1 = mean - np.sqrt(3) * variance / ell
+    mu_2 = mean + np.sqrt(3) * variance / ell
+
+    def d_arg(x1: np.ndarray, mu: np.ndarray) -> np.ndarray:
+        return scaled_diff(x1, mu, ell, 1 / np.sqrt(3))
+
+    exp_term_1 = np.exp(3 * variance / (2 * ell**2) + d_arg(x, mean))
+    exp_term_2 = np.exp(3 * variance / (2 * ell**2) - d_arg(x, mean))
+
+    cdf_term_1 = norm.cdf(scaled_diff(mu_1, x, np.sqrt(variance), 1)) * (1 - d_arg(x, mu_1))
+    cdf_term_2 = norm.cdf(scaled_diff(x, mu_2, np.sqrt(variance), 1)) * (1 + d_arg(x, mu_2))
+
+    norm_term_1 = norm.pdf(x, mu_1, np.sqrt(variance)) * np.sqrt(3) * variance / ell
+    norm_term_2 = norm.pdf(x, mu_2, np.sqrt(variance)) * np.sqrt(3) * variance / ell
+
+    kernel_mean = exp_term_1 * (cdf_term_1 + norm_term_1) + exp_term_2 * (cdf_term_2 + norm_term_2)
+    return kernel_mean.reshape(-1)
+
+
 def matern52_lebesgue_mean_func_1d(
     x: np.ndarray, ell: float, nu: float, lb: float, ub: float, density: float
 ) -> np.ndarray:

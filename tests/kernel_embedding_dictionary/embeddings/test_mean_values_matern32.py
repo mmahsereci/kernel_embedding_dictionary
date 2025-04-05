@@ -36,6 +36,34 @@ def get_config_matern32_lebesgue_2d_values():
     return "matern32", "lebesgue", ck, cm, x
 
 
+def get_config_matern32_gaussian_1d_standard():
+    ck = {"ndim": 1}
+    cm = {"ndim": 1}
+    x = np.array([[-0.1], [0.5], [0.9]])  # 3x1 must lie in domain
+    return "matern32", "gaussian", ck, cm, x
+
+
+def get_config_matern32_gaussian_1d_values():
+    ck = {"ndim": 1, "lengthscales": [0.3]}
+    cm = {"ndim": 1, "means": [-0.6], "variances": [1.7]}
+    x = np.array([[-0.1], [0.5], [1.8]])  # 3x1 must lie in domain
+    return "matern32", "gaussian", ck, cm, x
+
+
+def get_config_matern32_gaussian_2d_standard():
+    ck = {"ndim": 2}
+    cm = {"ndim": 2}
+    x = np.array([[-0.1, 0.2], [0.5, 0.0], [0.9, 3.4]])  # 3x1 must lie in domain
+    return "matern32", "gaussian", ck, cm, x
+
+
+def get_config_matern32_gaussian_2d_values():
+    ck = {"ndim": 2, "lengthscales": [0.3, 2.5]}
+    cm = {"ndim": 2, "means": [-0.6, 0.2], "variances": [1.7, 0.4]}
+    x = np.array([[-0.1, 0.2], [0.5, 0.0], [0.9, 3.4]])  # 3x1 must lie in domain
+    return "matern32", "gaussian", ck, cm, x
+
+
 @pytest.fixture()
 def config_matern32_lebesgue_1d_standard():
     kn, mn, ck, cm, x = get_config_matern32_lebesgue_1d_standard()
@@ -80,11 +108,59 @@ def config_matern32_lebesgue_2d_values():
     return kn, mn, ck, cm, x, mean_intervals
 
 
+@pytest.fixture()
+def config_matern32_gaussian_1d_standard():
+    kn, mn, ck, cm, x = get_config_matern32_gaussian_1d_standard()
+    mean_intervals = [
+        [0.6328577646684076, 0.6381503296832624],
+        [0.594548259969331, 0.6000942052089375],
+        [0.5141272812990044, 0.5199690149246167],
+    ]
+    return kn, mn, ck, cm, x, mean_intervals
+
+
+@pytest.fixture()
+def config_matern32_gaussian_1d_values():
+    kn, mn, ck, cm, x = get_config_matern32_gaussian_1d_values()
+    mean_intervals = [
+        [0.1904269404535665, 0.1959968147041723],
+        [0.14479444771345823, 0.14983672624670058],
+        [0.04049490079083514, 0.04338868088337324],
+    ]
+    return kn, mn, ck, cm, x, mean_intervals
+
+
+@pytest.fixture()
+def config_matern32_gaussian_2d_standard():
+    kn, mn, ck, cm, x = get_config_matern32_gaussian_2d_standard()
+    mean_intervals = [
+        [0.397104098362972, 0.40209207519073087],
+        [0.3758284944703415, 0.3808056880905707],
+        [0.02447406630722335, 0.025502554403619922],
+    ]
+    return kn, mn, ck, cm, x, mean_intervals
+
+
+@pytest.fixture()
+def config_matern32_gaussian_2d_values():
+    kn, mn, ck, cm, x = get_config_matern32_gaussian_2d_values()
+    mean_intervals = [
+        [0.17827159287124514, 0.18350450533242493],
+        [0.13613534724357507, 0.14089510993024484],
+        [0.039450786671686534, 0.04117740868307349],
+    ]
+    return kn, mn, ck, cm, x, mean_intervals
+
+
 fixture_list = [
     "config_matern32_lebesgue_1d_standard",
     "config_matern32_lebesgue_1d_values",
     "config_matern32_lebesgue_2d_standard",
     "config_matern32_lebesgue_2d_values",
+    "config_matern32_gaussian_1d_standard",
+    "config_matern32_gaussian_1d_values",
+    "config_matern32_gaussian_2d_standard",
+    "config_matern32_gaussian_2d_values",
 ]
 
 
