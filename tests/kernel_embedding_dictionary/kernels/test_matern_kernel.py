@@ -86,6 +86,21 @@ def test_matern_kernel_uni_evaluations():
 # tests for MaternKernel start here
 def test_matern_kernel_defaults():
 
+    # nothing given
+    k = MaternNu2Kernel()
+    assert k.ndim == 1
+    assert k.ell == [1.0]
+    assert len(k._kernels) == 1
+    assert k.nu == 2.5
+
+    # only ndim given
+    c = {"ndim": 3}
+    k = MaternNu2Kernel(c)
+    assert k.ndim == 3
+    assert k.ell == [1.0, 1.0, 1.0]
+    assert len(k._kernels) == 3
+    assert k.nu == 2.5
+
     # only nu given
     c = {"nu": 1.5}
     k = MaternNu2Kernel(c)
@@ -100,6 +115,14 @@ def test_matern_kernel_defaults():
     assert k.ndim == 2
     assert k.ell == [1.0, 1.0]
     assert len(k._kernels) == 2
+    assert k.nu == 2.5
+
+    # only ell and ndim given
+    c = {"lengthscales": [1.3, 2.0, 0.5, 0.5], "ndim": 4}
+    k = MaternNu2Kernel(c)
+    assert k.ndim == 4
+    assert k.ell == [1.3, 2.0, 0.5, 0.5]
+    assert len(k._kernels) == 4
     assert k.nu == 2.5
 
     # only ell given
