@@ -66,11 +66,15 @@ class MaternNu2Kernel(ProductKernel):
         kernels = [MaternNu2KernelUni(nu=nu, ell=elli) for elli in ell]
         super().__init__(name="matern", kernel_list=kernels)  # sets name, ndim and kernel list
 
-        self.nu = nu
+        self._nu = nu
 
     @property
     def ell(self) -> List[float]:
         return [k.ell for k in self._kernels]
+
+    @property
+    def nu(self) -> float:
+        return self._nu 
 
     def __str__(self) -> str:
         return f"Matern kernel \n" f"order: {self.nu} \n" f"dimensionality: {self.ndim} \n" f"lengthscales: {list(self.ell)}"
