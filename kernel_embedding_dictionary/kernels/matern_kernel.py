@@ -11,7 +11,7 @@ from ..utils import scaled_diff
 from .kernel import ProductKernel, UnivariateKernel
 
 
-class MaternKernelUni(UnivariateKernel):
+class MaternNu2KernelUni(UnivariateKernel):
     def __init__(self, nu: float, ell: float):
 
         if ell <= 0:
@@ -41,7 +41,7 @@ class MaternKernelUni(UnivariateKernel):
         return K
 
 
-class MaternKernel(ProductKernel):
+class MaternNu2Kernel(ProductKernel):
     def __init__(self, config: Optional[dict] = None):
         """
 
@@ -63,7 +63,7 @@ class MaternKernel(ProductKernel):
                 if ndim != len(ell):
                     raise ValueError(f"ndim ({ndim}) and dimensionality of lengthscales ({len(ell)}) does not match.")
 
-        kernels = [MaternKernelUni(nu=nu, ell=elli) for elli in ell]
+        kernels = [MaternNu2KernelUni(nu=nu, ell=elli) for elli in ell]
         super().__init__(name="matern", kernel_list=kernels)  # sets name, ndim and kernel list
 
         self.nu = nu

@@ -5,7 +5,7 @@
 import pytest
 import numpy as np
 
-from kernel_embedding_dictionary.kernels import MaternKernel, MaternKernelUni
+from kernel_embedding_dictionary.kernels import MaternNu2Kernel, MaternNu2KernelUni
 
 from kernel_embedding_dictionary.kernels import Matern12Kernel, Matern12KernelUni
 from kernel_embedding_dictionary.kernels import Matern32Kernel, Matern32KernelUni
@@ -17,7 +17,7 @@ def test_matern_kernel_uni_values():
 
     ell = 1.5
     nu = 7.5
-    k = MaternKernelUni(nu=nu, ell=ell)
+    k = MaternNu2KernelUni(nu=nu, ell=ell)
     assert k.ell == ell
     assert k.nu == nu
 
@@ -26,7 +26,7 @@ def test_matern_kernel_uni_param_dict():
 
     ell = 1.2
     nu = 0.5
-    k = MaternKernelUni(nu=nu, ell=ell)
+    k = MaternNu2KernelUni(nu=nu, ell=ell)
     p = k.get_param_dict()
 
     # this check is important due to how the kernel embedding params are assembled
@@ -40,22 +40,22 @@ def test_matern_kernel_uni_raises():
     # negative lengthscale
     wrong_ell = -1.0
     with pytest.raises(ValueError):
-        MaternKernelUni(nu=0.5, ell=wrong_ell)
+        MaternNu2KernelUni(nu=0.5, ell=wrong_ell)
 
     # zero lengthscale
     wrong_ell = 0.0
     with pytest.raises(ValueError):
-        MaternKernelUni(nu=0.5, ell=wrong_ell)
+        MaternNu2KernelUni(nu=0.5, ell=wrong_ell)
 
     # negative nu
     wrong_nu = -0.5
     with pytest.raises(ValueError):
-        MaternKernelUni(nu=wrong_nu, ell=1.0)
+        MaternNu2KernelUni(nu=wrong_nu, ell=1.0)
 
     # non-half-integer nu
     wrong_nu = 2.55
     with pytest.raises(ValueError):
-        MaternKernelUni(nu=wrong_nu, ell=1.0)
+        MaternNu2KernelUni(nu=wrong_nu, ell=1.0)
 
 
 def test_matern_kernel_uni_evaluations():
@@ -65,22 +65,22 @@ def test_matern_kernel_uni_evaluations():
 
     # Matern 1/2
     k1 = Matern12KernelUni(ell=ell)
-    k2 = MaternKernelUni(nu=0.5, ell=ell)
+    k2 = MaternNu2KernelUni(nu=0.5, ell=ell)
     assert (k1.evaluate(x, x) == k2.evaluate(x, x)).all
 
     # Matern 3/2
     k1 = Matern32KernelUni(ell=ell)
-    k2 = MaternKernelUni(nu=1.5, ell=ell)
+    k2 = MaternNu2KernelUni(nu=1.5, ell=ell)
     assert (k1.evaluate(x, x) == k2.evaluate(x, x)).all
 
     # Matern 5/2
     k1 = Matern52KernelUni(ell=ell)
-    k2 = MaternKernelUni(nu=2.5, ell=ell)
+    k2 = MaternNu2KernelUni(nu=2.5, ell=ell)
     assert (k1.evaluate(x, x) == k2.evaluate(x, x)).all
 
     # Matern 7/2
     k1 = Matern72KernelUni(ell=ell)
-    k2 = MaternKernelUni(nu=3.5, ell=ell)
+    k2 = MaternNu2KernelUni(nu=3.5, ell=ell)
     assert (k1.evaluate(x, x) == k2.evaluate(x, x)).all 
 
 # tests for MaternKernel start here
@@ -88,7 +88,7 @@ def test_matern_kernel_defaults():
 
     # only nu given
     c = {"nu": 1.5}
-    k = MaternKernel(c)
+    k = MaternNu2Kernel(c)
     assert k.ndim == 1
     assert k.ell == [1.0]
     assert len(k._kernels) == 1
@@ -96,7 +96,7 @@ def test_matern_kernel_defaults():
 
     # only nu and ndim given
     c = {"nu": 2.5, "ndim": 2}
-    k = MaternKernel(c)
+    k = MaternNu2Kernel(c)
     assert k.ndim == 2
     assert k.ell == [1.0, 1.0]
     assert len(k._kernels) == 2
@@ -104,7 +104,7 @@ def test_matern_kernel_defaults():
 
     # only ell given
     c = {"lengthscales": [1.0, 2.0]}
-    k = MaternKernel(config=c)
+    k = MaternNu2Kernel(config=c)
     assert k.ndim == 2
     assert k.ell == [1.0, 2.0]
     assert len(k._kernels) == 2
@@ -115,7 +115,7 @@ def test_matern_kernel_values():
 
     # all values given, no defaults
     c = {"nu": 3.5, "ndim": 2, "lengthscales": [1.0, 2.0]}
-    k = MaternKernel(config=c)
+    k = MaternNu2Kernel(config=c)
     assert k.ndim == 2
     assert k.ell == [1.0, 2.0]
     assert len(k._kernels) == 2
@@ -127,7 +127,7 @@ def test_matern_kernel_raises():
     # ndim and lengthscales do not match
     wrong_c = {"nu": 0.5, "ndim": 1, "lengthscales": [1.0, 1.0]}
     with pytest.raises(ValueError):
-        MaternKernel(wrong_c)
+        MaternNu2Kernel(wrong_c)
 
 def test_matern_kernel_evaluations():
 
@@ -137,26 +137,26 @@ def test_matern_kernel_evaluations():
     c1 = {"ndim": 2, "lengthscales": [1.0, 0.5]}
     c2 = {"nu": 0.5, "ndim": 2, "lengthscales": [1.0, 0.5]}
     k1 = Matern12Kernel(c1)
-    k2 = MaternKernel(c2)
+    k2 = MaternNu2Kernel(c2)
     assert (k1.evaluate(x, x) == k2.evaluate(x, x)).all
 
     # # Matern 3/2
     c1 = {"ndim": 2, "lengthscales": [1.0, 0.5]}
     c2 = {"nu": 1.5, "ndim": 2, "lengthscales": [1.0, 0.5]}
     k1 = Matern32Kernel(c1)
-    k2 = MaternKernel(c2)
+    k2 = MaternNu2Kernel(c2)
     assert (k1.evaluate(x, x) == k2.evaluate(x, x)).all
 
     # # Matern 5/2
     c1 = {"ndim": 2, "lengthscales": [1.0, 0.5]}
     c2 = {"nu": 2.5, "ndim": 2, "lengthscales": [1.0, 0.5]}
     k1 = Matern52Kernel(c1)
-    k2 = MaternKernel(c2)
+    k2 = MaternNu2Kernel(c2)
     assert (k1.evaluate(x, x) == k2.evaluate(x, x)).all
 
     # # Matern 7/2
     c1 = {"ndim": 2, "lengthscales": [1.0, 0.5]}
     c2 = {"nu": 3.5, "ndim": 2, "lengthscales": [1.0, 0.5]}
     k1 = Matern72Kernel(c1)
-    k2 = MaternKernel(c2)
+    k2 = MaternNu2Kernel(c2)
     assert (k1.evaluate(x, x) == k2.evaluate(x, x)).all
