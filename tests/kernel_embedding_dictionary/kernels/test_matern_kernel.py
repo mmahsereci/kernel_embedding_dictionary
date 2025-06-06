@@ -2,15 +2,21 @@
 # SPDX-License-Identifier: MIT
 
 
-import pytest
 import numpy as np
+import pytest
 
-from kernel_embedding_dictionary.kernels import MaternNu2Kernel, MaternNu2KernelUni
-
-from kernel_embedding_dictionary.kernels import Matern12Kernel, Matern12KernelUni
-from kernel_embedding_dictionary.kernels import Matern32Kernel, Matern32KernelUni
-from kernel_embedding_dictionary.kernels import Matern52Kernel, Matern52KernelUni
-from kernel_embedding_dictionary.kernels import Matern72Kernel, Matern72KernelUni
+from kernel_embedding_dictionary.kernels import (
+    Matern12Kernel,
+    Matern12KernelUni,
+    Matern32Kernel,
+    Matern32KernelUni,
+    Matern52Kernel,
+    Matern52KernelUni,
+    Matern72Kernel,
+    Matern72KernelUni,
+    MaternNu2Kernel,
+    MaternNu2KernelUni,
+)
 
 
 # tests for MaternKernelUni start here

@@ -7,11 +7,11 @@ import pytest
 
 from kernel_embedding_dictionary.kernels import (
     ExpQuadKernelUni,
-    MaternNu2KernelUni,
     Matern12KernelUni,
     Matern32KernelUni,
     Matern52KernelUni,
     Matern72KernelUni,
+    MaternNu2KernelUni,
 )
 
 

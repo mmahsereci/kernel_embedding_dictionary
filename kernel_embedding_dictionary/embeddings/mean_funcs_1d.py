@@ -3,9 +3,8 @@
 
 
 import numpy as np
-from scipy.special import erf
+from scipy.special import erf, factorial
 from scipy.stats import norm
-from scipy.special import factorial
 
 from kernel_embedding_dictionary.utils import scaled_diff
 

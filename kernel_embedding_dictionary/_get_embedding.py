@@ -5,7 +5,7 @@
 from typing import Optional
 
 from .embeddings import KernelEmbedding
-from .kernels import ExpQuadKernel, MaternNu2Kernel, Matern12Kernel, Matern32Kernel, Matern52Kernel, Matern72Kernel
+from .kernels import ExpQuadKernel, Matern12Kernel, Matern32Kernel, Matern52Kernel, Matern72Kernel, MaternNu2Kernel
 from .measures import GaussianMeasure, LebesgueMeasure
 
 
