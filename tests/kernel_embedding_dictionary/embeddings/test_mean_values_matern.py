@@ -85,4 +85,3 @@ def test_embedding_mean_values_closed_form(nu_set, fixture_name, request):
         print(res)
         print(res_explicit)
         assert res[i] == pytest.approx(res_explicit[i])
-

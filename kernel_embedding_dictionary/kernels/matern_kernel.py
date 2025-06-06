@@ -17,7 +17,7 @@ class MaternNu2KernelUni(UnivariateKernel):
         if ell <= 0:
             raise ValueError(f"ell ({ell}) must be positive")
 
-        if not ( int(nu + 0.5) == nu + 0.5 and nu > 0 ):
+        if not (int(nu + 0.5) == nu + 0.5 and nu > 0):
             raise ValueError(f"only kernels and embeddings for positive half-integer nu ({nu}) are implemented")
 
         self.ell = ell
@@ -31,11 +31,13 @@ class MaternNu2KernelUni(UnivariateKernel):
         n2 = x2.shape[0]
         K = np.zeros([n1, n2])
         n = int(self.nu)
-        ks = np.arange(n+1)
-        coefs =  factorial(n) / factorial(2 * n) * np.power(2, ks) * factorial(n + ks) / factorial(ks) / factorial(n - ks)
+        ks = np.arange(n + 1)
+        coefs = (
+            factorial(n) / factorial(2 * n) * np.power(2, ks) * factorial(n + ks) / factorial(ks) / factorial(n - ks)
+        )
         for i in range(n1):
             for j in range(n2):
-                abs_diff = np.sqrt( 2 *self.nu) * abs(scaled_diff(x1[i], x2[j], self.ell, 1))
+                abs_diff = np.sqrt(2 * self.nu) * abs(scaled_diff(x1[i], x2[j], self.ell, 1))
                 abs_diff_powers = np.power(abs_diff, n - ks)
                 K[i, j] = np.exp(-abs_diff) * np.sum(coefs * abs_diff_powers)
         return K
@@ -74,10 +76,15 @@ class MaternNu2Kernel(ProductKernel):
 
     @property
     def nu(self) -> float:
-        return self._nu 
+        return self._nu
 
     def __str__(self) -> str:
-        return f"Matern kernel \n" f"order: {self.nu} \n" f"dimensionality: {self.ndim} \n" f"lengthscales: {list(self.ell)}"
+        return (
+            f"Matern kernel \n"
+            f"order: {self.nu} \n"
+            f"dimensionality: {self.ndim} \n"
+            f"lengthscales: {list(self.ell)}"
+        )
 
     def __repr__(self) -> str:
         return "Matern kernel"

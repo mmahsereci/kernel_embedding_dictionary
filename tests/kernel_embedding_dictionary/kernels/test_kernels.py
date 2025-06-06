@@ -20,10 +20,12 @@ def expquad():
     c = {"ndim": 2}
     return ExpQuadKernel(c)
 
+
 @pytest.fixture()
 def matern():
     c = {"ndim": 2}
     return MaternNu2Kernel(c)
+
 
 @pytest.fixture()
 def matern12():

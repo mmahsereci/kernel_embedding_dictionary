@@ -12,6 +12,7 @@ from kernel_embedding_dictionary.kernels import Matern32Kernel, Matern32KernelUn
 from kernel_embedding_dictionary.kernels import Matern52Kernel, Matern52KernelUni
 from kernel_embedding_dictionary.kernels import Matern72Kernel, Matern72KernelUni
 
+
 # tests for MaternKernelUni start here
 def test_matern_kernel_uni_values():
 
@@ -81,7 +82,8 @@ def test_matern_kernel_uni_evaluations():
     # Matern 7/2
     k1 = Matern72KernelUni(ell=ell)
     k2 = MaternNu2KernelUni(nu=3.5, ell=ell)
-    assert (k1.evaluate(x, x) == k2.evaluate(x, x)).all 
+    assert (k1.evaluate(x, x) == k2.evaluate(x, x)).all
+
 
 # tests for MaternKernel start here
 def test_matern_kernel_defaults():
@@ -151,6 +153,7 @@ def test_matern_kernel_raises():
     wrong_c = {"nu": 0.5, "ndim": 1, "lengthscales": [1.0, 1.0]}
     with pytest.raises(ValueError):
         MaternNu2Kernel(wrong_c)
+
 
 def test_matern_kernel_evaluations():
 

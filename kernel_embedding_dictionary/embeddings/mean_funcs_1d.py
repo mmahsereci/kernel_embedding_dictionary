@@ -22,6 +22,7 @@ def expquad_gaussian_mean_func_1d(x: np.ndarray, ell: float, mean: float, varian
     scaled_norm_sq = np.power(scaled_diff(x, mean, np.sqrt(ell**2 + variance), np.sqrt(2)), 2)
     return factor * np.exp(-scaled_norm_sq).reshape(-1)
 
+
 def matern_lebesgue_mean_func_1d(
     x: np.ndarray, ell: float, nu: float, lb: float, ub: float, density: float
 ) -> np.ndarray:
@@ -37,8 +38,9 @@ def matern_lebesgue_mean_func_1d(
     Q_lb = np.exp(-x_lb.reshape(-1)) * np.sum(cs * np.power(x_lb, ms), 1)
     x_ub = (ub - x) / alpha
     Q_ub = np.exp(-x_ub.reshape(-1)) * np.sum(cs * np.power(x_ub, ms), 1)
-    kernel_mean = alpha * factorial(n) / factorial(2*n) * (2 * cs[0] - Q_lb - Q_ub)
+    kernel_mean = alpha * factorial(n) / factorial(2 * n) * (2 * cs[0] - Q_lb - Q_ub)
     return density * kernel_mean
+
 
 def matern12_lebesgue_mean_func_1d(
     x: np.ndarray, ell: float, nu: float, lb: float, ub: float, density: float
@@ -47,6 +49,7 @@ def matern12_lebesgue_mean_func_1d(
     exp_x_ub = np.exp(scaled_diff(x, ub, ell, 1))
     kernel_mean = ell * (2.0 - exp_lb_x - exp_x_ub)
     return density * kernel_mean.reshape(-1)
+
 
 def matern12_gaussian_mean_func_1d(x: np.ndarray, ell: float, nu: float, mean: float, variance: float) -> np.ndarray:
 
