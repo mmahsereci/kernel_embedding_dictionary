@@ -68,63 +68,20 @@ fixture_list = [
 ]
 
 
+@pytest.mark.parametrize("nu_set", [("12", 0.5), ("32", 1.5), ("52", 2.5), ("72", 3.5)])
 @pytest.mark.parametrize("fixture_name", fixture_list)
-def test_embedding_mean_values_closed_form(fixture_name, request):
+def test_embedding_mean_values_closed_form(nu_set, fixture_name, request):
     kn, mn, ck, cm, x_eval = request.getfixturevalue(fixture_name)
+    nu_suffix, nu = nu_set
 
-    # Matern 1/2
-    ck2 = ck.copy()
-    ck2.update({"nu": 0.5})
-    ke = get_embedding(kernel_name=kn, measure_name=mn, kernel_config=ck2, measure_config=cm)
-    ke_explicit = get_embedding(kernel_name=kn + "12", measure_name=mn, kernel_config=ck, measure_config=cm)
-
-    res = ke.mean(x_eval)
-    res_explicit = ke_explicit.mean(x_eval)
-    for i in range(x_eval.shape[0]):
-        print(i)
-        print(res)
-        print(res_explicit)
-        assert res[i] == pytest.approx(res_explicit[i])
-
-
-    # Matern 3/2
-    ck2 = ck.copy()
-    ck2.update({"nu": 1.5})
-    ke = get_embedding(kernel_name=kn, measure_name=mn, kernel_config=ck2, measure_config=cm)
-    ke_explicit = get_embedding(kernel_name=kn + "32", measure_name=mn, kernel_config=ck, measure_config=cm)
+    ck.update({"nu": nu})
+    ke = get_embedding(kernel_name=kn, measure_name=mn, kernel_config=ck, measure_config=cm)
+    ke_explicit = get_embedding(kernel_name=kn + nu_suffix, measure_name=mn, kernel_config=ck, measure_config=cm)
 
     res = ke.mean(x_eval)
     res_explicit = ke_explicit.mean(x_eval)
     for i in range(x_eval.shape[0]):
-        print(i)
-        print(res)
-        print(res_explicit)
-        assert res[i] == pytest.approx(res_explicit[i])
-
-    # Matern 5/2
-    ck2 = ck.copy()
-    ck2.update({"nu": 2.5})
-    ke = get_embedding(kernel_name=kn, measure_name=mn, kernel_config=ck2, measure_config=cm)
-    ke_explicit = get_embedding(kernel_name=kn + "52", measure_name=mn, kernel_config=ck, measure_config=cm)
-
-    res = ke.mean(x_eval)
-    res_explicit = ke_explicit.mean(x_eval)
-    for i in range(x_eval.shape[0]):
-        print(i)
-        print(res)
-        print(res_explicit)
-        assert res[i] == pytest.approx(res_explicit[i])
-
-    # Matern 7/2
-    ck2 = ck.copy()
-    ck2.update({"nu": 3.5})
-    ke = get_embedding(kernel_name=kn, measure_name=mn, kernel_config=ck2, measure_config=cm)
-    ke_explicit = get_embedding(kernel_name=kn + "72", measure_name=mn, kernel_config=ck, measure_config=cm)
-
-    res = ke.mean(x_eval)
-    res_explicit = ke_explicit.mean(x_eval)
-    for i in range(x_eval.shape[0]):
-        print(i)
+        print(i, nu)
         print(res)
         print(res_explicit)
         assert res[i] == pytest.approx(res_explicit[i])
