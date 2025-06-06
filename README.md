@@ -71,6 +71,7 @@ All multidimensional embeddings are based on product kernels and product measure
 | kernel / emdedding | `lebesgue` | `gaussian` |
 |--------------------|:----------:|:----------:|
 | `expquad`          |     x      |     x      |
+| `matern`           |     x      |            |
 | `matern12`         |     x      |     x      |
 | `matern32`         |     x      |     x      |
 | `matern52`         |     x      |            |
@@ -94,6 +95,16 @@ config_kernel = {
 ```
 
 where `ndim` = $d$ and `lengthscales` = $[\ell_1, ...\ell_d]$. 
+
+`matern` kernel of order $\nu = n + 1/2$ for $n \in \mathbb{N}_0$ with value $k(x_i, z_i) = \exp( -\sqrt{2n+1} r_i ) \frac{n!}{(2n)!} \sum_{k=0}^n \frac{(n+k)!}{k!(n-k)!} ( 2\sqrt{2n+1} \, r_i )^{n-k}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$.
+
+```python
+config_kernel = {
+    "ndim": 2,
+    "nu": 3.5,
+    "lengthscales": [1.0, 2.0],
+}
+```
 
 `matern12` with value $k(x_i, z_i) = e^{-r_i}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$.
 
