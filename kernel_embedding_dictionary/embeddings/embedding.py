@@ -50,8 +50,6 @@ class KernelEmbedding:
         kernel_mean = np.ones(x.shape[0])
         for dim in range(x.shape[1]):
             params_dim = {**self._kernel.get_param_dict_from_dim(dim), **self._measure.get_param_dict_from_dim(dim)}
-            # TODO: remove after debugging
-            print(params_dim)
             kernel_mean *= self._mean_func_1d(x[:, dim], **params_dim)
         return kernel_mean
 

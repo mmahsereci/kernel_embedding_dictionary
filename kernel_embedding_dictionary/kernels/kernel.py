@@ -12,7 +12,6 @@ class UnivariateKernel(abc.ABC):
 
     @property
     @abc.abstractmethod
-    # TODO: turn into absract property
     def param_dict(self) -> dict:
         pass
 
