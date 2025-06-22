@@ -4,11 +4,8 @@
 
 from typing import List, Optional
 
-import numpy as np
-from scipy.special import factorial
-
-from ..utils import scaled_diff
 from .kernel import ProductKernel, UnivariateKernel
+from .kernel_funcs_1d import matern_kernel_func_1d
 
 
 class MaternNu2KernelUni(UnivariateKernel):
@@ -23,24 +20,14 @@ class MaternNu2KernelUni(UnivariateKernel):
         self.ell = ell
         self.nu = nu
 
-    def get_param_dict(self) -> dict:
+        self._kernel_func = matern_kernel_func_1d
+
+    @property
+    def param_dict(self) -> dict:
         return {"ell": self.ell, "nu": self.nu}
 
-    def _evaluate(self, x1: np.ndarray, x2: np.ndarray) -> np.ndarray:
-        n1 = x1.shape[0]
-        n2 = x2.shape[0]
-        K = np.zeros([n1, n2])
-        n = int(self.nu)
-        ks = np.arange(n + 1)
-        coefs = (
-            factorial(n) / factorial(2 * n) * np.power(2, ks) * factorial(n + ks) / factorial(ks) / factorial(n - ks)
-        )
-        for i in range(n1):
-            for j in range(n2):
-                abs_diff = np.sqrt(2 * self.nu) * abs(scaled_diff(x1[i], x2[j], self.ell, 1))
-                abs_diff_powers = np.power(abs_diff, n - ks)
-                K[i, j] = np.exp(-abs_diff) * np.sum(coefs * abs_diff_powers)
-        return K
+    def _evaluate_pair(self, x1: float, x2: float) -> float:
+        return self._kernel_func(x1, x2, **self.param_dict)
 
 
 class MaternNu2Kernel(ProductKernel):

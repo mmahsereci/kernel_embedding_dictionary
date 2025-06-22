@@ -34,7 +34,7 @@ def test_matern_kernel_uni_param_dict():
     ell = 1.2
     nu = 0.5
     k = MaternNu2KernelUni(nu=nu, ell=ell)
-    p = k.get_param_dict()
+    p = k.param_dict
 
     # this check is important due to how the kernel embedding params are assembled
     assert set(p.keys()) == {"ell", "nu"}

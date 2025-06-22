@@ -24,7 +24,8 @@ class LebesgueMeasureUni(UnivariateMeasure):
         self.normalize = normalize
         self.density = density
 
-    def get_param_dict(self) -> dict:
+    @property
+    def param_dict(self) -> dict:
         return {"lb": self.lb, "ub": self.ub, "density": self.density}
 
     def sample(self, num_points: int) -> np.ndarray:

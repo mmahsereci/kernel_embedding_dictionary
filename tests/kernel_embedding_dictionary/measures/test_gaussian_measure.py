@@ -32,7 +32,7 @@ def test_gaussian_measure_uni_param_dict():
     mean = 1.4
     variance = 0.2
     m = GaussianMeasureUni(mean, variance)
-    p = m.get_param_dict()
+    p = m.param_dict
 
     # this check is important due to how the kernel embedding params are assembled
     assert set(p.keys()) == {"mean", "variance"}

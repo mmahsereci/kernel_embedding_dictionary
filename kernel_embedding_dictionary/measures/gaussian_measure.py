@@ -18,7 +18,8 @@ class GaussianMeasureUni(UnivariateMeasure):
         self.mean = mean
         self.variance = variance
 
-    def get_param_dict(self) -> dict:
+    @property
+    def param_dict(self) -> dict:
         return {"mean": self.mean, "variance": self.variance}
 
     def sample(self, num_points: int) -> np.ndarray:

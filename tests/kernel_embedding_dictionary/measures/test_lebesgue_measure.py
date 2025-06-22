@@ -45,7 +45,7 @@ def test_lebesgue_measure_uni_param_dict():
     ub = 4.5
     density = 1 / (ub - lb)
     m = LebesgueMeasureUni(lb, ub, normalize=True)
-    p = m.get_param_dict()
+    p = m.param_dict
 
     # this check is important due to how the kernel embedding params are assembled
     assert set(p.keys()) == {"lb", "ub", "density"}
