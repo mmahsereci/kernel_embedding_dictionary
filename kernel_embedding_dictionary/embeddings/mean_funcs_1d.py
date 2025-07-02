@@ -3,7 +3,7 @@
 
 
 import numpy as np
-from scipy.special import erf
+from scipy.special import erf, factorial
 from scipy.stats import norm
 
 from kernel_embedding_dictionary.utils import scaled_diff
@@ -20,6 +20,25 @@ def expquad_gaussian_mean_func_1d(x: np.ndarray, ell: float, mean: float, varian
     factor = np.sqrt(ell**2 / (ell**2 + variance))
     scaled_norm_sq = np.power(scaled_diff(x, mean, np.sqrt(ell**2 + variance), np.sqrt(2)), 2)
     return factor * np.exp(-scaled_norm_sq).reshape(-1)
+
+
+def matern_lebesgue_mean_func_1d(
+    x: np.ndarray, ell: float, nu: float, lb: float, ub: float, density: float
+) -> np.ndarray:
+    n = int(nu)
+    cs = np.zeros(n + 1)
+    for m in range(n + 1):
+        iss = np.arange(n - m + 1)
+        cs[m] = np.sum(np.power(2, n - iss) * factorial(n + iss) / factorial(iss)) / factorial(m)
+    alpha = ell / np.sqrt(2 * nu)
+    ms = np.arange(n + 1)
+    x = x.reshape(len(x.reshape(-1)), 1)
+    x_lb = (x - lb) / alpha
+    Q_lb = np.exp(-x_lb.reshape(-1)) * np.sum(cs * np.power(x_lb, ms), 1)
+    x_ub = (ub - x) / alpha
+    Q_ub = np.exp(-x_ub.reshape(-1)) * np.sum(cs * np.power(x_ub, ms), 1)
+    kernel_mean = alpha * factorial(n) / factorial(2 * n) * (2 * cs[0] - Q_lb - Q_ub)
+    return density * kernel_mean
 
 
 def matern12_lebesgue_mean_func_1d(

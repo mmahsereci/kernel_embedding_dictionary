@@ -8,16 +8,19 @@ from .matern12_kernel import Matern12Kernel, Matern12KernelUni
 from .matern13_kernel import Matern32Kernel, Matern32KernelUni
 from .matern52_kernel import Matern52Kernel, Matern52KernelUni
 from .matern72_kernel import Matern72Kernel, Matern72KernelUni
+from .matern_kernel import MaternNu2Kernel, MaternNu2KernelUni
 
 __all__ = [
     "ProductKernel",
     "UnivariateKernel",
     "ExpQuadKernel",
+    "MaternNu2Kernel",
     "Matern12Kernel",
     "Matern32Kernel",
     "Matern52Kernel",
     "Matern72Kernel",
     "ExpQuadKernelUni",
+    "MaternNu2KernelUni",
     "Matern12KernelUni",
     "Matern32KernelUni",
     "Matern52KernelUni",
