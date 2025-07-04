@@ -85,7 +85,9 @@ dimensionality and $k$ is a univariate kernel.
 If an argument is not given, a default is used or inferred. 
 The available kernels configs are as follows.
 
-`expaquad` with value $k(x_i, z_i) = e^{-\frac{(x_i - z_i)^2}{2\ell_i^2}}$.
+`expaquad` kernel $k(x_i, z_i) = e^{-\frac{(x_i - z_i)^2}{2\ell_i^2}}$.
+
+In the config below, `ndim` = $d$ and `lengthscales` = $[\ell_1, ...\ell_d]$.
 
 ```python
 config_kernel = {
@@ -94,9 +96,12 @@ config_kernel = {
 }
 ```
 
-where `ndim` = $d$ and `lengthscales` = $[\ell_1, ...\ell_d]$. 
+`matern` kernel of order $\nu = n + 1/2$ for 
+$n \in N_0$ with value 
+$k(x_i, z_i) = \exp( -\sqrt{2n+1} r_i ) \frac{n!}{(2n)!} \sum_{k=0}^n \frac{(n+k)!}{k!(n-k)!} ( 2\sqrt{2n+1} \, r_i )^{n-k}$ 
+where $r_i = \frac{|x_i - z_i|}{\ell_i}$.
 
-`matern` kernel of order $\nu = n + 1/2$ for $n \in \mathbb{N}_0$ with value $k(x_i, z_i) = \exp( -\sqrt{2n+1} r_i ) \frac{n!}{(2n)!} \sum_{k=0}^n \frac{(n+k)!}{k!(n-k)!} ( 2\sqrt{2n+1} \, r_i )^{n-k}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$.
+In the config below, `nu` = $\nu$, where `ndim` = $d$ and `lengthscales` = $[\ell_1, ...\ell_d]$.
 
 ```python
 config_kernel = {
@@ -106,7 +111,9 @@ config_kernel = {
 }
 ```
 
-`matern12` with value $k(x_i, z_i) = e^{-r_i}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$.
+`matern12` kernel $k(x_i, z_i) = e^{-r_i}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$.
+
+In the config below, `ndim` = $d$ and `lengthscales` = $[\ell_1, ...\ell_d]$.
 
 ```python
 config_kernel = {
@@ -115,7 +122,9 @@ config_kernel = {
 }
 ```
 
-`matern32` with value $k(x_i, z_i) = (1 + \sqrt{3} r_i)e^{-\sqrt{3} r_i}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$
+`matern32` kernel $k(x_i, z_i) = (1 + \sqrt{3} r_i)e^{-\sqrt{3} r_i}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$.
+
+In the config below, `ndim` = $d$ and `lengthscales` = $[\ell_1, ...\ell_d]$.
 
 ```python
 config_kernel = {
@@ -124,7 +133,9 @@ config_kernel = {
 }
 ```
 
-`matern52` with value $k(x_i, z_i) = (1 + \sqrt{5} r_i +\frac{5}{3} r_i^2)e^{-\sqrt{5} r_i}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$
+`matern52` kernel $k(x_i, z_i) = (1 + \sqrt{5} r_i +\frac{5}{3} r_i^2)e^{-\sqrt{5} r_i}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$.
+
+In the config below, `ndim` = $d$ and `lengthscales` = $[\ell_1, ...\ell_d]$.
 
 ```python
 config_kernel = {
@@ -133,7 +144,9 @@ config_kernel = {
 }
 ```
 
-`matern72` with value $k(x_i, z_i) = (1 + \sqrt{7} r_i +\frac{14}{5} r_i^2 + \frac{7\sqrt{7}}{15})e^{-\sqrt{7} r_i}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$
+`matern72` kernel $k(x_i, z_i) = (1 + \sqrt{7} r_i +\frac{14}{5} r_i^2 + \frac{7\sqrt{7}}{15})e^{-\sqrt{7} r_i}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$.
+
+In the config below, `ndim` = $d$ and `lengthscales` = $[\ell_1, ...\ell_d]$.
 
 ```python
 config_kernel = {
@@ -150,8 +163,10 @@ dimensionality and $p$ is a univariate density.
 If an argument is not given, a default is used or inferred. 
 The available measure configs are as follows.
 
-`lebesgue` with density $p(x_i) = (ub_i - lb_i)^{-1}$ (normalized) or 
-$p(x_i) = 1$ (not normalized) when $lb_i\leq x_i\leq ub_i$
+`lebesgue` measure with density $p(x_i) = (ub_i - lb_i)^{-1}$ (normalized) or 
+$p(x_i) = 1$ (not normalized) when $lb_i\leq x_i\leq ub_i$.
+
+In the config below, `ndim` = $d$ and `bounds` = $[(lb_1, ub_1), ... (lb_d, ub_d)]$
 
 ```python
 config_measure = {
@@ -161,10 +176,11 @@ config_measure = {
 }
 ```
 
-where `ndim` = $d$ and `bounds` = $[(lb_1, ub_1), ... (lb_d, ub_d)]$
 
 
-`gaussian` with density $p(x_i) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x_i - \mu_i)^2}{2\sigma_i^2}}$.
+`gaussian` measure with density $p(x_i) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x_i - \mu_i)^2}{2\sigma_i^2}}$.
+
+In the config below, where `ndim` = $d$, `variances` = $[\sigma_1^2, ...\sigma_d^2]$ and `means` = $[\mu_1, ...\mu_d]$. 
 
 ```python
 config_measure = {
@@ -174,7 +190,6 @@ config_measure = {
 }
 ```
 
-where `ndim` = $d$, `variances` = $[\sigma_1^2, ...\sigma_d^2]$ and `means` = $[\mu_1, ...\mu_d]$. 
 
 ## Contributing
 
