@@ -1,6 +1,6 @@
 # Kernel embedding dictionary
 
-A dictionary of kernel embeddings, accessible in Python.
+A dictionary of kernel embeddings in Python.
 
 ## Installation from source
 
