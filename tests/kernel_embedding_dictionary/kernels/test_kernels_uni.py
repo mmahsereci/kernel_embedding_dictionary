@@ -11,7 +11,7 @@ from kernel_embedding_dictionary.kernels import (
     Matern32KernelUni,
     Matern52KernelUni,
     Matern72KernelUni,
-    MaternNu2KernelUni,
+    MaternKernelUni,
 )
 
 
@@ -22,7 +22,7 @@ def expquad_uni():
 
 @pytest.fixture()
 def matern_uni():
-    return MaternNu2KernelUni(nu=8.5, ell=1.0)
+    return MaternKernelUni(nu=8.5, ell=1.0)
 
 
 @pytest.fixture()

@@ -11,7 +11,7 @@ from kernel_embedding_dictionary.kernels import (
     Matern32Kernel,
     Matern52Kernel,
     Matern72Kernel,
-    MaternNu2Kernel,
+    MaternKernel,
 )
 from kernel_embedding_dictionary.measures import GaussianMeasure, LebesgueMeasure
 
@@ -23,7 +23,7 @@ from kernel_embedding_dictionary.measures import GaussianMeasure, LebesgueMeasur
     [
         ("expquad", ExpQuadKernel, "lebesgue", LebesgueMeasure),
         ("expquad", ExpQuadKernel, "gaussian", GaussianMeasure),
-        ("matern", MaternNu2Kernel, "lebesgue", LebesgueMeasure),
+        ("matern", MaternKernel, "lebesgue", LebesgueMeasure),
         ("matern12", Matern12Kernel, "lebesgue", LebesgueMeasure),
         ("matern12", Matern12Kernel, "gaussian", GaussianMeasure),
         ("matern32", Matern32Kernel, "lebesgue", LebesgueMeasure),

@@ -11,7 +11,7 @@ from kernel_embedding_dictionary.kernels import (
     Matern32Kernel,
     Matern52Kernel,
     Matern72Kernel,
-    MaternNu2Kernel,
+    MaternKernel,
 )
 
 
@@ -24,7 +24,7 @@ def expquad():
 @pytest.fixture()
 def matern():
     c = {"ndim": 2}
-    return MaternNu2Kernel(c)
+    return MaternKernel(c)
 
 
 @pytest.fixture()
