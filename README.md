@@ -59,7 +59,7 @@ print(ke)
 If you would like to get your hands on some raw kernel embedding code for your own project, please feel
 free to inspect e.g. 
 [this](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/kernel_embedding_dictionary/embeddings/mean_funcs_1d.py) 
-module where all univariate mean embeddings are listed. The corresponding univariate kernel are [here](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/kernel_embedding_dictionary/kernels/kernel.py).
+module where all univariate mean embeddings are listed. The corresponding univariate kernels are [here](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/kernel_embedding_dictionary/kernels/kernel.py).
 
 If you are using KED, we would appreciate a citation of our paper.
 
@@ -112,7 +112,7 @@ $n \in N_0$ with value
 $k(x_i, z_i) = \exp( -\sqrt{2n+1} r_i ) \frac{n!}{(2n)!} \sum_{k=0}^n \frac{(n+k)!}{k!(n-k)!} ( 2\sqrt{2n+1} \, r_i )^{n-k}$ 
 where $r_i = \frac{|x_i - z_i|}{\ell_i}$.
 
-In the config below, `nu` = $\nu$, where `ndim` = $d$ and `lengthscales` = $[\ell_1, ...\ell_d]$.
+In the config below, `nu` = $\nu$, `ndim` = $d$ and `lengthscales` = $[\ell_1, ...\ell_d]$.
 
 ```python
 config_kernel = {
@@ -177,7 +177,7 @@ The available measure configs are as follows.
 `lebesgue` measure with density $p(x_i) = (ub_i - lb_i)^{-1}$ (normalized) or 
 $p(x_i) = 1$ (not normalized) when $lb_i\leq x_i\leq ub_i$.
 
-In the config below, `ndim` = $d$ and `bounds` = $[(lb_1, ub_1), ... (lb_d, ub_d)]$
+In the config below, `ndim` = $d$ and `bounds` = $[(lb_1, ub_1), ... (lb_d, ub_d)]$.
 
 ```python
 config_measure = {
@@ -187,11 +187,9 @@ config_measure = {
 }
 ```
 
-
-
 `gaussian` measure with density $p(x_i) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x_i - \mu_i)^2}{2\sigma_i^2}}$.
 
-In the config below, where `ndim` = $d$, `variances` = $[\sigma_1^2, ...\sigma_d^2]$ and `means` = $[\mu_1, ...\mu_d]$. 
+In the config below, `ndim` = $d$, `variances` = $[\sigma_1^2, ...\sigma_d^2]$ and `means` = $[\mu_1, ...\mu_d]$. 
 
 ```python
 config_measure = {
@@ -200,7 +198,6 @@ config_measure = {
     "variances": [0.3, 1.2]
 }
 ```
-
 
 ## Contributing
 
@@ -221,7 +218,7 @@ Active it.
  source .venv/bin/activate
 ```
 
-Install all dependencies
+Install all dependencies.
 
 ```commandline
 pip3 install -e .[dev]
@@ -231,17 +228,21 @@ Check install with `pip3 freeze`. Done :)
 
 ### Adding a new product kernel
 
+Make the following code changes
+
 - Add the univariate kernel function to the file [`kernel_funcs_1d.py`](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/kernel_embedding_dictionary/kernels/kernel_funcs_1d.py).
-- Create a new module under `kernel_embedding_dictionary/kernels/` and implement the classes `UnivariateKernel` and `ProductKernel`. Use the existing kernels as example.
+- Create a new module under `kernel_embedding_dictionary/kernels/` and implement the classes `UnivariateKernel` and `ProductKernel`. Use the existing kernel modules as example.
 - Add the kernel to `kernel_embedding_dictionary/kernels/__init__.py`.
 
 Add the kernels to the following tests
 
 - [`tests/kernel_embedding_dictionary/kernels/test_kernels.py`](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/tests/kernel_embedding_dictionary/kernels/test_kernels.py) as fixture and to the kernel list.
 - [`tests/kernel_embedding_dictionary/kernels/test_kernels_uni.py`](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/tests/kernel_embedding_dictionary/kernels/test_kernels_uni.py) as fixture and to the kernel list.
-- create a new test module under `tests/kernel_embedding_dictionary/kernels/test_<new-kernel-name>_kernel.py` using the existing ones as example.
+- Create a new test module under `tests/kernel_embedding_dictionary/kernels/test_<new-kernel-name>_kernel.py` using the existing ones as example.
 
 ### Adding a new product measure
+
+Make the following code changes
 
 - Create a new module under `kernel_embedding_dictionary/measures/` and implement the classes `UnivariateMeasure` and `ProductMeasure`. Use the existing kernels as example.
 - Add the measure to `kernel_embedding_dictionary/measures/__init__.py`.
@@ -253,6 +254,8 @@ Add the measure to the following tests
 
 ### Adding a new kernel mean embedding
 
+Make the following code changes
+
 - Add the univariate kernel mean embedding function to the file [`mean_funcs_1d.py`](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/kernel_embedding_dictionary/embeddings/mean_funcs_1d.py).
 - Import the mean function in [`embedding.py`](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/kernel_embedding_dictionary/embeddings/embedding.py) and add the embedding to the dic `mean_func_1d_dict` in the method `get_1d_funcs`.
 - Add the kernel-measure combination to [`_get_embedding.py`](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/kernel_embedding_dictionary/_get_embedding.py).
@@ -260,7 +263,7 @@ Add the measure to the following tests
 Add the embedding to the following tests
 
 - Add the kernel-measure combination to [`tests/test_get_embedding.py`](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/tests/test_get_embedding.py).
-- In order to test the kernel mean embedding values, we compare a Monte Carlo estimator and evaluate the mean embedding on a few datapoints. We pre-compute the numerical integral to i) get stable tests and ii) have faster running tests.
+- In order to test the kernel mean embedding values, we compare the analytic values to a Monte Carlo estimate and evaluate the mean embedding on a few datapoints. We pre-compute the numerical integral to i) get stable tests and ii) have faster running tests.
   * Create a new test module (in case of a new kernel) or use the existing test module under `tests/kernel_embedding_dictionary/embeddings/test_mean_values_<kernel-name>}.py`. 
   * Compute the Monte Carlo estimates with the script [`compute_credible_intervals.py`](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/tests/kernel_embedding_dictionary/embeddings/compute_credible_intervals.py). Make sure that the points on which the kernel mean is evaluated lie in the domain of the kernel and measure.
   * Copy the results over to the test module and use them as `mean_intervals` in the tests. Add the new combination to the `fixture_list`.
@@ -269,3 +272,5 @@ Add the embedding to the following tests
 
 Please make sure to run `isort` and then `black` on both the `kernel_embedding_dictionary` and `tests` directory. 
 Pytest can be run locally (after install) with `pytest tests/`.
+
+Happy coding!
