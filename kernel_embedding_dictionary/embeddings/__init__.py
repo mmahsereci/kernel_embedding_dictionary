@@ -3,7 +3,4 @@
 
 from .embedding import KernelEmbedding
 
-# TODO: perhaps hide modules
-
-
 __all__ = ["KernelEmbedding"]
