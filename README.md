@@ -112,7 +112,7 @@ $n \in N_0$ with value
 $k(x_i, z_i) = \exp( -\sqrt{2n+1} r_i ) \frac{n!}{(2n)!} \sum_{k=0}^n \frac{(n+k)!}{k!(n-k)!} ( 2\sqrt{2n+1} \, r_i )^{n-k}$ 
 where $r_i = \frac{|x_i - z_i|}{\ell_i}$.
 
-In the config below, `nu` = $\nu$, where `ndim` = $d$ and `lengthscales` = $[\ell_1, ...\ell_d]$.
+In the config below, `nu` = $\nu$, `ndim` = $d$ and `lengthscales` = $[\ell_1, ...\ell_d]$.
 
 ```python
 config_kernel = {
@@ -187,11 +187,9 @@ config_measure = {
 }
 ```
 
-
-
 `gaussian` measure with density $p(x_i) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x_i - \mu_i)^2}{2\sigma_i^2}}$.
 
-In the config below, where `ndim` = $d$, `variances` = $[\sigma_1^2, ...\sigma_d^2]$ and `means` = $[\mu_1, ...\mu_d]$. 
+In the config below, `ndim` = $d$, `variances` = $[\sigma_1^2, ...\sigma_d^2]$ and `means` = $[\mu_1, ...\mu_d]$. 
 
 ```python
 config_measure = {
@@ -200,7 +198,6 @@ config_measure = {
     "variances": [0.3, 1.2]
 }
 ```
-
 
 ## Contributing
 
