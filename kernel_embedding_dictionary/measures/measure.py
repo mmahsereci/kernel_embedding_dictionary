@@ -9,7 +9,6 @@ import numpy as np
 
 
 class UnivariateMeasure(abc.ABC):
-
     @property
     @abc.abstractmethod
     def param_dict(self) -> dict:
