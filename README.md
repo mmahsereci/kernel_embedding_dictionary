@@ -195,3 +195,32 @@ config_measure = {
 
 If you would like to contribute an additional kernel embedding or other enhancements, 
 please feel free to open an issue or a pull request.
+
+### Adding a new product kernel
+
+- Add the univariate kernel function to the file [`kernel_funcs_1d.py`](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/kernel_embedding_dictionary/kernels/kernel_funcs_1d.py).
+- Create a new module under `kernel_embedding_dictionary/kernels/` and implement the classes `UnivariateKernel` and `ProductKernel`. Use the existing kernels as example.
+- Add the kernel to `kernel_embedding_dictionary/kernels/__init__.py`.
+
+Add the kernels to the following tests
+
+- [`tests/kernel_embedding_dictionary/kernels/test_kernels.py`](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/tests/kernel_embedding_dictionary/kernels/test_kernels.py) as fixture and to the kernel list.
+- [`tests/kernel_embedding_dictionary/kernels/test_kernels_uni.py`](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/tests/kernel_embedding_dictionary/kernels/test_kernels_uni.py) as fixture and to the kernel list.
+- create a new test module under `tests/kernel_embedding_dictionary/kernels/test_<new-kernel-name>_kernel.py` using the existing ones as example.
+
+### Adding a new product measure
+
+- Create a new module under `kernel_embedding_dictionary/measures/` and implement the classes `UnivariateMeasure` and `ProductMeasure`. Use the existing kernels as example.
+- Add the measure to `kernel_embedding_dictionary/measures/__init__.py`.
+
+Add the kernels to the following tests
+
+- [`tests/kernel_embedding_dictionary/measures/test_measures.py`](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/tests/kernel_embedding_dictionary/measures/test_measures.py) as fixture and to the measure list.
+- create a new test module under `tests/kernel_embedding_dictionary/measures/test_<new-measure-name>_measure.py` using the existing ones as example.
+
+### Adding a new kernel mean embedding
+
+### Tests
+
+Please make sure to run `isort` and then `black` on both the `kernel_embedding_dictionary` and `tests` directory. 
+Pytest can be run locally (after install) with `pytest tests/`.
