@@ -8,7 +8,7 @@ from .kernel import ProductKernel, UnivariateKernel
 from .kernel_funcs_1d import matern_kernel_func_1d
 
 
-class MaternNu2KernelUni(UnivariateKernel):
+class MaternKernelUni(UnivariateKernel):
     def __init__(self, nu: float, ell: float):
 
         if ell <= 0:
@@ -30,7 +30,7 @@ class MaternNu2KernelUni(UnivariateKernel):
         return self._kernel_func(x1, x2, **self.param_dict)
 
 
-class MaternNu2Kernel(ProductKernel):
+class MaternKernel(ProductKernel):
     def __init__(self, config: Optional[dict] = None):
         """
 
@@ -52,7 +52,7 @@ class MaternNu2Kernel(ProductKernel):
                 if ndim != len(ell):
                     raise ValueError(f"ndim ({ndim}) and dimensionality of lengthscales ({len(ell)}) does not match.")
 
-        kernels = [MaternNu2KernelUni(nu=nu, ell=elli) for elli in ell]
+        kernels = [MaternKernelUni(nu=nu, ell=elli) for elli in ell]
         super().__init__(name="matern", kernel_list=kernels)  # sets name, ndim and kernel list
 
         self._nu = nu
