@@ -257,7 +257,7 @@ Add the measure to the following tests
 Make the following code changes
 
 - Add the univariate kernel mean embedding function to the file [`mean_funcs_1d.py`](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/kernel_embedding_dictionary/embeddings/mean_funcs_1d.py).
-- Import the mean function in [`embedding.py`](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/kernel_embedding_dictionary/embeddings/embedding.py) and add the embedding to the dic `mean_func_1d_dict` in the method `get_1d_funcs`.
+- Import the mean function in [`embedding.py`](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/kernel_embedding_dictionary/embeddings/embedding.py) and add the embedding to the dict `mean_func_1d_dict` in the method `get_1d_funcs`.
 - Add the kernel-measure combination to [`_get_embedding.py`](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/kernel_embedding_dictionary/_get_embedding.py).
 
 Add the embedding to the following tests
@@ -265,7 +265,7 @@ Add the embedding to the following tests
 - Add the kernel-measure combination to [`tests/test_get_embedding.py`](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/tests/test_get_embedding.py).
 - In order to test the kernel mean embedding values, we compare the analytic values to a Monte Carlo estimate and evaluate the mean embedding on a few datapoints. We pre-compute the numerical integral to i) get stable tests and ii) have faster running tests.
   * Create a new test module (in case of a new kernel) or use the existing test module under `tests/kernel_embedding_dictionary/embeddings/test_mean_values_<kernel-name>}.py`. 
-  * Compute the Monte Carlo estimates with the script [`compute_credible_intervals.py`](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/tests/kernel_embedding_dictionary/embeddings/compute_credible_intervals.py). Make sure that the points on which the kernel mean is evaluated lie in the domain of the kernel and measure.
+  * Compute the Monte Carlo estimates with the script [`compute_mean_intervals.py`](https://github.com/mmahsereci/kernel_embedding_dictionary/blob/main/tests/kernel_embedding_dictionary/embeddings/compute_mean_intervals.py). Make sure that the points on which the kernel mean is evaluated lie in the domain of the kernel and measure.
   * Copy the results over to the test module and use them as `mean_intervals` in the tests. Add the new combination to the `fixture_list`.
 
 ### Formatting and pytest
