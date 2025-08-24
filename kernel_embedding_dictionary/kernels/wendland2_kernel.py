@@ -6,8 +6,8 @@ from typing import List, Optional
 
 import numpy as np
 
-from ..utils import scaled_diff
 from .kernel import ProductKernel, UnivariateKernel
+from .kernel_funcs_1d import wendland2_kernel_func_1d
 
 
 class Wendland2KernelUni(UnivariateKernel):
@@ -19,18 +19,14 @@ class Wendland2KernelUni(UnivariateKernel):
         self.ell = ell
         self.order = 2
 
-    def get_param_dict(self) -> dict:
+        self._kernel_func = wendland2_kernel_func_1d
+
+    @property
+    def param_dict(self) -> dict:
         return {"ell": self.ell, "order": self.order}
 
-    def _evaluate(self, x1: np.ndarray, x2: np.ndarray) -> np.ndarray:
-        n1 = x1.shape[0]
-        n2 = x2.shape[0]
-        K = np.zeros([n1, n2])
-        for i in range(n1):
-            for j in range(n2):
-                abs_diff = abs(scaled_diff(x1[i], x2[j], self.ell, 1))
-                K[i, j] = max(0, (1 - abs_diff)) ** 3 * (1 + 3 * abs_diff)
-        return K
+    def _evaluate_pair(self, x1: np.ndarray, x2: np.ndarray) -> np.ndarray:
+        self._kernel_func(x1, x2, **self.param_dict)
 
 
 class Wendland2Kernel(ProductKernel):
