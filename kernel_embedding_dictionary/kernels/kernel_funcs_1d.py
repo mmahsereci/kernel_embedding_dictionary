@@ -46,3 +46,15 @@ def matern72_kernel_func_1d(x1: float, x2: float, ell: float, nu: float) -> floa
     abs_diff = np.sqrt(7) * abs(scaled_diff(x1, x2, ell, 1))
     kernel_value = (1 + abs_diff + 2 * abs_diff**2 / 5 + abs_diff**3 / 15) * np.exp(-abs_diff)
     return kernel_value
+
+
+def wendland0_kernel_func_1d(x1: float, x2: float, ell: float, order: int) -> float:
+    abs_diff = abs(scaled_diff(x1, x2, ell, 1))
+    kernel_value = max(0, (1 - abs_diff))
+    return kernel_value
+
+
+def wendland2_kernel_func_1d(x1: float, x2: float, ell: float, order: int) -> float:
+    abs_diff = abs(scaled_diff(x1, x2, ell, 1))
+    kernel_value = max(0, (1 - abs_diff)) ** 3 * (1 + 3 * abs_diff)
+    return kernel_value
