@@ -9,8 +9,9 @@ import numpy as np
 
 
 class UnivariateMeasure(abc.ABC):
+    @property
     @abc.abstractmethod
-    def get_param_dict(self) -> dict:
+    def param_dict(self) -> dict:
         pass
 
     @abc.abstractmethod
@@ -24,7 +25,7 @@ class ProductMeasure(abc.ABC):
         self._measures = measure_list
 
     def get_param_dict_from_dim(self, dim: int) -> dict:
-        return self._measures[dim].get_param_dict()
+        return self._measures[dim].param_dict
 
     def sample(self, num_points: int) -> np.ndarray:
         ndim = self.ndim

@@ -11,6 +11,7 @@ from kernel_embedding_dictionary.kernels import (
     Matern32KernelUni,
     Matern52KernelUni,
     Matern72KernelUni,
+    MaternKernelUni,
     Wendland0KernelUni,
     Wendland2KernelUni,
 )
@@ -19,6 +20,11 @@ from kernel_embedding_dictionary.kernels import (
 @pytest.fixture()
 def expquad_uni():
     return ExpQuadKernelUni(ell=1.0)
+
+
+@pytest.fixture()
+def matern_uni():
+    return MaternKernelUni(nu=8.5, ell=1.0)
 
 
 @pytest.fixture()
@@ -58,6 +64,7 @@ kernel_uni_list = [
     "matern32_uni",
     "matern52_uni",
     "matern72_uni",
+    "matern_uni",
     "wendland0_uni",
     "wendland2_uni",
 ]

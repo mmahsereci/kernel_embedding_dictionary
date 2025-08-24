@@ -4,10 +4,8 @@
 
 from typing import List, Optional
 
-import numpy as np
-
-from ..utils import scaled_diff
 from .kernel import ProductKernel, UnivariateKernel
+from .kernel_funcs_1d import matern72_kernel_func_1d
 
 
 class Matern72KernelUni(UnivariateKernel):
@@ -19,18 +17,14 @@ class Matern72KernelUni(UnivariateKernel):
         self.ell = ell
         self.nu = 3.5
 
-    def get_param_dict(self) -> dict:
+        self._kernel_func = matern72_kernel_func_1d
+
+    @property
+    def param_dict(self) -> dict:
         return {"ell": self.ell, "nu": self.nu}
 
-    def _evaluate(self, x1: np.ndarray, x2: np.ndarray) -> np.ndarray:
-        n1 = x1.shape[0]
-        n2 = x2.shape[0]
-        K = np.zeros([n1, n2])
-        for i in range(n1):
-            for j in range(n2):
-                abs_diff = np.sqrt(7) * abs(scaled_diff(x1[i], x2[j], self.ell, 1))
-                K[i, j] = (1 + abs_diff + 2 * abs_diff**2 / 5 + abs_diff**3 / 15) * np.exp(-abs_diff)
-        return K
+    def _evaluate_pair(self, x1: float, x2: float) -> float:
+        return self._kernel_func(x1, x2, **self.param_dict)
 
 
 class Matern72Kernel(ProductKernel):

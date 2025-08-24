@@ -17,6 +17,7 @@ from .mean_funcs_1d import (
     matern32_lebesgue_mean_func_1d,
     matern52_lebesgue_mean_func_1d,
     matern72_lebesgue_mean_func_1d,
+    matern_lebesgue_mean_func_1d,
     wendland0_gaussian_mean_func_1d,
     wendland0_lebesgue_mean_func_1d,
     wendland2_gaussian_mean_func_1d,
@@ -52,8 +53,6 @@ class KernelEmbedding:
         kernel_mean = np.ones(x.shape[0])
         for dim in range(x.shape[1]):
             params_dim = {**self._kernel.get_param_dict_from_dim(dim), **self._measure.get_param_dict_from_dim(dim)}
-            # TODO: remove after debugging
-            print(params_dim)
             kernel_mean *= self._mean_func_1d(x[:, dim], **params_dim)
         return kernel_mean
 
@@ -62,6 +61,7 @@ class KernelEmbedding:
         mean_func_1d_dict = {
             "expquad-lebesgue": expquad_lebesgue_mean_func_1d,
             "expquad-gaussian": expquad_gaussian_mean_func_1d,
+            "matern-lebesgue": matern_lebesgue_mean_func_1d,
             "matern12-lebesgue": matern12_lebesgue_mean_func_1d,
             "matern12-gaussian": matern12_gaussian_mean_func_1d,
             "matern32-lebesgue": matern32_lebesgue_mean_func_1d,

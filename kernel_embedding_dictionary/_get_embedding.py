@@ -11,6 +11,7 @@ from .kernels import (
     Matern32Kernel,
     Matern52Kernel,
     Matern72Kernel,
+    MaternKernel,
     Wendland0Kernel,
     Wendland2Kernel,
 )
@@ -24,6 +25,7 @@ def get_embedding(
     available_embeddings_dict = {
         "expquad-lebesgue": [ExpQuadKernel, LebesgueMeasure],
         "expquad-gaussian": [ExpQuadKernel, GaussianMeasure],
+        "matern-lebesgue": [MaternKernel, LebesgueMeasure],
         "matern12-lebesgue": [Matern12Kernel, LebesgueMeasure],
         "matern12-gaussian": [Matern12Kernel, GaussianMeasure],
         "matern32-lebesgue": [Matern32Kernel, LebesgueMeasure],
