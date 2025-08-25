@@ -20,7 +20,7 @@ def test_wendland2_kernel_uni_param_dict():
 
     ell = 1.5
     k = Wendland2KernelUni(ell)
-    p = k.get_param_dict()
+    p = k.param_dict
 
     # this check is important due to how the kernel embedding params are assembled
     assert set(p.keys()) == {"ell", "order"}
