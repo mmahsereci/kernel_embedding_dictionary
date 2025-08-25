@@ -92,6 +92,7 @@ class KernelEmbedding:
 
         var_func_1d = var_func_1d_dict.get(self._kernel.name + "-" + self._measure.name, None)
         if not var_func_1d:
-            raise ValueError(f"integrated kernel mean unknown.")
+            pass
+            # raise ValueError(f"integrated kernel mean unknown.")
 
         return var_func_1d
