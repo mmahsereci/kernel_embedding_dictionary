@@ -19,6 +19,9 @@ from .mean_funcs_1d import (
     matern72_lebesgue_mean_func_1d,
     matern_lebesgue_mean_func_1d,
 )
+from .var_funcs_1d import (
+    expquad_lebesgue_var_func_1d,
+)
 
 
 class KernelEmbedding:
@@ -31,7 +34,8 @@ class KernelEmbedding:
         self._measure = measure
 
         # kernel and measure must be set first
-        self._mean_func_1d = self._get_1d_funcs()
+        self._mean_func_1d = self._get_1d_mean_funcs()
+        self._var_func_1d = self._get_1d_var_funcs()
 
     def __str__(self) -> str:
         return f"Kernel embedding for\n\n{self._kernel.__str__()}\n\nand\n\n{self._measure.__str__()}"
@@ -52,8 +56,15 @@ class KernelEmbedding:
             params_dim = {**self._kernel.get_param_dict_from_dim(dim), **self._measure.get_param_dict_from_dim(dim)}
             kernel_mean *= self._mean_func_1d(x[:, dim], **params_dim)
         return kernel_mean
+    
+    def variance(self) -> float:
+        kernel_var = 1
+        for dim in range(self.ndim):
+            params_dim = {**self._kernel.get_param_dict_from_dim(dim), **self._measure.get_param_dict_from_dim(dim)}
+            kernel_var *= self._var_func_1d(**params_dim)
+        return kernel_var
 
-    def _get_1d_funcs(self) -> Callable:
+    def _get_1d_mean_funcs(self) -> Callable:
 
         mean_func_1d_dict = {
             "expquad-lebesgue": expquad_lebesgue_mean_func_1d,
@@ -72,3 +83,15 @@ class KernelEmbedding:
             raise ValueError(f"kernel embedding unknown.")
 
         return mean_func_1d
+    
+    def _get_1d_var_funcs(self) -> Callable:
+
+        var_func_1d_dict = {
+            "expquad-lebesgue": expquad_lebesgue_var_func_1d,
+        }
+
+        var_func_1d = var_func_1d_dict.get(self._kernel.name + "-" + self._measure.name, None)
+        if not var_func_1d:
+            raise ValueError(f"integrated kernel mean unknown.")
+
+        return var_func_1d
