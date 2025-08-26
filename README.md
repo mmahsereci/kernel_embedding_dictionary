@@ -171,6 +171,8 @@ config_kernel = {
 
 `wendland0` with value $k(x_i, z_i) = (1 - r_i)_{+}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$ and $(\cdot)_{+} = \operatorname{max} (0, \cdot)$
 
+In the config below, `ndim` = $d$ and `lengthscales` = $[\ell_1, ...\ell_d]$.
+
 ```python
 config_kernel = {
     "ndim": 2,
@@ -179,6 +181,9 @@ config_kernel = {
 ```
 
 `wendland2` with value $k(x_i, z_i) = (1 - r_i)_{+}^3 (3r_i + 1)$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$ and $(\cdot)_{+} = \operatorname{max} (0, \cdot)$
+
+In the config below, `ndim` = $d$ and `lengthscales` = $[\ell_1, ...\ell_d]$.
+
 
 ```python
 config_kernel = {
