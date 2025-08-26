@@ -15,8 +15,14 @@ def get_config_wendland0_lebesgue_1d_standard():
     return "wendland0", "lebesgue", ck, cm, x
 
 
-def get_config_wendland0_lebesgue_1d_values():
-    """Tests three conditions of the Wendland0 kernel mean embedding with Lebesgue measure in 1D."""
+def get_config_wendland0_lebesgue_1d_values_case1to3():
+    """Tests three conditions of the Wendland0 kernel mean embedding with Lebesgue measure in 1D.
+
+    These settings cover three of four cases in the integrated Wendland kernel:
+    1. (ub >= (x + ell)) & ((lb + ell) < x)
+    2. (ub >= (x + ell)) & ((lb + ell) >= x)
+    3. (ub < (x + ell)) & ((lb + ell) < x)
+    """
     ck = {"ndim": 1, "lengthscales": [0.8]}
     cm = {"ndim": 1, "bounds": [(-0.3, 1.4)], "normalize": True}  # test only works for normalized measures
     x = np.array([[0.1], [0.55], [0.8]])  # 3x1 must lie in domain
@@ -24,7 +30,7 @@ def get_config_wendland0_lebesgue_1d_values():
 
 
 def get_config_wendland0_lebesgue_1d_values_case4():
-    """Tests the last condition of the Wendland0 kernel mean embedding with Lebesgue measure in 1D."""
+    """Tests the fourth condition (not 1, 2 or 3) of the Wendland0 kernel mean embedding with Lebesgue measure in 1D."""
     ck = {"ndim": 1, "lengthscales": [0.9]}
     cm = {"ndim": 1, "bounds": [(-0.3, 1.4)], "normalize": True}  # test only works for normalized measures
     x = np.array([[0.55]])  # 1x1 must lie in domain
@@ -93,7 +99,7 @@ def config_wendland0_lebesgue_1d_standard():
 
 @pytest.fixture()
 def config_wendland0_lebesgue_1d_values():
-    kn, mn, ck, cm, x = get_config_wendland0_lebesgue_1d_values()
+    kn, mn, ck, cm, x = get_config_wendland0_lebesgue_1d_values_case1to3()
     mean_intervals = [
         [0.40545133617900014, 0.41214700860517123],
         [0.4676560436265604, 0.4734209224151989],
