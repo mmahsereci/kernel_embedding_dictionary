@@ -202,8 +202,8 @@ def test_embedding_mean_values(fixture_name, request):
         assert mean_intervals[i][0] < res[i] < mean_intervals[i][1]
 
 
-def test_get_embedding_raises():
-    """Test that get_embedding raises ValueError for non-zero mean in Gaussian measure."""
+def test_kernel_mean_raises():
+    """Test that the kernel mean raises ValueError for non-zero mean in Gaussian measure."""
     kn, mn, ck, cm, x = get_config_wendland0_gaussian_1d_non_zero_mean_values()
 
     ke = get_embedding(kernel_name=kn, measure_name=mn, kernel_config=ck, measure_config=cm)
