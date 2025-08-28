@@ -79,7 +79,7 @@ If you are using KED, we would appreciate a citation of our paper.
 
 All multidimensional embeddings are based on product kernels and product measures.
 
-| kernel / emdedding | `lebesgue` | `gaussian` |
+| kernel / embedding | `lebesgue` | `gaussian` |
 |--------------------|:----------:|:----------:|
 | `expquad`          |     x      |     x      |
 | `matern`           |     x      |            |
@@ -87,6 +87,9 @@ All multidimensional embeddings are based on product kernels and product measure
 | `matern32`         |     x      |     x      |
 | `matern52`         |     x      |            |
 | `matern72`         |     x      |            |
+| `wendland0`        |     x      |     x      |
+| `wendland2`        |            |     x      |
+
 
 ## Kernel configs
 
@@ -165,6 +168,30 @@ config_kernel = {
     "lengthscales": [1.0, 2.0],
 }
 ```
+
+`wendland0` with value $k(x_i, z_i) = (1 - r_i)_{+}$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$ and $(\cdot)_{+} = \operatorname{max} (0, \cdot)$
+
+In the config below, `ndim` = $d$ and `lengthscales` = $[\ell_1, ...\ell_d]$.
+
+```python
+config_kernel = {
+    "ndim": 2,
+    "lengthscales": [1.0, 2.0],
+}
+```
+
+`wendland2` with value $k(x_i, z_i) = (1 - r_i)_{+}^3 (3r_i + 1)$ where $r_i = \frac{|x_i - z_i|}{\ell_i}$ and $(\cdot)_{+} = \operatorname{max} (0, \cdot)$
+
+In the config below, `ndim` = $d$ and `lengthscales` = $[\ell_1, ...\ell_d]$.
+
+
+```python
+config_kernel = {
+    "ndim": 2,
+    "lengthscales": [1.0, 2.0],
+}
+```
+
 
 ## Measure configs
 
