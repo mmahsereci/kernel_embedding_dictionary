@@ -65,6 +65,7 @@ Test structure mirrors the source tree under `tests/kernel_embedding_dictionary/
 - [ ] Run `isort .` then `black .`; confirm no diffs remain
 - [ ] `pytest tests/` passes locally
 - [ ] Every new `.py` file has the correct license header with the current year
+- [ ] PR body mentions that the PR was co-authored by an AI agent
 
 **When adding a new kernel:**
 - [ ] Univariate kernel function added to `kernels/kernel_funcs_1d.py`
