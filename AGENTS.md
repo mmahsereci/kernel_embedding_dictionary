@@ -49,3 +49,29 @@ The library computes closed-form kernel mean embeddings $\int k(x, \cdot)\, dp$ 
 ## Tests
 
 Test structure mirrors the source tree under `tests/kernel_embedding_dictionary/`. Embedding value tests compare analytic results against pre-computed Monte Carlo estimates. To generate those estimates for a new embedding, use `tests/kernel_embedding_dictionary/embeddings/compute_mean_intervals.py` and copy the output into the corresponding `test_mean_values_<kernel>.py` file as `mean_intervals`.
+
+## PR Checklist
+
+**Every PR:**
+- [ ] Run `isort .` then `black .`; confirm no diffs remain
+- [ ] `pytest tests/` passes locally
+
+**When adding a new kernel:**
+- [ ] Univariate kernel function added to `kernels/kernel_funcs_1d.py`
+- [ ] New module `kernels/<name>_kernel.py` implementing `UnivariateKernel` and `ProductKernel`
+- [ ] Kernel registered in `kernels/__init__.py`
+- [ ] Kernel added as fixture to `tests/kernel_embedding_dictionary/kernels/test_kernels.py` and `test_kernels_uni.py`
+- [ ] Dedicated `tests/kernel_embedding_dictionary/kernels/test_<name>_kernel.py` created
+
+**When adding a new measure:**
+- [ ] New module `measures/<name>_measure.py` implementing `UnivariateMeasure` and `ProductMeasure`
+- [ ] Measure registered in `measures/__init__.py`
+- [ ] Measure added as fixture to `tests/kernel_embedding_dictionary/measures/test_measures.py`
+- [ ] Dedicated `tests/kernel_embedding_dictionary/measures/test_<name>_measure.py` created
+
+**When adding a new kernel–measure embedding:**
+- [ ] Closed-form 1D mean function added to `embeddings/mean_funcs_1d.py`
+- [ ] Combination registered in `embeddings/embedding.py` (`mean_func_1d_dict`) and `_get_embedding.py` (`available_embeddings_dict`)
+- [ ] Combination added to `tests/test_get_embedding.py`
+- [ ] Monte Carlo estimates generated via `compute_mean_intervals.py` and added to `tests/kernel_embedding_dictionary/embeddings/test_mean_values_<kernel>.py`
+- [ ] Support matrix table in `README.md` updated
