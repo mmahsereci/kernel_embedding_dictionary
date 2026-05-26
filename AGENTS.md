@@ -33,18 +33,12 @@ The library computes closed-form kernel mean embeddings $\int k(x, \cdot)\, dp$ 
 **Three core modules**, each following the same pattern:
 
 - `kernels/` — `UnivariateKernel` (abstract, evaluates $k(x_1, x_2)$) → `ProductKernel` (holds a list of univariate kernels, evaluates the product). Raw 1D kernel functions live in `kernels/kernel_funcs_1d.py`.
-- `measures/` — `UnivariateMeasure` (abstract, holds params + can sample) → `ProductMeasure`. No raw function file; logic lives in each measure class.
+- `measures/` — `UnivariateMeasure` (abstract, holds params + can sample) → `ProductMeasure`. Unlike kernels, each measure class contains its own logic rather than delegating to a shared functions file.
 - `embeddings/` — `KernelEmbedding` wraps a `ProductKernel` + `ProductMeasure`. Its `mean(x)` method loops over dimensions and multiplies 1D mean values. All closed-form 1D mean embedding formulas live in `embeddings/mean_funcs_1d.py`.
 
 **Public API** is a single factory function: `get_embedding(kernel_name, measure_name, kernel_config, measure_config)` in `_get_embedding.py`. It looks up the kernel–measure pair by the string key `"<kernel>-<measure>"` and returns a `KernelEmbedding`.
 
-**Adding a new kernel–measure embedding** requires touching exactly four places:
-1. `kernels/kernel_funcs_1d.py` — add the univariate kernel function
-2. `kernels/<name>_kernel.py` — implement `UnivariateKernel` and `ProductKernel`; register in `kernels/__init__.py`
-3. `embeddings/mean_funcs_1d.py` — add the closed-form 1D mean embedding function
-4. `embeddings/embedding.py` (`mean_func_1d_dict`) and `_get_embedding.py` (`available_embeddings_dict`) — register the combination
-
-**Adding a new measure** requires a new `measures/<name>_measure.py` with `UnivariateMeasure` and `ProductMeasure`, registered in `measures/__init__.py`.
+For all changes, follow the PR Checklist below — it is the authoritative source for what files to touch.
 
 ## License Header
 
@@ -84,5 +78,5 @@ Test structure mirrors the source tree under `tests/kernel_embedding_dictionary/
 - [ ] Closed-form 1D mean function added to `embeddings/mean_funcs_1d.py`
 - [ ] Combination registered in `embeddings/embedding.py` (`mean_func_1d_dict`) and `_get_embedding.py` (`available_embeddings_dict`)
 - [ ] Combination added to `tests/test_get_embedding.py`
-- [ ] Monte Carlo estimates generated via `compute_mean_intervals.py` and added to `tests/kernel_embedding_dictionary/embeddings/test_mean_values_<kernel>.py`
+- [ ] Monte Carlo estimates generated via `tests/kernel_embedding_dictionary/embeddings/compute_mean_intervals.py` and added to `tests/kernel_embedding_dictionary/embeddings/test_mean_values_<kernel>.py`
 - [ ] Support matrix table in `README.md` updated
