@@ -46,6 +46,15 @@ The library computes closed-form kernel mean embeddings $\int k(x, \cdot)\, dp$ 
 
 **Adding a new measure** requires a new `measures/<name>_measure.py` with `UnivariateMeasure` and `ProductMeasure`, registered in `measures/__init__.py`.
 
+## License Header
+
+Every new `.py` file must start with this two-line header. Replace `<YEAR>` with the **current calendar year at the time the file is created** (e.g. a file created in 2026 gets `2026`, one created in 2027 gets `2027`):
+
+```python
+# Copyright <YEAR> The KED Authors. All Rights Reserved.
+# SPDX-License-Identifier: MIT
+```
+
 ## Tests
 
 Test structure mirrors the source tree under `tests/kernel_embedding_dictionary/`. Embedding value tests compare analytic results against pre-computed Monte Carlo estimates. To generate those estimates for a new embedding, use `tests/kernel_embedding_dictionary/embeddings/compute_mean_intervals.py` and copy the output into the corresponding `test_mean_values_<kernel>.py` file as `mean_intervals`.
@@ -55,6 +64,7 @@ Test structure mirrors the source tree under `tests/kernel_embedding_dictionary/
 **Every PR:**
 - [ ] Run `isort .` then `black .`; confirm no diffs remain
 - [ ] `pytest tests/` passes locally
+- [ ] Every new `.py` file has the correct license header with the current year
 
 **When adding a new kernel:**
 - [ ] Univariate kernel function added to `kernels/kernel_funcs_1d.py`
