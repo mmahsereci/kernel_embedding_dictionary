@@ -28,7 +28,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-license = {text = "MIT"}
+license = "MIT"
 #license-files = ["LICEN[CS]E*"]
 dependencies = [
     "numpy",
@@ -50,6 +50,13 @@ dev = [
     "coverage>=4.5.1",
     "codecov>=2.0.15",
 ]
+
+################################################################################
+# Package discovery                                                            #
+################################################################################
+
+[tool.setuptools.packages.find]
+include = ["kernel_embedding_dictionary*"]
 
 ################################################################################
 # Formatting                                                     #
