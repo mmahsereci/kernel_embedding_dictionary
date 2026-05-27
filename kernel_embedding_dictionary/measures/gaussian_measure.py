@@ -36,47 +36,32 @@ class GaussianMeasure(ProductMeasure):
         if config is None:
             config = {}
 
-        # dimensionality and bounds
-        variances = config.get("variances", None)
         means = config.get("means", None)
+        variances = config.get("variances", None)
         ndim = config.get("ndim", None)
 
-        # none given
-        if not (means or variances or ndim):
-            ndim = 1
+        # validate all provided values against each other
+        if means is not None and variances is not None and len(means) != len(variances):
+            raise ValueError(f"len(means) ({len(means)}) and len(variances) ({len(variances)}) must match.")
+        if means is not None and ndim is not None and len(means) != ndim:
+            raise ValueError(f"len(means) ({len(means)}) and ndim ({ndim}) must match.")
+        if variances is not None and ndim is not None and len(variances) != ndim:
+            raise ValueError(f"len(variances) ({len(variances)}) and ndim ({ndim}) must match.")
+
+        # infer ndim from first available source, default to 1
+        if ndim is None:
+            if means is not None:
+                ndim = len(means)
+            elif variances is not None:
+                ndim = len(variances)
+            else:
+                ndim = 1
+
+        # fill missing means/variances with defaults
+        if means is None:
             means = ndim * [0.0]
+        if variances is None:
             variances = ndim * [1.0]
-        # all given
-        elif means and variances and ndim:
-            if len(means) != len(variances) != ndim:
-                raise ValueError("means, variances and ndim must match.")
-        # only ndim given
-        elif ndim and not (means or variances):
-            means = ndim * [0.0]
-            variances = ndim * [1.0]
-        # only means given
-        elif means and not (ndim or variances):
-            variances = len(means) * [1.0]
-        # only variances given
-        elif variances and not (ndim or means):
-            means = len(variances) * [0.0]
-        # only variances given
-        elif variances and not (ndim or means):
-            means = len(variances) * [0.0]
-        # ndim and variances given
-        elif (variances and ndim) and not means:
-            if len(variances) != ndim:
-                raise ValueError("means, variances and ndim must match.")
-            means = ndim * [0.0]
-        # ndim and means given
-        elif (means and ndim) and not variances:
-            if len(means) != ndim:
-                raise ValueError("means, variances and ndim must match.")
-            variances = ndim * [1.0]
-        # means and variances given
-        else:
-            if len(means) != len(variances):
-                raise ValueError("means, variances and ndim must match.")
 
         measures = [GaussianMeasureUni(mean=m, variance=v) for (m, v) in zip(means, variances)]
         super().__init__(name="gaussian", measure_list=measures)  # sets name, ndim and measure list
