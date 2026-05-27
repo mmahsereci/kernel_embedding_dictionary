@@ -43,12 +43,9 @@ Issues = "https://github.com/mmahsereci/kernel_embedding_dictionary/issues"
 dev = [
     "pytest>=3.5.1",
     "pytest-cov>=2.5.1",
-    "mock>=2.0.0",
-    "flake8>=3.5.0",
     "isort>=5.10",
     "black>22.1",
     "coverage>=4.5.1",
-    "codecov>=2.0.15",
 ]
 
 ################################################################################
@@ -72,4 +69,11 @@ profile = 'black'
 skip_gitignore = true
 line_length = 120
 #skip_glob = 'doc/*'
+
+################################################################################
+# Pytest                                                                       #
+################################################################################
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
 

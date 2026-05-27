@@ -9,7 +9,7 @@ This file provides guidance to AI coding agents when working with code in this r
 pip install -e .[dev]
 
 # Run all tests
-pytest tests/
+pytest
 
 # Run a single test file
 pytest tests/kernel_embedding_dictionary/kernels/test_expquad_kernel.py

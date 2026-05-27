@@ -298,6 +298,6 @@ Add the embedding to the following tests
 ### Formatting and pytest
 
 Please make sure to run `isort` and then `black` on both the `kernel_embedding_dictionary` and `tests` directory. 
-Pytest can be run locally (after install) with `pytest tests/`.
+Pytest can be run locally (after install) with `pytest`.
 
 Happy coding!
