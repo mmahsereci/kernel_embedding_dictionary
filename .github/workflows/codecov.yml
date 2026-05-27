@@ -33,7 +33,7 @@ jobs:
         run: python -m pytest --verbose --cov kernel_embedding_dictionary --cov-report term-missing tests
 
       - name: Upload results to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v6
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: mmahsereci/kernel_embedding_dictionary
