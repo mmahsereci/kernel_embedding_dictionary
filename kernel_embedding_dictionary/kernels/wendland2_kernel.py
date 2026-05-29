@@ -26,7 +26,7 @@ class Wendland2KernelUni(UnivariateKernel):
         return {"ell": self.ell, "order": self.order}
 
     def _evaluate_pair(self, x1: np.ndarray, x2: np.ndarray) -> np.ndarray:
-        self._kernel_func(x1, x2, **self.param_dict)
+        return self._kernel_func(x1, x2, **self.param_dict)
 
 
 class Wendland2Kernel(ProductKernel):

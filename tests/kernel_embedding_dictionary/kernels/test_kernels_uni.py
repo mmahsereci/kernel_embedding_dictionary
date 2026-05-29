@@ -103,6 +103,16 @@ def test_kernel_uni_evaluate_shapes(kernel_uni_name, request):
 
 
 @pytest.mark.parametrize("kernel_uni_name", kernel_uni_list)
+def test_kernel_uni_evaluate_finite(kernel_uni_name, request):
+    k = request.getfixturevalue(kernel_uni_name)
+
+    x1 = np.array([0.1, 0.3])
+    x2 = np.array([0.1, 0.3, 0.5])
+    res = k.evaluate(x1, x2)
+    assert np.all(np.isfinite(res))
+
+
+@pytest.mark.parametrize("kernel_uni_name", kernel_uni_list)
 def test_kernel_uni_raises(kernel_uni_name, request):
     k = request.getfixturevalue(kernel_uni_name)
 
