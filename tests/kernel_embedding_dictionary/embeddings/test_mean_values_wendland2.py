@@ -102,6 +102,7 @@ def test_embedding_mean_values(fixture_name, request):
     ke = get_embedding(kernel_name=kn, measure_name=mn, kernel_config=ck, measure_config=cm)
 
     res = ke.mean(x_eval)
+    # intentional: useful for local inspection with pytest -s
     print(res)
     for i in range(x_eval.shape[0]):
         assert mean_intervals[i][0] < res[i] < mean_intervals[i][1]
