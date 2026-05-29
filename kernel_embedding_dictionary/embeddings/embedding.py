@@ -76,6 +76,9 @@ class KernelEmbedding:
         mean_func_1d = mean_func_1d_dict.get(self._kernel.name + "-" + self._measure.name, None)
 
         if not mean_func_1d:
-            raise ValueError(f"kernel embedding unknown.")
+            raise ValueError(
+                f"No embedding available for '{self._kernel.name}-{self._measure.name}'. "
+                "See the README for the list of supported kernel-measure combinations."
+            )
 
         return mean_func_1d
