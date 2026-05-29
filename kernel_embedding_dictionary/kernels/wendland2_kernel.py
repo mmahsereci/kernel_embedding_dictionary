@@ -17,7 +17,7 @@ class Wendland2KernelUni(UnivariateKernel):
             raise ValueError(f"ell ({ell}) must be positive")
 
         self.ell = ell
-        self.order = 2
+        self.order = 2  # defines this kernel variant; not used by the formula but included in param_dict
 
         self._kernel_func = wendland2_kernel_func_1d
 

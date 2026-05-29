@@ -15,7 +15,7 @@ class Matern72KernelUni(UnivariateKernel):
             raise ValueError(f"ell ({ell}) must be positive")
 
         self.ell = ell
-        self.nu = 3.5
+        self.nu = 3.5  # defines this kernel variant; not used by the formula but included in param_dict
 
         self._kernel_func = matern72_kernel_func_1d
 
