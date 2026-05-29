@@ -40,6 +40,9 @@ def get_embedding(
     km = available_embeddings_dict.get(kernel_name + "-" + measure_name, None)
 
     if not km:
-        raise ValueError(f"kernel embedding unknown.")
+        raise ValueError(
+            f"No embedding available for '{kernel_name}-{measure_name}'. "
+            "See the README for the list of supported kernel-measure combinations."
+        )
 
     return KernelEmbedding(km[0](kernel_config), km[1](measure_config))
