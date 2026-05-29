@@ -36,6 +36,14 @@ class KernelEmbedding:
         # kernel and measure must be set first
         self._mean_func_1d = self._get_1d_funcs()
 
+    @property
+    def kernel(self) -> ProductKernel:
+        return self._kernel
+
+    @property
+    def measure(self) -> ProductMeasure:
+        return self._measure
+
     def __str__(self) -> str:
         return f"Kernel embedding for\n\n{self._kernel.__str__()}\n\nand\n\n{self._measure.__str__()}"
 

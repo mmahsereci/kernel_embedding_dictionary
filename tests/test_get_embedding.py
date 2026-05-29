@@ -41,8 +41,8 @@ def test_get_embedding_returns_correct_types(embedding):
     k_name, k_type, m_name, m_type = embedding
     ke = get_embedding(k_name, m_name)
 
-    assert isinstance(ke._kernel, k_type)
-    assert isinstance(ke._measure, m_type)
+    assert isinstance(ke.kernel, k_type)
+    assert isinstance(ke.measure, m_type)
 
 
 def test_get_embedding_raises():
