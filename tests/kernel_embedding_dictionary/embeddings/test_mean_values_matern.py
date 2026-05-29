@@ -71,6 +71,10 @@ fixture_list = [
 @pytest.mark.parametrize("nu_set", [("12", 0.5), ("32", 1.5), ("52", 2.5), ("72", 3.5)])
 @pytest.mark.parametrize("fixture_name", fixture_list)
 def test_embedding_mean_values_closed_form(nu_set, fixture_name, request):
+    # MC interval validation is intentionally omitted for matern-lebesgue. The generic matern
+    # embedding is validated transitively: for each nu, it must agree with the fixed-nu
+    # implementation (e.g. matern(nu=0.5) == matern12), and each fixed-nu implementation is
+    # independently validated against MC intervals in its own test file.
     kn, mn, ck, cm, x_eval = request.getfixturevalue(fixture_name)
     nu_suffix, nu = nu_set
 
