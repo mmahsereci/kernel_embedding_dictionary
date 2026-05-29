@@ -55,6 +55,7 @@ def matern72_kernel_func_1d(x1: float, x2: float, ell: float, nu: float) -> floa
 def wendland0_kernel_func_1d(x1: float, x2: float, ell: float, order: int) -> float:
     # order is hardcoded in the formula (order=0); accepted to keep the Wendland family signature uniform.
     abs_diff = abs(scaled_diff(x1, x2, ell, 1))
+    # scalar max; these funcs are called with float inputs only
     kernel_value = max(0, (1 - abs_diff))
     return kernel_value
 
@@ -62,5 +63,6 @@ def wendland0_kernel_func_1d(x1: float, x2: float, ell: float, order: int) -> fl
 def wendland2_kernel_func_1d(x1: float, x2: float, ell: float, order: int) -> float:
     # order is hardcoded in the formula (order=2); accepted to keep the Wendland family signature uniform.
     abs_diff = abs(scaled_diff(x1, x2, ell, 1))
+    # scalar max; these funcs are called with float inputs only
     kernel_value = max(0, (1 - abs_diff)) ** 3 * (1 + 3 * abs_diff)
     return kernel_value
