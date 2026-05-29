@@ -20,7 +20,15 @@ class UnivariateKernel(abc.ABC):
         pass
 
     def _evaluate(self, x1: np.ndarray, x2: np.ndarray) -> np.ndarray:
-        """override for efficiency. x1 and x2 have shape (n1, ) and (n2, )."""
+        """Reference implementation via scalar loop over all (x1[i], x2[j]) pairs.
+
+        Correct by construction but O(n1 * n2) Python iterations — slow for large inputs.
+        Override with a vectorized numpy implementation for performance, e.g.:
+            diff = (x1[:, None] - x2[None, :]) / self.ell
+            return np.exp(-0.5 * diff**2)  # expquad example
+        The loop body is the ground truth to validate any override against.
+        x1 and x2 have shape (n1,) and (n2,).
+        """
         n1 = x1.shape[0]
         n2 = x2.shape[0]
         K = np.zeros([n1, n2])
