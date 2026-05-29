@@ -96,6 +96,7 @@ def test_embedding_mean_values(fixture_name, request):
 
     res = ke.mean(x_eval)
     for i in range(x_eval.shape[0]):
+        # intentional: useful for local inspection with pytest -s
         print(i)
         print(res)
         assert mean_intervals[i][0] < res[i] < mean_intervals[i][1]

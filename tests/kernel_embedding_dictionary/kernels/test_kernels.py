@@ -72,6 +72,7 @@ kernel_list = ["expquad", "matern12", "matern32", "matern52", "matern72", "mater
 @pytest.mark.parametrize("kernel_name", kernel_list)
 def test_kernel_names(kernel_name, request):
     k = request.getfixturevalue(kernel_name)
+    # intentional: useful for local inspection with pytest -s
     print(k)
     assert k.name == kernel_name
 

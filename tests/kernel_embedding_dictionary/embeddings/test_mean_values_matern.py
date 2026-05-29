@@ -81,6 +81,7 @@ def test_embedding_mean_values_closed_form(nu_set, fixture_name, request):
     res = ke.mean(x_eval)
     res_explicit = ke_explicit.mean(x_eval)
     for i in range(x_eval.shape[0]):
+        # intentional: useful for local inspection with pytest -s
         print(i, nu)
         print(res)
         print(res_explicit)
