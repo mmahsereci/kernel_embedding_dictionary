@@ -25,36 +25,42 @@ def matern_kernel_func_1d(x1: float, x2: float, ell: float, nu: float) -> float:
 
 
 def matern12_kernel_func_1d(x1: float, x2: float, ell: float, nu: float) -> float:
+    # nu is hardcoded in the formula (nu=0.5); accepted to match matern_kernel_func_1d's signature.
     diff = scaled_diff(x1, x2, ell, 1)
     kernel_value = np.exp(-abs(diff))
     return kernel_value
 
 
 def matern32_kernel_func_1d(x1: float, x2: float, ell: float, nu: float) -> float:
+    # nu is hardcoded in the formula (nu=1.5); accepted to match matern_kernel_func_1d's signature.
     abs_diff = np.sqrt(3) * abs(scaled_diff(x1, x2, ell, 1))
     kernel_value = (1 + abs_diff) * np.exp(-abs_diff)
     return kernel_value
 
 
 def matern52_kernel_func_1d(x1: float, x2: float, ell: float, nu: float) -> float:
+    # nu is hardcoded in the formula (nu=2.5); accepted to match matern_kernel_func_1d's signature.
     abs_diff = np.sqrt(5) * abs(scaled_diff(x1, x2, ell, 1))
     kernel_value = (1 + abs_diff + abs_diff**2 / 3) * np.exp(-abs_diff)
     return kernel_value
 
 
 def matern72_kernel_func_1d(x1: float, x2: float, ell: float, nu: float) -> float:
+    # nu is hardcoded in the formula (nu=3.5); accepted to match matern_kernel_func_1d's signature.
     abs_diff = np.sqrt(7) * abs(scaled_diff(x1, x2, ell, 1))
     kernel_value = (1 + abs_diff + 2 * abs_diff**2 / 5 + abs_diff**3 / 15) * np.exp(-abs_diff)
     return kernel_value
 
 
 def wendland0_kernel_func_1d(x1: float, x2: float, ell: float, order: int) -> float:
+    # order is hardcoded in the formula (order=0); accepted to keep the Wendland family signature uniform.
     abs_diff = abs(scaled_diff(x1, x2, ell, 1))
     kernel_value = max(0, (1 - abs_diff))
     return kernel_value
 
 
 def wendland2_kernel_func_1d(x1: float, x2: float, ell: float, order: int) -> float:
+    # order is hardcoded in the formula (order=2); accepted to keep the Wendland family signature uniform.
     abs_diff = abs(scaled_diff(x1, x2, ell, 1))
     kernel_value = max(0, (1 - abs_diff)) ** 3 * (1 + 3 * abs_diff)
     return kernel_value
